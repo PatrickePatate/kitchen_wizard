@@ -1,0 +1,162 @@
+@use(Carbon\Carbon)
+@extends('layouts.app')
+@section('meta')
+    <meta property="og:title" content="{{$recipe->title}}" />
+    <meta property="og:url" content="{{$recipe->url}}" />
+    <meta property="og:image" content="{{$recipe->pictures[0] ?? asset('images/default_recipe_picture.webp')}}" />
+@endsection
+@section('content')
+    <div class="container mx-auto my-5 px-4">
+        <div class="max-w-2xl mx-auto mt-12">
+            <h2 class="font-sans uppercase text-md mb-1">{{$recipe->meal_type}}</h2>
+            <x-recipe-card class="mb-10" :recipe="$recipe" :allowRefresh="false" :clickable="false"/>
+
+            <div class="grid grid-cols-3 bg-neutral-100 p-3 mb-10">
+                <div>
+                    <p>Temps de preparation</p>
+                    <span class="font-semibold">{{$recipe->times['prep']}}</span>
+                </div>
+                <div>
+                    <p>Temps de cuisson</p>
+                    <span class="font-semibold">{{$recipe->times['cook']}}</span>
+                </div>
+                <div>
+                    <p>Temps de repos</p>
+                    <span class="font-semibold">{{$recipe->times['rest_time']}}</span>
+                </div>
+            </div>
+
+            <div x-data="{open: true}" class="flex flex-col gap-2 p-4 bg-neutral-100 mb-6">
+                <div class="flex justify-between">
+                    <h3 class="font-sans font-medium uppercase text-md flex items-center gap-1">
+                        <x-tabler-apple class="inline" />
+                        <span class="pt-1">Ingrédients :</span>
+                    </h3>
+                    <div>
+                        <x-tabler-chevron-up @click="open = false" class="cursor-pointer" x-show="open" />
+                        <x-tabler-chevron-down @click="open = true" class="cursor-pointer" x-show="!open" />
+                    </div>
+                </div>
+                <div class="w-full mt-3 grid grid-cols-2 sm:grid-cols-4 gap-5" x-show="open"
+                     x-transition:enter="transition ease-out duration-100"
+                     x-transition:enter-start="opacity-0"
+                     x-transition:enter-end="opacity-100"
+                     x-transition:leave="transition ease-in duration-100"
+                     x-transition:leave-start="opacity-100"
+                     x-transition:leave-end="opacity-0">
+                    @foreach($recipe->ingredients as $ingredient)
+                        <div class="flex flex-col flex-nowrap gap-1">
+                            <h3 class="text-lg font-semibold pt-1 capitalize">{{$ingredient['label']}}</h3>
+                            <h4 class="text-sm font-normal pt-1"> {{ucfirst($ingredient['quantity_text'])}}</h4>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+            <div x-data="{open: false}" class="flex flex-col gap-2 p-4 bg-neutral-100 mb-12">
+                <div class="flex justify-between">
+                    <h3 class="font-sans font-medium uppercase text-md flex items-center gap-1">
+                        <x-tabler-grill-fork class="inline" />
+                        <span class="pt-1">Ustensiles :</span>
+                    </h3>
+                    <div>
+                        <x-tabler-chevron-up @click="open = false" class="cursor-pointer" x-show="open" />
+                        <x-tabler-chevron-down @click="open = true" class="cursor-pointer" x-show="!open" />
+                    </div>
+                </div>
+                <div class="w-full mt-3 grid grid-cols-4 gap-5" x-show="open"
+                     x-transition:enter="transition ease-out duration-100"
+                     x-transition:enter-start="opacity-0"
+                     x-transition:enter-end="opacity-100"
+                     x-transition:leave="transition ease-in duration-100"
+                     x-transition:leave-start="opacity-100"
+                     x-transition:leave-end="opacity-0">
+                    @foreach($recipe->utensils as $utensil)
+                        <div class="flex flex-col flex-nowrap gap-1">
+                            <h3 class="text-lg font-semibold pt-1 capitalize text-nowrap">{{$utensil['label']}}</h3>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+            <section id="steps" class="mb-10">
+                <h3 class="font-sans font-medium uppercase text-md flex items-center gap-1 mb-3">
+                    <x-tabler-cooker class="inline" />
+                    <span class="pt-1">Préparation :</span>
+                </h3>
+                <div class="grid grid-cols-1 gap-4">
+                    @foreach($recipe->steps as $step)
+                        <div x-data="{hover:false}" class="step relative p-1 flex flex-col gap-2" id="step-{{$loop->index+1}}">
+                            <div class="flex items-center gap-2">
+                                <h3 class="font-sans font-medium uppercase text-md">
+                                    {{$step['heading']}}
+                                </h3>
+                                <div class="hidden cursor-pointer opacity-75 share-btn">
+                                    <x-tabler-share-2 @click="$clipboard('{{route('recipe', ['recipe' => $recipe])}}#step-{{$loop->index+1}}'); $flash('#copied-message-step-{{$loop->index+1}}')" class="text-cyan-900 h-5"/>
+                                </div>
+                                <div class="hidden px-2 py-1 bg-neutral-800 text-white text-[0.7rem]" id="copied-message-step-{{$loop->index+1}}">Copié !</div>
+                            </div>
+
+                            <p class="text-sm font-normal">{{$step['text']}}</p>
+                        </div>
+                    @endforeach
+                </div>
+            </section>
+
+            <section id="author" class="flex items-start gap-6">
+                <div class="flex justify-center items-center w-20 h-16 bg-cyan-600 rounded-full">
+                    <x-tabler-user class="text-white w-10 h-10"/>
+                </div>
+                <div class="mt-1 w-full">
+                    <p class="font-medium capitalize">{{$recipe->author}}</p>
+                    <p class="font-extralight tracking-wide max-w-[90%]">
+                        {{$recipe->author_note ?? "Aucun commentaire de l'auteur sur la recette"}}
+                    </p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+    @push('styles')
+        <style>
+            .step:hover .share-btn {
+                transition: ease-in-out 0.5s;
+                display: inline-block;
+            }
+            .flash {
+                animation: flash-animation 1.5s ease-in-out 0s 1 alternate;
+            }
+
+            @keyframes flash-animation {
+                0% { background-color: transparent; }
+                50% { background-color: #ffff87; }
+                100% { background-color: transparent; }
+            }
+        </style>
+    @endpush
+    @push('scripts')
+        <script>
+            function flashElement(id) {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.classList.add('flash');
+                    // Optionally remove the class after the animation completes to prevent replay on subsequent hash changes
+                    setTimeout(() => {
+                        element.classList.remove('flash');
+                    }, 3000); // 3s = duration of the animation
+                }
+            }
+
+            function checkHashOnLoad() {
+                const hash = window.location.hash.substring(1); // Remove the '#' from the hash
+                console.log(hash);
+                if (hash) {
+                    flashElement(hash);
+                }
+            }
+
+            // Check the URL on page load
+            window.onload = checkHashOnLoad;
+        </script>
+    @endpush
+@endsection
