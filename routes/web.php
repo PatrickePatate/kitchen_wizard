@@ -18,3 +18,4 @@ Route::middleware(['auth:web'])->group(function () {
 
 Route::get('login', [LoginController::class, 'create'])->name('login');
 Route::post('login', [LoginController::class, 'store']);
+Route::get('logout', [LoginController::class, 'destroy'])->name('logout');

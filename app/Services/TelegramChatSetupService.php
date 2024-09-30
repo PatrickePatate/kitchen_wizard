@@ -8,6 +8,41 @@ use NotificationChannels\Telegram\TelegramUpdates;
 
 class TelegramChatSetupService
 {
+    public static function start($chatId){
+        TelegramMessage::create()
+            ->to($chatId)
+            ->line('👋 Bienvenue sur ' . config('app.name') . '!')
+            ->line('')
+            ->line('🔗 Pour lier votre compte, tapez /link `<VOTRE EMAIL>`')
+            ->line('')
+            ->line('📝 Exemple: /link arthur@entreprise.fr')
+            ->send();
+    }
+    public static function setupChatId($chatId, $email) {
+        $user = User::where('email', $email)->first();
+        if($user) {
+            //TODO: send a code by mail before linking the account
+            $user->telegram_chat_id = $chatId;
+            $user->save();
+
+            TelegramMessage::create()
+                ->to($chatId)
+                ->line('🚀 Hey ! Bonne nouvelle !')
+                ->line('')
+                ->line('🎉 Votre compte a été lié à ' . config('app.name').' 🎉')
+                ->line('')
+                ->line('Vous recevrez désormais des suggestions de recettes les matins via Telegram !')
+                ->send();
+        } else {
+            TelegramMessage::create()
+                ->to($chatId)
+                ->line("⚠️ Oups ! Une erreur s'est produite !")
+                ->line('')
+                ->line('🔍 Aucun compte n\'a été trouvé avec l\'email ' . (empty($email) ? '*vide*' : $email))
+                ->send();
+        }
+    }
+
     public function handle()
     {
         $updates = TelegramUpdates::create()
