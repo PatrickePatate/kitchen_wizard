@@ -1,4 +1,7 @@
-<!doctype html>
+@props([
+    'hasHeader' => true
+])
+    <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -14,9 +17,9 @@
     @livewireStyles
 </head>
 <body class="font-sans antialiased">
-    <div class="container mx-auto px-2">
+    @if($hasHeader)
         @include('components.menu')
-    </div>
+    @endif
     @yield('content')
     @livewireScripts
     <script>
