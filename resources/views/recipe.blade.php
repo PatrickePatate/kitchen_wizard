@@ -3,7 +3,7 @@
 @section('meta')
     <meta property="og:title" content="{{$recipe->title}}" />
     <meta property="og:url" content="{{$recipe->url}}" />
-    <meta property="og:image" content="{{asset('storage/'.$recipe->pictures[0]) ?? asset('images/default_recipe_picture.webp')}}" />
+    <meta property="og:image" content="{{ isset($recipe->pictures[0]) ? asset('storage/'.$recipe->pictures[0]) : asset('images/default_recipe_picture.webp') }}" />
 @endsection
 @section('content')
     <div class="container mx-auto my-5 px-4">

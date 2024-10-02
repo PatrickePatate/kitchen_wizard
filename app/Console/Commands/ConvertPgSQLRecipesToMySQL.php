@@ -31,6 +31,7 @@ class ConvertPgSQLRecipesToMySQL extends Command
         Recipe::all()->chunk(100)->each(function(Collection $recipes) {
             $recipes->transform(function($recipe) {
                 return [
+                    'id' => $recipe->id,
                     'title' => $recipe->title,
                     'url' => $recipe->url,
                     'pictures' => json_encode($recipe->pictures ?? []),
