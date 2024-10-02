@@ -58,18 +58,19 @@
             </div>
             <div class="p-4 mb-6">
                 <div class="grid grid-cols-3 sm:grid-cols-4">
-                    <div class="flex flex-col items-center justify-center" x-data="{active: {{Auth::user()->isTelegramAccountSetup()}}}">
+                    <div class="flex flex-col items-center justify-center" x-data="{ active: {{(int)Auth::user()->isTelegramAccountSetup()}} }">
                         <div class="bg-[#29a9ea] w-20 h-20 p-6 rounded-full flex justify-center items-center mb-2">
                             <x-tabler-brand-telegram class="text-white w-12 h-12"/>
                         </div>
                         <p class="text-nowrap">Telegram : <span :class="active ? 'text-green-500' : 'text-red-500'">{{Auth::user()->isTelegramAccountSetup() ? __("Active") : __('Inactive')}}</span></p>
+                        <a target="_blank" href="{{sprintf('https://t.me/%s', str_replace('@', '', config('services.telegram-bot-api.bot_username')))}}" class="mt-2 px-3 py-2 rounded-md bg-[#29a9ea] text-white text-center" :class="active ? 'hidden': ''">{{__('Link your account')}}</a>
                     </div>
 
-                    <div class="flex flex-col items-center justify-center" x-data="{active: {{Auth::user()->isTelegramAccountSetup()}}}">
+                    <div class="flex flex-col items-center justify-center" x-data="{ active: {{(int)Auth::user()->isEmailNotificationsActive()}} }">
                         <div class="bg-teal-800 w-20 h-20 p-6 rounded-full flex justify-center items-center mb-2">
                             <x-tabler-mail class="text-white w-12 h-12"/>
                         </div>
-                        <p class="text-nowrap">Email : <span :class="active ? 'text-green-500' : 'text-red-500'">{{Auth::user()->isTelegramAccountSetup() ? __("Active") : __('Inactive')}}</span></p>
+                        <p class="text-nowrap">Email : <span :class="active ? 'text-green-500' : 'text-red-500'">{{Auth::user()->isEmailNotificationsActive() ? __("Active") : __('Inactive')}}</span></p>
                     </div>
                 </div>
 

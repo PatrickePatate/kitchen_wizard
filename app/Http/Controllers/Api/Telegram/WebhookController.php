@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\TelegramChatSetupService;
 use Illuminate\Http\Request;
 use Log;
+use NotificationChannels\Telegram\TelegramMessage;
 
 class WebhookController extends Controller
 {
@@ -16,15 +17,45 @@ class WebhookController extends Controller
             $message = trim($request->message['text'] ?? '');
 
             if($message === '/start'){
-                // Send a message to the chat
                 TelegramChatSetupService::start($chatId);
                 return;
             }
 
             if(str_starts_with($message, '/link')){
-                // Send a message to the chat
                 $email = trim(substr($message, 6));
+
+                if(empty($email)){
+                    TelegramMessage::create()
+                        ->to($chatId)
+                        ->line('⚠️ Oups ! Une erreur s\'est produite !')
+                        ->line('')
+                        ->line('🔍 L\'email est obligatoire pour lier votre compte !')
+                        ->line('')
+                        ->line('📝 Exemple: /link arthur@example.org')
+                        ->send();
+                    return;
+                }
+
                 TelegramChatSetupService::setupChatId($chatId, $email);
+                return;
+            }
+
+            if(str_starts_with($message, '/code')){
+                $code = trim(substr($message, 6));
+
+                if(empty($code)){
+                    TelegramMessage::create()
+                        ->to($chatId)
+                        ->line('⚠️ Oups ! Une erreur s\'est produite !')
+                        ->line('')
+                        ->line('🔍 Le code est obligatoire pour lier votre compte !')
+                        ->line('')
+                        ->line('📝 Exemple: /code 123456')
+                        ->send();
+                    return;
+                }
+
+                TelegramChatSetupService::validateLinking($chatId, $code);
                 return;
             }
         } else{

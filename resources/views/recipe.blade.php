@@ -3,7 +3,7 @@
 @section('meta')
     <meta property="og:title" content="{{$recipe->title}}" />
     <meta property="og:url" content="{{$recipe->url}}" />
-    <meta property="og:image" content="{{$recipe->pictures[0] ?? asset('images/default_recipe_picture.webp')}}" />
+    <meta property="og:image" content="{{asset('storage/'.$recipe->pictures[0]) ?? asset('images/default_recipe_picture.webp')}}" />
 @endsection
 @section('content')
     <div class="container mx-auto my-5 px-4">
@@ -26,7 +26,7 @@
                 </div>
             </div>
 
-            <div x-data="{open: true}" class="flex flex-col gap-2 p-4 bg-neutral-100 mb-6">
+            <div x-data="ingredients" class="flex flex-col gap-2 p-4 bg-neutral-100 mb-6">
                 <div class="flex justify-between">
                     <h3 class="font-sans font-medium uppercase text-md flex items-center gap-1">
                         <x-tabler-apple class="inline" />
@@ -37,19 +37,28 @@
                         <x-tabler-chevron-down @click="open = true" class="cursor-pointer" x-show="!open" />
                     </div>
                 </div>
-                <div class="w-full mt-3 grid grid-cols-2 sm:grid-cols-4 gap-5" x-show="open"
+                <div class="w-full mt-3 " x-show="open"
                      x-transition:enter="transition ease-out duration-100"
                      x-transition:enter-start="opacity-0"
                      x-transition:enter-end="opacity-100"
                      x-transition:leave="transition ease-in duration-100"
                      x-transition:leave-start="opacity-100"
                      x-transition:leave-end="opacity-0">
-                    @foreach($recipe->ingredients as $ingredient)
-                        <div class="flex flex-col flex-nowrap gap-1">
-                            <h3 class="text-lg font-semibold pt-1 capitalize">{{$ingredient['label']}}</h3>
-                            <h4 class="text-sm font-normal pt-1"> {{ucfirst($ingredient['quantity_text'])}}</h4>
+                    <div class="mb-3">
+                        <div class="flex gap-2 items-center">
+                            <span class="text-md font-sans font-thin">Pour</span>
+                            <input type="number" min="0" class="w-14 h-8 text-center border border-neutral-300 rounded-md" @change="recalculateServings($el.value)" value="{{$recipe->people}}">
+                            <span class="text-md font-sans font-thin">personne(s)</span>
                         </div>
-                    @endforeach
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-5">
+                        <template x-for="ing in ingredients" :key="ing.label">
+                            <div  class="flex flex-col flex-nowrap gap-1">
+                                <h3 class="text-lg font-semibold pt-1 capitalize" x-text="ing.label"></h3>
+                                <h4 class="text-sm font-normal pt-1 capitalize" x-text="ing.quantity == 0 ? '' : (ing.new_quantity || ing.quantity_text)"></h4>
+                            </div>
+                        </template>
+                    </div>
                 </div>
             </div>
 
@@ -136,6 +145,24 @@
     @endpush
     @push('scripts')
         <script>
+            document.addEventListener('alpine:init', () => {
+                Alpine.data('ingredients', () => ({
+                    open: true,
+                    ingredients: @json($recipe->ingredients),
+                    default_servings: @json($recipe->people),
+                    recalculateServings(servings) {
+                        this.ingredients.forEach(ing => {
+                            if(this.default_servings !== 0){
+                                ing.new_quantity = ing.quantity_text.replace(ing.quantity, Math.round(ing.quantity / this.default_servings * servings));
+                            } else{
+                                ing.new_quantity =  ing.quantity_text.replace(Math.round(ing.quantity * servings));
+                            }
+                        });
+                    }
+                }));
+            });
+
+
             function flashElement(id) {
                 const element = document.getElementById(id);
                 if (element) {
@@ -149,7 +176,7 @@
 
             function checkHashOnLoad() {
                 const hash = window.location.hash.substring(1); // Remove the '#' from the hash
-                console.log(hash);
+
                 if (hash) {
                     flashElement(hash);
                 }

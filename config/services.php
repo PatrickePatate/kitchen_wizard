@@ -36,8 +36,8 @@ return [
     ],
 
     'telegram-bot-api' => [
+        'bot_username' => env('TELEGRAM_BOT_USERNAME'),
         'token' => env('TELEGRAM_BOT_TOKEN'),
-        'user-id' => env('TELEGRAM_USER_ID'),
     ],
 
 ];

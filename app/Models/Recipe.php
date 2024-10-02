@@ -20,6 +20,20 @@ class Recipe extends Model
 
     protected $guarded = [];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->timestamps = false;
+            $model->scrapped_at = now();
+        });
+
+        static::updating(function ($model) {
+            $model->timestamps = false;
+        });
+    }
+
     public function url(): Attribute
     {
         return Attribute::make(

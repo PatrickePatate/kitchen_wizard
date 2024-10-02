@@ -3,6 +3,10 @@ export default {
     content: [
         './resources/views/**/*.blade.php',
     ],
+    safelist: [
+        'text-green-500',
+        'text-red-500',
+    ],
     theme: {
         screens: {
             'sm': '640px',

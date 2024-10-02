@@ -1,5 +1,7 @@
 <?php
 
+use App\Jobs\BuildDailyRecipeSelectionJob;
+use App\Jobs\SendRecipesSuggestionsToUsersJob;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -16,4 +18,15 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
+    })
+    ->withSchedule(function (\Illuminate\Console\Scheduling\Schedule $schedule) {
+        $schedule->call(function () {
+            BuildDailyRecipeSelectionJob::dispatchSync();
+        })->dailyAt('00:00');
+
+        $schedule->command('model:prune')->daily();
+
+        $schedule->call(function () {
+            SendRecipesSuggestionsToUsersJob::dispatchSync();
+        })->dailyAt('08:30');
     })->create();

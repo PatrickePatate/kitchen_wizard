@@ -4,29 +4,31 @@ namespace App\Livewire;
 
 use App\MealTypeEnum;
 use App\Models\Recipe;
+use App\Models\RecipeDailySelection;
 use App\Services\RecipeSelectorService;
 use Livewire\Component;
 
 class RecipeFeed extends Component
 {
-    public Recipe $main;
-    public Recipe $starter;
-    public Recipe $dessert;
+    public ?RecipeDailySelection $selection;
+    public ?Recipe $main;
+    public ?Recipe $starter;
+    public ?Recipe $dessert;
 
     public function mount(){
-        $this->main = app(RecipeSelectorService::class)->getRecipe(MealTypeEnum::MAIN_COURSE);
-        $this->starter = app(RecipeSelectorService::class)->getRecipe(MealTypeEnum::STARTER);
-        $this->dessert = app(RecipeSelectorService::class)->getRecipe(MealTypeEnum::DESSERT);
+        $this->selection = RecipeDailySelection::forUser(auth()->user());
+
+        $this->main = $this->selection?->main();
+        $this->starter = $this->selection?->starter();
+        $this->dessert = $this->selection?->dessert();
     }
 
     public function refreshMeal(MealTypeEnum $type){
-        if($type == MealTypeEnum::MAIN_COURSE){
-            $this->main = app(RecipeSelectorService::class)->getRecipe(MealTypeEnum::MAIN_COURSE);
-        }elseif($type == MealTypeEnum::STARTER){
-            $this->starter = app(RecipeSelectorService::class)->getRecipe(MealTypeEnum::STARTER);
-        }elseif($type == MealTypeEnum::DESSERT){
-            $this->dessert = app(RecipeSelectorService::class)->getRecipe(MealTypeEnum::DESSERT);
-        }
+        $this->selection->refreshRecipe($type);
+
+        $this->main = $this->selection?->main();
+        $this->starter = $this->selection?->starter();
+        $this->dessert = $this->selection?->dessert();
     }
 
     public function render()

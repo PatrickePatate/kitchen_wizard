@@ -123,4 +123,9 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+
+    'assets' => [
+        'disk' => env('APP_ASSETS_DISK', 'public'),
+    ]
+
 ];

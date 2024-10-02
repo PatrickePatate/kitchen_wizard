@@ -13,11 +13,15 @@ class RecipeSelectorService
 
     }
 
-    public function getRecipe(MealTypeEnum $type): Recipe
+    public function getRecipe(MealTypeEnum $type, ?int $avoid=null): Recipe
     {
+
         return Recipe::where('meal_type', $type)
             ->whereNot('difficulty', "difficile")
             ->where('total_time', '<', 45)
+            ->when($avoid, function($query) use ($avoid){
+                return $query->where('id', '!=', $avoid);
+            })
             ->inRandomOrder()
             ->first();
     }

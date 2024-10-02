@@ -1,0 +1,94 @@
+{
+    "Octobre": [
+        "avocat", "banane", "châtaigne", "citron", "coing", "datte", "figue fraîche", "fruit de la passion", "kaki",
+        "litchi", "mandarine", "mangue", "marron", "noisette", "noix", "papaye", "poire", "pomme", "prune",
+        "quetsche", "raisin", "bette", "betterave rouge", "brocoli", "carotte", "catalonia", "céleri",
+        "céleri branche", "céleri rave", "chou blanc", "chou de bruxelles", "chou frisé", "chou rouge",
+        "chou-chinois", "chou-fleur", "chou-rave", "cima di rapa", "citrouille", "courge", "cresson",
+        "epinard", "fenouil", "laitue romaine", "maïs", "oignon", "panais", "petit oignon blanc",
+        "poireau", "poivron", "pomme de terre", "potimarron", "potiron", "salsifis", "topinambour"
+    ],
+    "Novembre": [
+        "ananas", "avocat", "banane", "châtaigne", "citron", "clémentine", "datte", "fruit de la passion",
+        "grenade", "kaki", "kiwi", "kumquat", "mandarine", "mangue", "marron", "noix", "orange", "papaye",
+        "poire", "pomme", "carotte", "catalonia", "céleri", "céleri branche", "céleri rave", "chou blanc",
+        "chou de bruxelles", "chou frisé", "chou rouge", "chou-chinois", "chou-rave", "cima di rapa",
+        "citrouille", "courge", "cresson", "endive", "epinard", "fenouil", "mâche", "oignon", "panais",
+        "poireau", "pomme de terre", "potimarron", "salsifis", "topinambour"
+    ],
+    "Décembre": [
+        "ananas", "avocat", "banane", "châtaigne", "citron", "clémentine", "datte", "fruit de la passion",
+        "grenade", "kaki", "kiwi", "kumquat", "litchi", "mandarine", "mangue", "marron", "orange",
+        "orange sanguine", "pamplemousse", "papaye", "poire", "pomme", "carotte", "catalonia", "céleri",
+        "céleri branche", "céleri rave", "chou blanc", "chou de bruxelles", "chou frisé", "chou rouge",
+        "chou-chinois", "cima di rapa", "citrouille", "courge", "cresson", "endive", "mâche", "oignon",
+        "panais", "poireau", "pomme de terre", "salsifis", "topinambour"
+    ],
+    "Janvier": [
+        "ananas", "avocat", "banane", "citron", "clémentine", "datte", "fruit de la passion", "grenade",
+        "kaki", "kiwi", "litchi", "mandarine", "mangue", "orange", "orange sanguine", "pamplemousse",
+        "papaye", "poire", "pomme", "carotte", "céleri", "céleri branche", "céleri rave", "chou blanc",
+        "chou de bruxelles", "chou frisé", "chou rouge", "chou-chinois", "cima di rapa", "citrouille",
+        "cresson", "endive", "mâche", "oignon", "poireau", "pomme de terre", "salsifis", "topinambour"
+    ],
+    "Février": [
+        "ananas", "avocat", "banane", "citron", "clémentine", "datte", "fruit de la passion", "grenade",
+        "kiwi", "litchi", "mandarine", "mangue", "orange", "orange sanguine", "pamplemousse", "papaye",
+        "pomme", "carotte", "céleri", "céleri branche", "céleri rave", "chou blanc", "chou frisé",
+        "chou rouge", "chou-chinois", "cima di rapa", "citrouille", "endive", "mâche", "oignon",
+        "poireau", "pomme de terre", "salsifis", "topinambour"
+    ],
+    "Mars": [
+        "ananas", "avocat", "banane", "citron", "datte", "fruit de la passion", "kiwi", "mandarine",
+        "mangue", "orange sanguine", "pamplemousse", "papaye", "pomme", "carotte", "céleri", "chou blanc",
+        "chou frisé", "chou rouge", "chou-rave", "cima di rapa", "endive", "oignon", "petit oignon blanc",
+        "poireau", "salsifis"
+    ],
+    "Avril": [
+        "ail", "asperge blanche", "bette", "carotte", "chou blanc", "chou rouge", "chou-rave", "epinard",
+        "laitue romaine", "oignon", "petit oignon blanc", "radis", "avocat", "banane", "citron",
+        "fruit de la passion", "kiwi", "litchi", "mangue", "papaye"
+    ],
+    "Mai": [
+        "ail", "asperge blanche", "asperge verte", "aubergine", "bette", "betterave rouge", "chou frisé",
+        "chou-chinois", "chou-fleur", "chou-rave", "concombre", "epinard", "fenouil", "laitue romaine",
+        "petit oignon blanc", "pomme de terre", "radis", "radis long", "rhubarbe", "avocat", "banane",
+        "citron", "fraise", "fraise des bois", "fruit de la passion", "kiwi", "mangue", "papaye"
+    ],
+    "Juin": [
+        "ail", "artichaut", "asperge blanche", "asperge verte", "aubergine", "bette", "betterave rouge",
+        "brocoli", "chou blanc", "chou frisé", "chou romanesco", "chou rouge", "chou-chinois", "chou-fleur",
+        "chou-rave", "concombre", "courgette", "epinard", "fenouil", "haricot", "laitue romaine", "navet",
+        "petit oignon blanc", "petit pois", "pois mange-tout", "poivron", "pomme de terre", "radis",
+        "radis long", "rhubarbe", "banane", "cerise", "citron", "fraise", "fraise des bois", "framboise",
+        "fruit de la passion", "groseille", "groseille à maquereau", "litchi", "mangue", "melon", "nectarine",
+        "papaye", "pastèque", "pêche", "tomate", "tomate charnue", "tomate peretti"
+    ],
+    "Juillet": [
+        "abricot", "airelle", "banane", "cassis", "cerise", "citron", "fraise", "fraise des bois",
+        "framboise", "fruit de la passion", "groseille", "groseille à maquereau", "litchi", "mangue",
+        "melon", "mûre", "myrtille", "nectarine", "papaye", "pastèque", "pêche", "tomate", "tomate charnue",
+        "tomate peretti", "ail", "artichaut", "aubergine", "bette", "betterave rouge", "brocoli",
+        "chou blanc", "chou frisé", "chou romanesco", "chou rouge", "chou-chinois", "chou-fleur",
+        "chou-rave", "concombre", "courgette", "cresson", "epinard", "fenouil", "haricot", "laitue romaine",
+        "navet", "petit oignon blanc", "petit pois", "pois mange-tout", "poivron", "pomme de terre", "radis",
+        "radis long"
+    ],
+    "Août": [
+        "abricot", "airelle", "banane", "cassis", "citron", "fraise", "fraise des bois", "framboise",
+        "fruit de la passion", "groseille", "groseille à maquereau", "litchi", "mangue", "melon", "mûre",
+        "myrtille", "nectarine", "papaye", "pastèque", "pêche", "prune", "tomate", "tomate charnue",
+        "tomate peretti", "ail", "artichaut", "aubergine", "bette", "betterave rouge", "brocoli",
+        "chou blanc", "chou romanesco", "chou rouge", "chou-chinois", "chou-fleur", "concombre",
+        "courgette", "cresson", "fenouil", "haricot", "laitue romaine", "navet", "poivron", "pomme de terre"
+    ],
+    "Septembre": [
+        "abricot", "airelle", "banane", "cassis", "citron", "fraise", "fraise des bois", "framboise",
+        "fruit de la passion", "groseille", "groseille à maquereau", "litchi", "mangue", "melon",
+        "mûre", "nectarine", "papaye", "pastèque", "pêche", "poire", "prune", "raisin", "tomate",
+        "tomate charnue", "tomate peretti", "ail", "artichaut", "aubergine", "bette", "betterave rouge",
+        "brocoli", "chou blanc", "chou romanesco", "chou rouge", "chou-chinois", "chou-fleur", "concombre",
+        "courgette", "cresson", "fenouil", "haricot", "laitue romaine", "maïs", "navet", "poivron",
+        "pomme de terre"
+    ]
+}
