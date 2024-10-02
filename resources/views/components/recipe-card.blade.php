@@ -5,10 +5,10 @@
 
         @if($clickable)
             <a href="{{$clickable ? route('recipe', ['recipe'=>$recipe]) : '#'}}">
-                <img src="{{ asset('storage/'.$recipe->pictures[0])??asset('images/default_recipe_picture.webp') }}" alt="Recipe image" class="w-full h-96 object-cover object-center">
+                <img src="{{ isset($recipe->pictures[0]) ? asset('storage/'.$recipe->pictures[0]) : asset('images/default_recipe_picture.webp') }}" alt="Recipe image" class="w-full h-96 object-cover object-center">
             </a>
         @else
-            <img src="{{ asset('storage/'.$recipe->pictures[0])??asset('images/default_recipe_picture.webp') }}" alt="Recipe image" class="w-full h-96 object-cover object-center">
+            <img src="{{ isset($recipe->pictures[0]) ? asset('storage/'.$recipe->pictures[0]) : asset('images/default_recipe_picture.webp') }}" alt="Recipe image" class="w-full h-96 object-cover object-center">
         @endif
     </div>
     <div class="flex justify-between">
