@@ -122,7 +122,7 @@
                 </div>
             </section>
 
-            <section id="author" class="flex items-start gap-6">
+            <section id="author" class="flex items-start gap-6 mb-10">
                 <div class="flex justify-center items-center w-20 h-16 bg-cyan-600 rounded-full">
                     <x-tabler-user class="text-white w-10 h-10"/>
                 </div>

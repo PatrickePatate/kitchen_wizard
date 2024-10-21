@@ -42,17 +42,17 @@
         </div>
     </div>
     @if($allowRefresh || $clickable)
-        <div class="flex items-center mt-4 -ms-1 gap-3">
+        <div class="flex items-stretch mt-4 -ms-1 gap-3">
             @if($allowRefresh)
-                <div @click="$wire.refreshMeal('{{$recipe->meal_type}}')" class="flex gap-2 py-2 px-3 bg-gray-200 font-semibold rounded-full w-fit cursor-pointer">
+                <div @click="$wire.refreshMeal('{{$recipe->meal_type}}')" class="flex items-center gap-2 py-2 px-3 bg-gray-200 font-semibold rounded-full w-fit cursor-pointer">
                     <x-tabler-reload></x-tabler-reload>
                     Changer
                 </div>
             @endif
             @if($clickable)
-                    <a href="{{route('recipe', ['recipe'=>$recipe])}}" class="flex justify-center  gap-2 py-2 px-3 bg-gray-900 text-white font-semibold rounded-full w-full cursor-pointer">
+                    <a href="{{route('recipe', ['recipe'=>$recipe])}}" class="flex justify-center items-center gap-2 py-2 px-3 bg-gray-900 text-white font-semibold rounded-full w-full cursor-pointer">
                         <x-tabler-player-play></x-tabler-player-play>
-                        On passe en cuisine ?
+                        On passe en cuisine ?
                     </a>
             @endif
         </div>
