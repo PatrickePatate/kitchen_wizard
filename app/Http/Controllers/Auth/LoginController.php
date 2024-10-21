@@ -16,10 +16,10 @@ class LoginController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        if (auth()->attempt($credentials)) {
+        if (auth()->attempt($credentials, ($request->remember ?? false))) {
             $request->session()->regenerate();
 
-            return redirect()->intended('home');
+            return redirect()->intended();
         }
 
         return back()->withErrors([

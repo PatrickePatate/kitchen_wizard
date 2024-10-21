@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', __('Login').' - '.config('app.name'))
+@section('title', __('Profile').' - '.config('app.name'))
 
 @section('content')
     <div class="container mx-auto mt-16">
@@ -29,7 +29,7 @@
             <div class="bg-neutral-100 p-4 mb-6">
                 <form method="POST">
                     @csrf
-                    <x-forms.input type="text" name="name" label="{{__('Name')}}" required value="{{Auth::user()->name}}" />
+                    <x-forms.input type="text" name="name" label="{{__('Fullname')}}" required value="{{Auth::user()->name}}" />
                     <x-forms.input type="email" name="email" label="{{__('Email')}}" required value="{{Auth::user()->email}}" />
                     <x-forms.input type="password" name="password" label="{{__('Password')}}" help="Laissez vide pour conserver votre mot de passe actuel" />
                     <x-forms.input type="password" name="password_confirmation" label="{{__('Confirm password')}}" />
@@ -41,6 +41,41 @@
                         <label for="email-notifications" class="ms-2 text-sm font-medium text-gray-700">{{__('Activate Email recipe suggestions')}}</label>
                     </div>
 
+                    <div class="flex justify-end">
+                        <button type="submit" class="px-5 py-3 bg-blue-700 font-medium text-white rounded-md">
+                            {{__('Save')}}
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="bg-neutral-200 p-4">
+                <h1 class="font-heading text-xl">{{__('Meteo')}}</h1>
+            </div>
+            <div x-data="meteo" class="bg-neutral-100 p-4 mb-6">
+                <form method="POST" action="{{route('profile.store.meteo')}}">
+                    @csrf
+                    <div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">Place's name</label>
+                            <div>
+                                <input autocomplete="off" type="text" @keydown="updateLocationSearch($el.value)" value="{{Auth::user()->meteo_city}}" name="meteo_city" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500  sm:text-sm" value="{{ Auth::user()->meteo_city }}">
+                                <div class="relative" @click.away="this.show=false">
+                                    <div x-cloak x-show="show" class="absolute top-1 left-0 right-0 rounded-md bg-white border p-1">
+                                        <template x-for="res in results" class="p-2">
+                                            <div class="hover:bg-blue-100 px-2 p-1 rounded-md cursor-pointer" @click="setLocationData(res)" x-text="res.properties?.label"></div>
+                                        </template>
+                                        <div x-show="results.length === 0" class="p-2">
+                                            <p class="text-gray-500">{{__('Searching')}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <x-forms.input type="number" step="any" name="meteo_lat" label="{{__('Latitude')}}" required value="{{Auth::user()->meteo_lat}}" />
+                        <x-forms.input type="number" step="any" name="meteo_lon" label="{{__('Longitude')}}" required value="{{Auth::user()->meteo_lon}}" />
+                    </div>
                     <div class="flex justify-end">
                         <button type="submit" class="px-5 py-3 bg-blue-700 font-medium text-white rounded-md">
                             {{__('Save')}}
@@ -99,6 +134,31 @@
                             }
                         }
                     })
+                })
+
+                document.addEventListener('alpine:init', () => {
+                    Alpine.data('meteo', () => ({
+                        endpoint: "https://api-adresse.data.gouv.fr/search/",
+                        show: false,
+                        results: [],
+                        updateLocationSearch(val) {
+                            if(val.length > 2) {
+                                this.show = true;
+                                fetch(`${this.endpoint}?q=${val}`)
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        this.show = true;
+                                        this.results = data.features;
+                                    })
+                            }
+                        },
+                        setLocationData(res) {
+                            this.show = false;
+                            document.querySelector('input[name="meteo_city"]').value = res.properties.label;
+                            document.querySelector('input[name="meteo_lat"]').value = res.geometry.coordinates[1];
+                            document.querySelector('input[name="meteo_lon"]').value = res.geometry.coordinates[0];
+                        }
+                    }))
                 })
             </script>
         @endpush

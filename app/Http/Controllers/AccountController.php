@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
 
 class AccountController extends Controller
@@ -36,5 +37,22 @@ class AccountController extends Controller
         $user->update($request->only('name', 'email'));
 
         return redirect()->route('profile')->with('success', __('Profile updated!'));
+    }
+
+    public function meteo(Request $request)
+    {
+        $request->validate([
+            'meteo_city' => 'required|string|max:255',
+            'meteo_lat' => 'required|numeric',
+            'meteo_lon' => 'required|numeric',
+        ]);
+
+        $user = $request->user();
+
+        $user->update($request->only('meteo_city', 'meteo_lat', 'meteo_lon'));
+
+        Cache::forget('weather'.$user->id);
+
+        return redirect()->route('profile')->with('success', __('Meteo updated!'));
     }
 }

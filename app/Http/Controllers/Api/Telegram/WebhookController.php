@@ -25,14 +25,14 @@ class WebhookController extends Controller
                 $email = trim(substr($message, 6));
 
                 if(empty($email)){
-                    TelegramMessage::create()
-                        ->to($chatId)
-                        ->line('⚠️ Oups ! Une erreur s\'est produite !')
-                        ->line('')
-                        ->line('🔍 L\'email est obligatoire pour lier votre compte !')
-                        ->line('')
-                        ->line('📝 Exemple: /link arthur@example.org')
-                        ->send();
+                    $error = TelegramMessage::create()
+                        ->to($chatId);
+
+                    foreach (trans('telegram.errors.link.no_email') ?? [] as $line) {
+                        $error->line($line);
+                    }
+
+                    $error->send();
                     return;
                 }
 
@@ -44,14 +44,14 @@ class WebhookController extends Controller
                 $code = trim(substr($message, 6));
 
                 if(empty($code)){
-                    TelegramMessage::create()
-                        ->to($chatId)
-                        ->line('⚠️ Oups ! Une erreur s\'est produite !')
-                        ->line('')
-                        ->line('🔍 Le code est obligatoire pour lier votre compte !')
-                        ->line('')
-                        ->line('📝 Exemple: /code 123456')
-                        ->send();
+                    $error = TelegramMessage::create()
+                        ->to($chatId);
+
+                    foreach (trans('telegram.errors.link.no_code') ?? [] as $line) {
+                        $error->line($line);
+                    }
+
+                    $error->send();
                     return;
                 }
 

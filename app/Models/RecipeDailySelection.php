@@ -34,7 +34,7 @@ class RecipeDailySelection extends Model
         };
 
         $selection = $this->recipes_selection;
-        $selection[$key] = app(RecipeSelectorService::class)->getRecipe($type, $selection[$key])->id;
+        $selection[$key] = app(RecipeSelectorService::class)->getRecipe($type, $selection[$key] ?? null)->id;
         $this->update(['recipes_selection' => $selection]);
     }
 

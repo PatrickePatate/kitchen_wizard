@@ -6,9 +6,19 @@
     <meta property="og:image" content="{{ isset($recipe->pictures[0]) ? asset('storage/'.$recipe->pictures[0]) : asset('images/default_recipe_picture.webp') }}" />
 @endsection
 @section('content')
-    <div class="container mx-auto my-5 px-4">
-        <div class="max-w-2xl mx-auto mt-12">
-            <h2 class="font-sans uppercase text-md mb-1">{{$recipe->meal_type}}</h2>
+    <div class="container mx-auto px-4">
+        <div class="max-w-2xl mx-auto mt-8">
+            <a href="{{route('home')}}" class="flex gap-2 items-center mb-7">
+                <x-tabler-arrow-left class="w-8 h-auto text-gray-600 "></x-tabler-arrow-left>
+                <p class="font-light">Retour</p>
+            </a>
+            <div class="flex gap-2 items-center mb-3">
+                <div class="bg-gray-200 rounded-full p-2 w-10 h-10 flex justify-center items-center">
+                    @svg($recipe->meal_type?->getIcon())
+                </div>
+                <h2 class="font-sans uppercase font-semibold text-lg">{{$recipe->meal_type}}</h2>
+            </div>
+
             <x-recipe-card class="mb-10" :recipe="$recipe" :allowRefresh="false" :clickable="false"/>
 
             <div class="grid grid-cols-3 bg-neutral-100 p-3 mb-10">

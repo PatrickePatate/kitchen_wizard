@@ -9,10 +9,14 @@ class WeatherService
 {
     public static function getWeather(): array
     {
-        return Cache::remember("weather", now()->addMinutes(config('weather.cache_duration_in_minutes')), function () {
+        $user = auth()->user();
+        return Cache::remember("weather".$user->id, now()->addMinutes(config('weather.cache_duration_in_minutes')), function () use($user){
+            $lat = $user->meteo_lat ?? config('weather.latitude');
+            $lon = $user->meteo_lon ?? config('weather.longitude');
+
             $endpoint = sprintf("https://api.open-meteo.com/v1/forecast?latitude=%f&longitude=%f&current=temperature_2m,wind_speed_10m,weather_code",
-                config('weather.latitude'),
-                config('weather.longitude')
+                $lat,
+                $lon
             );
 
             return Http::get($endpoint)->json();
@@ -29,7 +33,7 @@ class WeatherService
 
     public static function getCity(): string
     {
-        return config('weather.city');
+        return auth()->user()?->meteo_city ?? config('weather.city');
     }
 
     public static function getIcon(): string
