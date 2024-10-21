@@ -22,6 +22,19 @@ return [
         '',
         'Vous recevrez désormais des suggestions de recettes les matins via Telegram !'
     ],
+    'suggestions' => [
+        '☀️ Bonjour :name !',
+        '',
+        'Voici une suggestion de recette pour vous aujourd\'hui !',
+        '',
+        '🥗 Entrée: :starter',
+        '',
+        '🍲 Plat: :main',
+        '',
+        '🍰 Dessert: :dessert',
+        '',
+        '👩‍🍳 Bon appétit !'
+    ],
     'errors' => [
         'link' => [
             'no_email' => [

@@ -1,4 +1,5 @@
 {
+    "Plat principal": "Main dish",
     "Account creation:": "Account creation",
     "Activate Email recipe suggestions": "Receive recipe sugestions by email",
     "Active": "Active",
@@ -9,6 +10,9 @@
     "Voici quelques recettes qui pourraient vous intéresser !": "Here's some recipes that might give you some inspirations !",
     "Vos suggestions de recettes pour ce :date": "Your suggestions for :date",
     "No account ? Register.": "You don't have an account yet ? Register !",
+    "Voir l'entrée": "Check the starter",
+    "Voir le dessert": "Check the dessert",
+    "Voir le plat": "Check the main dish",
     "Meteo updated!": "Weather localization updated !",
     "Register": "Create an account",
     "Searching": "Searching...",

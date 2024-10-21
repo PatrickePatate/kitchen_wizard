@@ -22,26 +22,29 @@ class SendRecipesSuggestionsToUsersJob implements ShouldQueue
             try{
                 $selection = RecipeDailySelection::forUser($user);
                 if($user->isTelegramAccountSetup()) {
-                    TelegramMessage::create()
-                        ->to($user->telegram_chat_id)
-                        ->line('☀️ Bonjour ' . $user->name . ' !')
-                        ->line('Voici une suggestion de recette pour vous aujourd\'hui !')
-                        ->line('')
-                        ->line('🥗 Entrée: ' . $selection->starter()->title)
-                        ->line('')
-                        ->line('🍲 Plat: ' . $selection->main()->title)
-                        ->line('')
-                        ->line('🍰 Dessert: ' . $selection->dessert()->title)
-                        ->button('Voir les recettes', route('home'))
-                        ->button('Voir le plat', route('recipe', $selection->main()))
-                        ->button('Voir l\'entrée', route('recipe', $selection->starter()))
-                        ->button('Voir le dessert', route('recipe', $selection->dessert()))
+                    $suggestion = TelegramMessage::create()
+                        ->to($user->telegram_chat_id);
+
+                    foreach (trans('telegram.suggestions', [
+                        'name'=> $user->name,
+                        'starter' => $selection->starter()->title,
+                        'main' => $selection->main()->title,
+                        'dessert' => $selection->dessert()->title,
+                    ]) as $line) {
+                        $suggestion->line($line);
+                    }
+
+                    $suggestion
+                        ->button(__('Voir les recettes'), route('home'))
+                        ->button(__('Voir le plat'), route('recipe', $selection->main()))
+                        ->button(__("Voir l'entrée"), route('recipe', $selection->starter()))
+                        ->button(__('Voir le dessert'), route('recipe', $selection->dessert()))
                         ->send();
                 }
                 if($user->isEmailNotificationsActive()) {
                     Mail::to($user)->send(new RecipesSuggestionsMail($user));
                 }
-                throw new Exception('test');
+
             } catch(\Exception $e) {
                 report($e);
             }
