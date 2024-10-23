@@ -19,7 +19,7 @@
                 <h2 class="font-sans uppercase font-semibold text-lg">{{$recipe->meal_type}}</h2>
             </div>
 
-            <x-recipe-card class="mb-10" :recipe="$recipe" :allowRefresh="false" :clickable="false"/>
+            <x-recipe-card class="mb-10" :recipe="$recipe" :carousel="true" :allowRefresh="false" :clickable="false"/>
 
             <div class="grid grid-cols-3 bg-neutral-100 p-3 mb-10">
                 <div>

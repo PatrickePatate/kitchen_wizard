@@ -1,12 +1,28 @@
-@props(['recipe','allowRefresh'=>true, 'clickable'=>true])
-<div class="w-full relative {{$attributes->get('class')}}" data-recipeid="{{$recipe->id}}">
+@php use App\Models\Recipe; @endphp
+@props([
+    /** @var Recipe $recipe */
+    'recipe',
+    'allowRefresh'=>true,
+    'clickable'=>true,
+    'carousel'=>false
+    ])
+<div x-data="{ currentSrc : '{{isset($recipe->pictures[0]) ? asset('storage/'.$recipe->pictures[0]) : ''}}' }" class="w-full relative {{$attributes->get('class')}}" data-recipeid="{{$recipe->id}}">
     <div class="mb-2">
         @if($clickable)
             <a href="{{$clickable ? route('recipe', ['recipe'=>$recipe]) : '#'}}">
-                <img src="{{ isset($recipe->pictures[0]) ? asset('storage/'.$recipe->pictures[0]) : asset('images/default_recipe_picture.webp') }}" alt="Recipe image" class="w-full h-96 object-cover object-center rounded-2xl">
+                <img x-ref="mainPicture" src="{{isset($recipe->pictures[0]) ? asset('storage/'.$recipe->pictures[0]) : asset('images/default_recipe_picture.webp')}}" alt="Recipe image" class="w-full h-96 object-cover object-center rounded-2xl">
             </a>
         @else
-            <img src="{{ isset($recipe->pictures[0]) ? asset('storage/'.$recipe->pictures[0]) : asset('images/default_recipe_picture.webp') }}" alt="Recipe image" class="w-full h-96 object-cover object-center rounded-2xl">
+            <img x-ref="mainPicture" src="{{isset($recipe->pictures[0]) ? asset('storage/'.$recipe->pictures[0]) : asset('images/default_recipe_picture.webp')}}" alt="Recipe image" class="w-full h-96 object-cover object-center rounded-2xl">
+        @endif
+        @if($carousel && count($recipe->pictures) > 1)
+            <div class="py-3">
+                <div class="flex justify-start items-center gap-2">
+                    @foreach($recipe->pictures as $picture)
+                        <img src="{{ asset('storage/'.$picture) }}" @click="$refs.mainPicture.setAttribute('src', $el.src); currentSrc = $el.src" x-init="$watch('currentSrc', (value) => { if(value === $el.src) { $el.classList.add('ring-2','ring-amber-400') } else { $el.classList.remove('ring-2','ring-amber-400') } })" alt="Recipe image" class="cursor-pointer w-16 h-16 object-cover object-center rounded-lg @if($loop->index === 0) ring-2 ring-amber-400 @endif ">
+                    @endforeach
+                </div>
+            </div>
         @endif
     </div>
     <div class="flex flex-col">
@@ -44,7 +60,7 @@
     @if($allowRefresh || $clickable)
         <div class="flex items-stretch mt-4 -ms-1 gap-3">
             @if($allowRefresh)
-                <button wire:loading.class.remove="cursor-pointer" wire:loading.class="cursor-progress" wire:loading.attr="disabled" @click="$wire.refreshMeal('{{$recipe->meal_type}}')" class="flex items-center gap-2 py-2 px-3 bg-gray-200 font-semibold rounded-full w-fit cursor-pointer">
+                <button wire:loading.class.remove="cursor-pointer" wire:loading.class="cursor-progress" wire:loading.attr="disabled" @click="$wire.refreshMeal('{{$recipe->meal_type}}'); setTimeout(() => { currentPicture = $refs.mainPicture.getAttribute('src'); }, 500)" class="flex items-center gap-2 py-2 px-3 bg-gray-200 font-semibold rounded-full w-fit cursor-pointer">
                     <x-tabler-reload wire:loading.class="animate-spin"></x-tabler-reload>
                     Changer
                 </button>

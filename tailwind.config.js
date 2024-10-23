@@ -6,6 +6,8 @@ export default {
     safelist: [
         'text-green-500',
         'text-red-500',
+        'ring-amber-400',
+        'ring-2'
     ],
     theme: {
         screens: {

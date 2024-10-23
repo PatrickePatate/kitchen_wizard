@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:web'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
-    Route::get('recipe/{recipe}', [RecipeController::class, 'show'])->name('recipe');
+    Route::get('recipe/{recipe}', [RecipeController::class, 'show'])->name('recipe')->whereNumber('recipe');
 
     Route::prefix('account')->group(function () {
         Route::get('profile', [AccountController::class, 'view'])->name('profile');
