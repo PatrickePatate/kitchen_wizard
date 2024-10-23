@@ -6,7 +6,7 @@
         <div class="flex items-center gap-3 py-1">
                 <div x-data="{popup: { open: false }}" @click="popup.open = !popup.open" @click.away="popup.open = false">
                     <div class="relative">
-                        <img class="w-9 h-9 rounded-full" src="{{Auth::user()->avatar}}"  alt="avatar"/>
+                        <img class="w-9 h-9 rounded-full cursor-pointer" src="{{Auth::user()->avatar}}"  alt="avatar"/>
                         <div x-cloak x-transition x-show="popup.open" class="bg-neutral-900 rounded-lg px-3 py-2 -mt-1 min-w-[180px] absolute z-20 top-14 right-0">
                             <div class="text-lg font-medium mb-1">
                                 <a href="{{route('profile')}}" class="flex items-center">
