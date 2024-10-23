@@ -44,10 +44,10 @@
     @if($allowRefresh || $clickable)
         <div class="flex items-stretch mt-4 -ms-1 gap-3">
             @if($allowRefresh)
-                <div @click="$wire.refreshMeal('{{$recipe->meal_type}}')" class="flex items-center gap-2 py-2 px-3 bg-gray-200 font-semibold rounded-full w-fit cursor-pointer">
-                    <x-tabler-reload></x-tabler-reload>
+                <button wire:loading.class.remove="cursor-pointer" wire:loading.class="cursor-progress" wire:loading.attr="disabled" @click="$wire.refreshMeal('{{$recipe->meal_type}}')" class="flex items-center gap-2 py-2 px-3 bg-gray-200 font-semibold rounded-full w-fit cursor-pointer">
+                    <x-tabler-reload wire:loading.class="animate-spin"></x-tabler-reload>
                     Changer
-                </div>
+                </button>
             @endif
             @if($clickable)
                     <a href="{{route('recipe', ['recipe'=>$recipe])}}" class="flex justify-center items-center gap-2 py-2 px-3 bg-gray-900 text-white font-semibold rounded-full w-full cursor-pointer">

@@ -83,7 +83,7 @@
                         <x-tabler-chevron-down @click="open = true" class="cursor-pointer" x-show="!open" />
                     </div>
                 </div>
-                <div class="w-full mt-3 grid grid-cols-4 gap-5" x-show="open"
+                <div class="w-full mt-3 grid grid-cols-2 sm:grid-cols-4 gap-5" x-show="open"
                      x-transition:enter="transition ease-out duration-100"
                      x-transition:enter-start="opacity-0"
                      x-transition:enter-end="opacity-100"
@@ -92,7 +92,7 @@
                      x-transition:leave-end="opacity-0">
                     @foreach($recipe->utensils as $utensil)
                         <div class="flex flex-col flex-nowrap gap-1">
-                            <h3 class="text-lg font-semibold pt-1 capitalize text-nowrap">{{$utensil['label']}}</h3>
+                            <h3 class="text-lg font-semibold pt-1 capitalize ">{{$utensil['label']}}</h3>
                         </div>
                     @endforeach
                 </div>

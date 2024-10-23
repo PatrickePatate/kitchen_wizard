@@ -41,8 +41,8 @@
                 </div>
             </div>
 
-            <div class="hidden md:block relative col-span-3">
-                <img src="{{asset('images/register_background.jpeg')}}" class="object-center object-cover w-full h-full max-h-[95dvh]  rounded-lg">
+            <div class="hidden md:block relative col-span-3 ">
+                <img src="{{asset('images/register_background.jpeg')}}" class="object-center object-cover w-full h-full max-h-[95dvh]  rounded-lg"/>
                 <a class="absolute bottom-2 right-3 text-white text-sm font-light" href="https://www.freepik.com/free-photo/fresh-organic-mixed-fruit-vegetables_13311286.htm#page=2&query=vegetable&position=16&from_view=keyword&track=ais_hybrid&uuid=391df862-4275-4180-902d-fe7b0d217b7d">Image by rawpixel.com on freepik</a>
             </div>
         </div>
