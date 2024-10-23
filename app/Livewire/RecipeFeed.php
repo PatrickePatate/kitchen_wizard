@@ -16,7 +16,7 @@ class RecipeFeed extends Component
     public ?Recipe $dessert;
 
     public function mount(){
-        $this->selection = RecipeDailySelection::forUser(auth()->user());
+        $this->selection = RecipeDailySelection::forUser(auth()->user())->preload();
 
         $this->main = $this->selection?->main();
         $this->starter = $this->selection?->starter();

@@ -13,6 +13,8 @@ class RecipeDailySelection extends Model
     use Prunable;
     protected $guarded = [];
 
+    protected $recipes = [];
+
     protected $casts = [
         'recipes_selection' => 'array'
     ];
@@ -38,19 +40,29 @@ class RecipeDailySelection extends Model
         $this->update(['recipes_selection' => $selection]);
     }
 
+    public function preload(): self
+    {
+        $recipes = Recipe::whereIn('id', collect($this->recipes_selection)->values())->get();
+        $this->recipes['starter'] = $recipes->firstWhere('meal_type', MealTypeEnum::STARTER);
+        $this->recipes['main'] = $recipes->firstWhere('meal_type', MealTypeEnum::MAIN_COURSE);
+        $this->recipes['dessert'] = $recipes->firstWhere('meal_type', MealTypeEnum::DESSERT);
+
+        return $this;
+    }
+
     public function starter(): ?Recipe
     {
-        return Recipe::find($this->recipes_selection['starter']);
+        return $this->recipes['starter'] ?? Recipe::find($this->recipes_selection['starter']);
     }
 
     public function main(): ?Recipe
     {
-        return Recipe::find($this->recipes_selection['main']);
+        return $this->recipes['main'] ?? Recipe::find($this->recipes_selection['main']);
     }
 
     public function dessert(): ?Recipe
     {
-        return Recipe::find($this->recipes_selection['dessert']);
+        return $this->recipes['dessert'] ??Recipe::find($this->recipes_selection['dessert']);
     }
 
 
