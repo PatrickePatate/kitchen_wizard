@@ -50,7 +50,7 @@ class User extends Authenticatable
 
     public function hasAtLeastOneNotificationChannelActive(): bool
     {
-        return ($this->isEmailNotificationsActive() || $this->isTelegramAccountSetup());
+        return !($this->isEmailNotificationsActive() || $this->isTelegramAccountSetup());
     }
 
     public function initials(): Attribute
