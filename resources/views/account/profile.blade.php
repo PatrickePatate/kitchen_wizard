@@ -2,7 +2,7 @@
 @section('title', __('Profile').' - '.config('app.name'))
 
 @section('content')
-    <div class="container mx-auto mt-16">
+    <div class="container mx-auto mt-16 px-6">
         <div class="w-full max-w-2xl mx-auto">
             @if(session()->has('success'))
                 <div class="p-5 bg-green-300 bg-opacity-85 mb-6">

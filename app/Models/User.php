@@ -48,6 +48,11 @@ class User extends Authenticatable
         return (bool) $this->is_email_notifications_active;
     }
 
+    public function hasAtLeastOneNotificationChannelActive(): bool
+    {
+        return ($this->isEmailNotificationsActive() || $this->isTelegramAccountSetup());
+    }
+
     public function initials(): Attribute
     {
         return Attribute::make(
