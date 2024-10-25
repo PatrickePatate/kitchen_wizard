@@ -9,6 +9,7 @@
         "barryvdh/laravel-translation-manager": "^0.6.6",
         "blade-ui-kit/blade-icons": "^1.7",
         "cmixin/season": "^1.0",
+        "code16/sharp": "^8.5",
         "laravel-notification-channels/telegram": "^5.0",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
@@ -39,6 +40,7 @@
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan vendor:publish --provider=Code16\\Sharp\\SharpServiceProvider --tag=assets --force",
             "@php artisan package:discover --ansi"
         ],
         "post-update-cmd": [
