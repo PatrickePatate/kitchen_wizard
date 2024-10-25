@@ -24,7 +24,7 @@ class RecipesSuggestionsMail extends Mailable
     {
         return new Envelope(
             to: $this->user->email,
-            subject: 'Votre suggestion de recherche du jour !',
+            subject: 'Votre suggestion de recettes du jour !',
         );
     }
 
