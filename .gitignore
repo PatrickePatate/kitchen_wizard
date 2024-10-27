@@ -4,6 +4,7 @@
 /public/storage
 /storage/*.key
 /vendor
+build.sh
 .env
 .env.backup
 .env.production
@@ -18,3 +19,7 @@ yarn-error.log
 /.idea
 /.vscode
 /.zed
+
+**/caddy
+frankenphp
+frankenphp-worker.php

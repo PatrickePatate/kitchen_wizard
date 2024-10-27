@@ -12,6 +12,7 @@
         "code16/sharp": "^8.5",
         "laravel-notification-channels/telegram": "^5.0",
         "laravel/framework": "^11.9",
+        "laravel/octane": "^2.5",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
         "predis/predis": "^2.2",
@@ -20,7 +21,6 @@
     "require-dev": {
         "fakerphp/faker": "^1.23",
         "laravel/pint": "^1.13",
-        "laravel/sail": "^1.36",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.0",
         "phpunit/phpunit": "^11.0.1"
