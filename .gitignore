@@ -5,6 +5,7 @@
 /storage/*.key
 /vendor
 build.sh
+docker-composer.yml
 .env
 .env.backup
 .env.production
