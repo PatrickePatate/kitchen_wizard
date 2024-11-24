@@ -1044,3 +1044,121 @@
 2024-11-24 12:00:20,411 INFO stopped: laravel-worker_01 (exit status 0)
 2024-11-24 12:00:20,412 INFO stopped: laravel-worker_00 (exit status 0)
 2024-11-24 12:00:20,415 WARN stopped: laravel-scheduler_00 (terminated by SIGTERM)
+2024-11-24 15:23:06,221 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-11-24 15:23:06,223 INFO supervisord started with pid 1
+2024-11-24 15:23:07,225 INFO spawned: 'laravel-scheduler_00' with pid 74
+2024-11-24 15:23:07,226 INFO spawned: 'laravel-worker_00' with pid 75
+2024-11-24 15:23:07,228 INFO spawned: 'laravel-worker_01' with pid 76
+2024-11-24 15:23:07,230 INFO spawned: 'octane' with pid 77
+2024-11-24 15:23:08,700 INFO success: laravel-scheduler_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-11-24 15:23:08,700 INFO success: laravel-worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-11-24 15:23:08,700 INFO success: laravel-worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-11-24 15:23:08,700 INFO success: octane entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-11-24 15:24:06,328 WARN received SIGTERM indicating exit request
+2024-11-24 15:24:06,328 INFO waiting for laravel-scheduler_00, laravel-worker_00, laravel-worker_01, octane to die
+2024-11-24 15:24:06,367 INFO stopped: octane (exit status 0)
+2024-11-24 15:24:06,374 INFO stopped: laravel-worker_01 (exit status 0)
+2024-11-24 15:24:06,375 INFO stopped: laravel-worker_00 (exit status 0)
+2024-11-24 15:24:06,377 WARN stopped: laravel-scheduler_00 (terminated by SIGTERM)
+2024-11-24 15:24:16,729 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-11-24 15:24:16,733 INFO supervisord started with pid 1
+2024-11-24 15:24:17,736 INFO spawned: 'laravel-scheduler_00' with pid 43
+2024-11-24 15:24:17,739 INFO spawned: 'laravel-worker_00' with pid 44
+2024-11-24 15:24:17,741 INFO spawned: 'laravel-worker_01' with pid 45
+2024-11-24 15:24:17,744 INFO spawned: 'octane' with pid 46
+2024-11-24 15:24:19,050 INFO success: laravel-scheduler_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-11-24 15:24:19,050 INFO success: laravel-worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-11-24 15:24:19,050 INFO success: laravel-worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-11-24 15:24:19,050 INFO success: octane entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-11-24 15:24:42,810 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-11-24 15:24:42,812 INFO supervisord started with pid 1
+2024-11-24 15:24:43,815 INFO spawned: 'laravel-scheduler_00' with pid 43
+2024-11-24 15:24:43,817 INFO spawned: 'laravel-worker_00' with pid 44
+2024-11-24 15:24:43,819 INFO spawned: 'laravel-worker_01' with pid 45
+2024-11-24 15:24:43,822 INFO spawned: 'octane' with pid 46
+2024-11-24 15:24:45,115 INFO success: laravel-scheduler_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-11-24 15:24:45,115 INFO success: laravel-worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-11-24 15:24:45,115 INFO success: laravel-worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-11-24 15:24:45,115 INFO success: octane entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-11-24 15:26:15,396 WARN received SIGTERM indicating exit request
+2024-11-24 15:26:15,397 INFO waiting for laravel-scheduler_00, laravel-worker_00, laravel-worker_01, octane to die
+2024-11-24 15:26:15,424 INFO stopped: octane (exit status 0)
+2024-11-24 15:26:15,432 INFO stopped: laravel-worker_00 (exit status 0)
+2024-11-24 15:26:15,433 INFO stopped: laravel-worker_01 (exit status 0)
+2024-11-24 15:26:15,437 WARN stopped: laravel-scheduler_00 (terminated by SIGTERM)
+2024-11-24 15:27:05,835 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-11-24 15:27:05,838 INFO supervisord started with pid 1
+2024-11-24 15:27:06,840 INFO spawned: 'laravel-scheduler_00' with pid 43
+2024-11-24 15:27:06,842 INFO spawned: 'laravel-worker_00' with pid 44
+2024-11-24 15:27:06,844 INFO spawned: 'laravel-worker_01' with pid 45
+2024-11-24 15:27:06,846 INFO spawned: 'octane' with pid 46
+2024-11-24 15:27:08,106 INFO success: laravel-scheduler_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-11-24 15:27:08,106 INFO success: laravel-worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-11-24 15:27:08,106 INFO success: laravel-worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-11-24 15:27:08,106 INFO success: octane entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-11-24 15:27:19,117 WARN received SIGTERM indicating exit request
+2024-11-24 15:27:19,117 INFO waiting for laravel-scheduler_00, laravel-worker_00, laravel-worker_01, octane to die
+2024-11-24 15:27:19,162 INFO stopped: octane (exit status 0)
+2024-11-24 15:27:19,171 INFO stopped: laravel-worker_01 (exit status 0)
+2024-11-24 15:27:19,172 INFO stopped: laravel-worker_00 (exit status 0)
+2024-11-24 15:27:19,177 WARN stopped: laravel-scheduler_00 (terminated by SIGTERM)
+2024-11-24 15:27:29,147 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-11-24 15:27:29,150 INFO supervisord started with pid 1
+2024-11-24 15:27:30,152 INFO spawned: 'laravel-scheduler_00' with pid 43
+2024-11-24 15:27:30,154 INFO spawned: 'laravel-worker_00' with pid 44
+2024-11-24 15:27:30,156 INFO spawned: 'laravel-worker_01' with pid 45
+2024-11-24 15:27:30,158 INFO spawned: 'octane' with pid 46
+2024-11-24 15:27:31,454 INFO success: laravel-scheduler_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-11-24 15:27:31,454 INFO success: laravel-worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-11-24 15:27:31,454 INFO success: laravel-worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-11-24 15:27:31,454 INFO success: octane entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-11-24 15:30:23,411 INFO reaped unknown pid 167 (terminated by SIGKILL)
+2024-11-24 15:30:25,413 INFO reaped unknown pid 175 (terminated by SIGKILL)
+2024-11-24 15:30:25,414 INFO reaped unknown pid 166 (terminated by SIGKILL)
+2024-11-24 15:48:40,464 WARN exited: octane (exit status 139; not expected)
+2024-11-24 15:48:41,467 INFO spawned: 'octane' with pid 562
+2024-11-24 15:48:42,743 INFO success: octane entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-11-24 16:27:31,030 INFO exited: laravel-worker_01 (exit status 0; expected)
+2024-11-24 16:27:31,032 INFO exited: laravel-worker_00 (exit status 0; expected)
+2024-11-24 16:27:31,041 INFO spawned: 'laravel-worker_00' with pid 1442
+2024-11-24 16:27:31,044 INFO spawned: 'laravel-worker_01' with pid 1443
+2024-11-24 16:27:32,046 INFO success: laravel-worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-11-24 16:27:32,046 INFO success: laravel-worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-11-24 17:27:31,685 INFO exited: laravel-worker_01 (exit status 0; expected)
+2024-11-24 17:27:31,757 INFO spawned: 'laravel-worker_01' with pid 2548
+2024-11-24 17:27:31,760 INFO exited: laravel-worker_00 (exit status 0; expected)
+2024-11-24 17:27:32,763 INFO spawned: 'laravel-worker_00' with pid 2553
+2024-11-24 17:27:32,764 INFO success: laravel-worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-11-24 17:27:33,765 INFO success: laravel-worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-11-24 18:25:47,338 WARN received SIGTERM indicating exit request
+2024-11-24 18:25:47,344 INFO waiting for laravel-scheduler_00, laravel-worker_00, laravel-worker_01, octane to die
+2024-11-24 18:25:47,664 INFO stopped: octane (exit status 0)
+2024-11-24 18:25:47,671 INFO stopped: laravel-worker_01 (exit status 0)
+2024-11-24 18:25:47,671 INFO stopped: laravel-worker_00 (exit status 0)
+2024-11-24 18:25:47,674 WARN stopped: laravel-scheduler_00 (terminated by SIGTERM)
+2024-11-24 18:25:56,553 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-11-24 18:25:56,555 INFO supervisord started with pid 1
+2024-11-24 18:25:57,557 INFO spawned: 'laravel-scheduler_00' with pid 74
+2024-11-24 18:25:57,560 INFO spawned: 'laravel-worker_00' with pid 75
+2024-11-24 18:25:57,561 INFO spawned: 'laravel-worker_01' with pid 76
+2024-11-24 18:25:57,564 INFO spawned: 'octane' with pid 77
+2024-11-24 18:25:58,860 INFO success: laravel-scheduler_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-11-24 18:25:58,860 INFO success: laravel-worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-11-24 18:25:58,860 INFO success: laravel-worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-11-24 18:25:58,860 INFO success: octane entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-11-24 18:26:25,101 WARN received SIGTERM indicating exit request
+2024-11-24 18:26:25,101 INFO waiting for laravel-scheduler_00, laravel-worker_00, laravel-worker_01, octane to die
+2024-11-24 18:26:25,146 INFO stopped: octane (exit status 0)
+2024-11-24 18:26:25,151 INFO stopped: laravel-worker_00 (exit status 0)
+2024-11-24 18:26:25,153 INFO stopped: laravel-worker_01 (exit status 0)
+2024-11-24 18:26:25,157 WARN stopped: laravel-scheduler_00 (terminated by SIGTERM)
+2024-11-24 18:26:34,877 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-11-24 18:26:34,878 INFO supervisord started with pid 1
+2024-11-24 18:26:35,881 INFO spawned: 'laravel-scheduler_00' with pid 42
+2024-11-24 18:26:35,882 INFO spawned: 'laravel-worker_00' with pid 43
+2024-11-24 18:26:35,884 INFO spawned: 'laravel-worker_01' with pid 44
+2024-11-24 18:26:35,885 INFO spawned: 'octane' with pid 45
+2024-11-24 18:26:37,084 INFO success: laravel-scheduler_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-11-24 18:26:37,084 INFO success: laravel-worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-11-24 18:26:37,085 INFO success: laravel-worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-11-24 18:26:37,085 INFO success: octane entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)

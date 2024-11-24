@@ -19,7 +19,7 @@
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
         "meilisearch/meilisearch-php": "^1.11",
-        "predis/predis": "^2.2",
+        "predis/predis": "^2.3",
         "ryangjchandler/blade-tabler-icons": "^2.3"
     },
     "require-dev": {

@@ -11,13 +11,13 @@ docker-compose.yml
 .env.production
 .phpactor.json
 .phpunit.result.cache
-supervisord.pid
-supervisord.log
 Homestead.json
 Homestead.yaml
 auth.json
 npm-debug.log
 yarn-error.log
+supervisord.pid
+supervisord.log
 /.fleet
 /.idea
 /.vscode
