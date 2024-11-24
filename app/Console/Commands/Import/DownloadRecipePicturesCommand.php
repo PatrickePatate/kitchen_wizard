@@ -49,6 +49,6 @@ class DownloadRecipePicturesCommand extends Command
                 $this->error("Failed to download picture from '{$url}' for recipe #{$recipe->id}, error message: ".$e->getMessage());
             }
         }
-        $recipe->update(['pictures' => $pictures]);
+        $recipe->update(['pictures' => array_values($pictures)]);
     }
 }
