@@ -1,7 +1,7 @@
 @php use App\Services\WeatherService; @endphp
 <nav x-data="{search:{open:false}}" class="bg-neutral-900 text-white py-1 px-6">
     <div class="flex justify-between items-center">
-        <h1 class="text-2xl font-heading"><a href="{{route('home')}}">KitchenWizard</a></h1>
+        <h1 class="text-xl sm:text-2xl font-heading"><a href="{{route('home')}}">KitchenWizard</a></h1>
 
         <div class="flex items-center gap-3 py-1">
             <div>
