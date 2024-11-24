@@ -13,6 +13,7 @@
         "http-interop/http-factory-guzzle": "^1.2",
         "laravel-notification-channels/telegram": "^5.0",
         "laravel/framework": "^11.9",
+        "laravel/horizon": "^5.29",
         "laravel/octane": "^2.5",
         "laravel/scout": "^10.11",
         "laravel/tinker": "^2.9",
