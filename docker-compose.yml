@@ -6,19 +6,20 @@ services:
         image: kitchenwizard
         restart: always
         ports:
-            -   "8000:80"
+            -   "8000:8000"
         networks:
            # - web
             - host
         labels:
-            - "traefik.http.routers.romainalcon.rule=Host(`new-portfolio.romainalcon.me`)"
-            - "traefik.http.routers.romainalcon.tls=true"
-            - "traefik.http.routers.romainalcon.tls.certresolver=lets-encrypt"
-            - "traefik.http.routers.romainalcon.entrypoints=websecure"
-            - "traefik.http.services.romainalcon.loadbalancer.server.port=8000"
+            - "traefik.http.routers.kitchenwizard.rule=Host(`miammmm.fr`)"
+            - "traefik.http.routers.kitchenwizard.tls=true"
+            - "traefik.http.routers.kitchenwizard.tls.certresolver=lets-encrypt"
+            - "traefik.http.routers.kitchenwizard.entrypoints=websecure"
+            - "traefik.http.services.kitchenwizard.loadbalancer.server.port=8000"
         volumes:
-            - ./storage:/app/storage
-            - ./.env:/app/.env
+            - ./:/app
+           # - ./storage:/app/storage
+           # - ./.env:/app/.env
 #        depends_on:
 #            common-postgres:
 #                condition: service_healthy

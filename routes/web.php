@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RecipeController;
+use App\Http\Controllers\TestRecipeController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:web'])->group(function () {
@@ -18,6 +19,7 @@ Route::middleware(['auth:web'])->group(function () {
     });
 });
 
+Route::get('/test', [TestRecipeController::class, 'show'])->name('test');
 // Auth
 Route::get('login', [LoginController::class, 'create'])->name('login');
 Route::post('login', [LoginController::class, 'store']);

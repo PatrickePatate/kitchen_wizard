@@ -3,6 +3,7 @@ FROM dunglas/frankenphp:1.2-php8.3.8
 RUN install-php-extensions \
     pcntl \
     mysqli \
+    pdo_pgsql \
     pdo_mysql \
     intl \
     ctype \
@@ -24,9 +25,11 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 COPY init-project.sh /usr/local/bin/start
 
-COPY . /app
+#COPY . /app
+VOLUME ["/app"]
+WORKDIR /app
 
-RUN rm -f /app/.env
+#RUN rm -f /app/.env
 
 RUN chmod +x /usr/local/bin/start
 
