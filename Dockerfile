@@ -15,9 +15,16 @@ RUN install-php-extensions \
     mbstring \
     pcre \
     tokenizer \
-    xml
+    xml \
+    zip
 
-RUN apt-get update && apt-get install -y supervisor composer && apt-get clean
+RUN apt-get update  \
+    && apt-get install -y supervisor  \
+    && apt-get install -y postgresql \
+    && apt-get clean
+
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 #COPY --from=node:20-slim /usr/local/bin /usr/local/bin
 

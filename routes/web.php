@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth:web'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('recipe/{recipe}', [RecipeController::class, 'show'])->name('recipe')->whereNumber('recipe');
+    Route::get('/search', [RecipeController::class, 'search'])->name('search');
 
     Route::prefix('account')->group(function () {
         Route::get('profile', [AccountController::class, 'view'])->name('profile');
@@ -19,7 +20,6 @@ Route::middleware(['auth:web'])->group(function () {
     });
 });
 
-Route::get('/test', [TestRecipeController::class, 'show'])->name('test');
 // Auth
 Route::get('login', [LoginController::class, 'create'])->name('login');
 Route::post('login', [LoginController::class, 'store']);

@@ -6,9 +6,12 @@ use App\MealTypeEnum;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Recipe extends Model
 {
+    use Searchable;
+
     protected $casts = [
         'pictures' => 'array',
         'ingredients' => 'array',
@@ -39,5 +42,10 @@ class Recipe extends Model
         return Attribute::make(
             get: fn() => route('recipe', ['recipe' => $this]),
         );
+    }
+
+    public function toSearchableArray(): array
+    {
+        return $this->toArray();
     }
 }

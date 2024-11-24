@@ -7,7 +7,7 @@
     'required' => false,
     'placeholder' => null,
 ])
-<div class="mb-4">
+<div {{$attributes->class('mb-4')}}>
     @if($label)
         <label for="input-{{$name}}" class="block text-sm font-medium text-gray-700">{{ $label }}</label>
     @endif

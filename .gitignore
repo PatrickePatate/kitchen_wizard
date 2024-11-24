@@ -11,6 +11,8 @@ docker-composer.yml
 .env.production
 .phpactor.json
 .phpunit.result.cache
+supervisord.pid
+supervisord.log
 Homestead.json
 Homestead.yaml
 auth.json

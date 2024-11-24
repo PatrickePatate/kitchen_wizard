@@ -1,21 +1,15 @@
-version: '3.1'
-
 services:
     app:
         hostname: kitchenwizard
         image: kitchenwizard
-        restart: always
+        restart: unless-stopped
+        network_mode: host
         ports:
             -   "8000:8000"
-        networks:
-           # - web
-            - host
-        labels:
-            - "traefik.http.routers.kitchenwizard.rule=Host(`miammmm.fr`)"
-            - "traefik.http.routers.kitchenwizard.tls=true"
-            - "traefik.http.routers.kitchenwizard.tls.certresolver=lets-encrypt"
-            - "traefik.http.routers.kitchenwizard.entrypoints=websecure"
-            - "traefik.http.services.kitchenwizard.loadbalancer.server.port=8000"
+#        networks:
+#           # - web
+#            - host
+
         volumes:
             - ./:/app
            # - ./storage:/app/storage

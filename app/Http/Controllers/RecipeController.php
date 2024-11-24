@@ -11,4 +11,11 @@ class RecipeController extends Controller
     {
         return view('recipe', ['recipe' => $recipe]);
     }
+
+    public function search(Request $request)
+    {
+        $recipes = Recipe::search($request->input('q'))->paginate(10);
+
+        return view('search', ['recipes' => $recipes]);
+    }
 }

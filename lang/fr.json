@@ -9,6 +9,7 @@
     "Fullname": "Nom complet",
     "Inactive": "Inactif(ve)",
     "Integrations": "Intégrations",
+    "Place's name": "Nom de l'emplacement",
     "Latitude": "Latitude",
     "Link your account": "Liez votre compte",
     "Login": "Se connecter",
@@ -32,5 +33,11 @@
     "Set your avatar on": "Définissez votre avatar sur",
     "Something went wrong": "Quelque chose s'est mal passé.",
     "Your informations": "Vos informations",
-    "Your validation code for": "Votre code de validation pour"
+    "Your validation code for": "Votre code de validation pour",
+    "Pagination Navigation": "Navigation de pagination",
+    "Showing": "Affichage de",
+    "to": "à",
+    "of": "de",
+    "results": "résultats",
+    "No data available in table": "Aucune donnée disponible dans le tableau"
 }

@@ -57,7 +57,7 @@
                     @csrf
                     <div>
                         <div class="mb-4">
-                            <label class="block text-sm font-medium text-gray-700">Place's name</label>
+                            <label class="block text-sm font-medium text-gray-700">{{__("Place's name")}}</label>
                             <div>
                                 <input autocomplete="off" type="text" @keydown="updateLocationSearch($el.value)" value="{{Auth::user()->meteo_city}}" name="meteo_city" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500  sm:text-sm" value="{{ Auth::user()->meteo_city }}">
                                 <div class="relative" @click.away="this.show=false">
@@ -92,7 +92,7 @@
                 <h1 class="font-heading text-xl">{{__('Integrations')}}</h1>
             </div>
             <div class="p-4 mb-6">
-                <div class="grid grid-cols-3 sm:grid-cols-4">
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
                     <div class="flex flex-col items-center justify-center" x-data="{ active: {{(int)Auth::user()->isTelegramAccountSetup()}} }">
                         <div class="bg-[#29a9ea] w-20 h-20 p-6 rounded-full flex justify-center items-center mb-2">
                             <x-tabler-brand-telegram class="text-white w-12 h-12"/>
@@ -106,6 +106,13 @@
                             <x-tabler-mail class="text-white w-12 h-12"/>
                         </div>
                         <p class="text-nowrap">Email : <span :class="active ? 'text-green-500' : 'text-red-500'">{{Auth::user()->isEmailNotificationsActive() ? __("Active") : __('Inactive')}}</span></p>
+                    </div>
+
+                    <div class="flex flex-col items-center justify-center" x-data="{ active: {{(int)Auth::user()->isEmailNotificationsActive()}} }">
+                        <div class="bg-gray-700 w-20 h-20 p-6 rounded-full flex justify-center items-center mb-2">
+                            <x-tabler-question-mark class="text-white w-12 h-12"/>
+                        </div>
+                        <p class="text-nowrap">Autre... <span class="text-orange-800">Bientôt..</span></p>
                     </div>
                 </div>
 
