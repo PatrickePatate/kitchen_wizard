@@ -9,6 +9,7 @@ RUN install-php-extensions \
     ctype \
     curl \
     dom \
+    redis \
     fileinfo \
     filter \
     hash \

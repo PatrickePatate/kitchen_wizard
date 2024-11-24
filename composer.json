@@ -20,7 +20,8 @@
         "livewire/livewire": "^3.5",
         "meilisearch/meilisearch-php": "^1.11",
         "predis/predis": "^2.3",
-        "ryangjchandler/blade-tabler-icons": "^2.3"
+        "ryangjchandler/blade-tabler-icons": "^2.3",
+        "sentry/sentry-laravel": "^4.10"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
