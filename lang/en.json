@@ -1,9 +1,7 @@
 {
+    "Activer un canal de notification": "Activate a notification channel",
+    "Reléguer au rang d'utilisateur": "Downgrade to non-admin user",
     "Plat principal": "Main dish",
-    "Account creation:": "Account creation",
-    "Activate Email recipe suggestions": "Receive recipe sugestions by email",
-    "Active": "Active",
-    "Confirm password": "Confirm password",
     "Merci de valider votre compte Telegram en entrant le code suivant dans l'application Telegram avec la commande suivante :": "Thanks to validate your telegram account by sending the following command to the bot :",
     "Bonjour :name": "Hello :name",
     "Valider mon compte Telegram": "Validate my telegram account",
@@ -11,6 +9,12 @@
     "Vos suggestions de recettes pour ce :date": "Your suggestions for :date",
     "No account ? Register.": "You don't have an account yet ? Register !",
     "Voir l'entrée": "Check the starter",
+    "L'utilisateur(trice) aura accès à l'administration.": "User will have access to the administration panel",
+    "Vous n'avez activé aucun canal de notifications, vous ne recevrez donc pas de suggestions.": "You have not enabled any notification channels, so you will not receive suggestions.",
+    "Account creation:": "Account creation",
+    "Activate Email recipe suggestions": "Receive recipe sugestions by email",
+    "Active": "Active",
+    "Confirm password": "Confirm password",
     "Voir le dessert": "Check the dessert",
     "Voir le plat": "Check the main dish",
     "Meteo updated!": "Weather localization updated !",
@@ -20,5 +24,6 @@
     "Entrée": "Starter",
     "Merci": "Thanks",
     "Validez votre compte Telegram": "Validate your telegram account",
-    "Voir les recettes": "See those recipes"
+    "Voir les recettes": "See those recipes",
+    "L'utilisateur(trice) n'aura plus accès à l'administration.": "User will no longer have access to the administration panel"
 }

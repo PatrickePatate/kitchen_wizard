@@ -8,7 +8,7 @@
                 <x-recipe-card :recipe="$recipe" />
             @endforeach
         </div>
-        <div class="my-5">
+        <div class="my-5 px-3">
             {{ $recipes->links('pagination::tailwind') }}
         </div>
     </div>
