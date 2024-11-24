@@ -17,7 +17,7 @@ RUN install-php-extensions \
     tokenizer \
     xml
 
-RUN apt-get update && apt-get install -y supervisor && apt-get clean
+RUN apt-get update && apt-get install -y supervisor composer && apt-get clean
 
 #COPY --from=node:20-slim /usr/local/bin /usr/local/bin
 
