@@ -1,13 +1,13 @@
 @php use App\Services\WeatherService; @endphp
-<nav class="bg-neutral-900 text-white py-1 px-6">
+<nav x-data="{search:{open:false}}" class="bg-neutral-900 text-white py-1 px-6">
     <div class="flex justify-between items-center">
         <h1 class="text-2xl font-heading"><a href="{{route('home')}}">KitchenWizard</a></h1>
 
         <div class="flex items-center gap-3 py-1">
             <div>
                 <form action="{{route('search')}}" class="relative flex items-center gap-3">
-                    <input type="search" @keydown.enter="$el.parent.submit" class="mt-1 block w-full px-2 pe-9 py-1.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 text-sm text-black" placeholder="Search" name="q" value="">
-                    <x-tabler-search class="h-5 text-black absolute right-2 top-50"></x-tabler-search>
+                    <input type="search" @keydown.enter="$el.parent.submit" class="mt-1 hidden sm:block w-full px-2 pe-9 py-1.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 text-sm text-black" placeholder="Search" name="q" value="">
+                    <x-tabler-search @click="search.open = !search.open" class="h-5 text-white sm:text-black absolute right-2 top-50"></x-tabler-search>
                 </form>
             </div>
             <div x-data="{popup: { open: false }}" @click="popup.open = !popup.open" @click.away="popup.open = false">
@@ -33,4 +33,10 @@
 
         </div>
     </div>
+    <div x-cloak x-transition x-show="search.open" class="bg-neutral-900 text-white py-1 px-3 sm:hidden">
+        <form action="{{route('search')}}" class="relative flex items-center gap-3">
+            <input type="search" @keydown.enter="$el.parent.submit" class="mt-1 block w-full px-2 pe-9 py-1.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 text-sm text-black" placeholder="Search" name="q" value="">
+        </form>
+    </div>
+
 </nav>
