@@ -6,7 +6,7 @@
         <div class="flex items-center gap-3 py-1">
             <div>
                 <form action="{{route('search')}}" class="relative flex items-center gap-3">
-                    <input type="search" @keydown.enter="$el.parent.submit" class="mt-1 hidden sm:block w-full px-2 pe-9 py-1.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 text-sm text-black" placeholder="Search" name="query" value="">
+                    <input type="search" @keydown.enter="$el.parent.submit" class="mt-1 hidden sm:block w-full px-2 pe-9 py-1.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 text-sm text-black" placeholder="{{__('Search')}}" name="query" value="">
                     <x-tabler-search @click="search.open = !search.open" class="h-5 text-white sm:text-black absolute right-2 top-50"></x-tabler-search>
                 </form>
             </div>
@@ -35,7 +35,7 @@
     </div>
     <div x-cloak x-transition x-show="search.open" class="bg-neutral-900 text-white py-1 px-3 sm:hidden">
         <form action="{{route('search')}}" class="relative flex items-center gap-3">
-            <input type="search" @keydown.enter="$el.parent.submit" class="mt-1 block w-full px-2 pe-9 py-1.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 text-sm text-black" placeholder="Search" name="query" value="">
+            <input type="search" @keydown.enter="$el.parent.submit" class="mt-1 block w-full px-2 pe-9 py-1.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 text-sm text-black" placeholder="{{__('Search')}}" name="query" value="">
         </form>
     </div>
 
