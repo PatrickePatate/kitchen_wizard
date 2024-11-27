@@ -1,13 +1,18 @@
 @php use App\Services\WeatherService; @endphp
 <nav x-data="{search:{open:false}}" class="bg-neutral-900 text-white py-1 px-6">
-    <div class="flex justify-between items-center">
+    <div class="flex justify-between items-center gap-4">
         <h1 class="text-xl sm:text-2xl font-heading"><a href="{{route('home')}}">KitchenWizard</a></h1>
 
-        <div class="flex items-center gap-3 py-1">
+        <div class="flex-1 flex justify-end items-center gap-2 py-1">
+            <div>
+                <a href="{{route('likes')}}" title="{{__('Mes recettes favorites')}}">
+                    <x-tabler-heart-filled class="h-9 text-white"></x-tabler-heart-filled>
+                </a>
+            </div>
             <div>
                 <form action="{{route('search')}}" class="relative flex items-center gap-3">
                     <input type="search" @keydown.enter="$el.parent.submit" class="mt-1 hidden sm:block w-full px-2 pe-9 py-1.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 text-sm text-black" placeholder="{{__('Search')}}" name="query" value="">
-                    <x-tabler-search @click="search.open = !search.open" class="h-5 text-white sm:text-black absolute right-2 top-50"></x-tabler-search>
+                    <x-tabler-search @click="search.open = !search.open" class="h-5 text-white sm:text-black sm:absolute sm:right-2 sm:top-50"></x-tabler-search>
                 </form>
             </div>
             <div x-data="{popup: { open: false }}" @click="popup.open = !popup.open" @click.away="popup.open = false">

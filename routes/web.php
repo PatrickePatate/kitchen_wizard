@@ -4,6 +4,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LikedRecipesController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\TestRecipeController;
 use Illuminate\Support\Facades\Route;
@@ -12,6 +13,7 @@ Route::middleware(['auth:web'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('recipe/{recipe}', [RecipeController::class, 'show'])->name('recipe')->whereNumber('recipe');
     Route::get('/search', [RecipeController::class, 'search'])->name('search');
+    Route::get('/likes', [LikedRecipesController::class, 'index'])->name('likes');
 
     Route::prefix('account')->group(function () {
         Route::get('profile', [AccountController::class, 'view'])->name('profile');

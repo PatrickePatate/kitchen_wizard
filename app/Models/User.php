@@ -3,10 +3,12 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Miscs\RecipeLike;
 use App\UserGroupEnum;
 use Cache;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -38,6 +40,11 @@ class User extends Authenticatable
             'password' => 'hashed',
             'group' => UserGroupEnum::class
         ];
+    }
+
+    public function likedRecipes(): HasMany
+    {
+        return $this->hasMany(RecipeLike::class)->orderBy('liked_at', 'desc');
     }
 
     public function isTelegramAccountSetup(): bool

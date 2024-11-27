@@ -37,14 +37,14 @@
             </div>
 
             <div x-data="ingredients" class="flex flex-col gap-2 p-4 bg-neutral-100 mb-6">
-                <div class="flex justify-between">
+                <div class="flex justify-between cursor-pointer" @click="open = !open">
                     <h3 class="font-sans font-medium uppercase text-md flex items-center gap-1">
                         <x-tabler-apple class="inline" />
                         <span class="pt-1">Ingrédients :</span>
                     </h3>
                     <div>
-                        <x-tabler-chevron-up @click="open = false" class="cursor-pointer" x-show="open" />
-                        <x-tabler-chevron-down @click="open = true" class="cursor-pointer" x-show="!open" />
+                        <x-tabler-chevron-up x-show="open" />
+                        <x-tabler-chevron-down x-show="!open" />
                     </div>
                 </div>
                 <div class="w-full mt-3 " x-show="open"
@@ -73,14 +73,14 @@
             </div>
 
             <div x-data="{open: false}" class="flex flex-col gap-2 p-4 bg-neutral-100 mb-12">
-                <div class="flex justify-between">
-                    <h3 class="font-sans font-medium uppercase text-md flex items-center gap-1">
+                <div class="flex justify-between cursor-pointer" @click="open = !open">
+                    <h3 class="font-sans font-medium uppercase text-md flex items-center gap-1" >
                         <x-tabler-grill-fork class="inline" />
                         <span class="pt-1">Ustensiles :</span>
                     </h3>
                     <div>
-                        <x-tabler-chevron-up @click="open = false" class="cursor-pointer" x-show="open" />
-                        <x-tabler-chevron-down @click="open = true" class="cursor-pointer" x-show="!open" />
+                        <x-tabler-chevron-up x-show="open"></x-tabler-chevron-up>
+                        <x-tabler-chevron-down x-show="!open" />
                     </div>
                 </div>
                 <div class="w-full mt-3 grid grid-cols-2 sm:grid-cols-4 gap-5" x-show="open"

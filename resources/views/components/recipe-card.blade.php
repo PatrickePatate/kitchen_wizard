@@ -24,6 +24,7 @@
                 </div>
             </div>
         @endif
+        <livewire:actions.like-recipe :recipe="$recipe" />
     </div>
     <div class="flex flex-col">
         <div class="flex justify-between items-start">
