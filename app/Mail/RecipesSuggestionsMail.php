@@ -34,7 +34,7 @@ class RecipesSuggestionsMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'mails.recipes-suggestions',
+            view: 'mails.recipe-daily-selection',
             with: [
                 'selection' => RecipeDailySelection::forUser($this->user),
             ]

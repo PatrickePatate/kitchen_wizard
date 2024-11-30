@@ -7,8 +7,7 @@
             <div class="w-full h-full my-auto mx-auto md:col-span-2">
                 <div class="mx-auto h-full flex flex-col justify-between max-w-md">
                     <h1 class="font-heading py-3">
-                        <x-tabler-chef-hat class="inline me-2"></x-tabler-chef-hat>
-                        {{config('app.name')}}
+                        <x-icon-logo class="w-48"></x-icon-logo>
                     </h1>
 
                     <div>

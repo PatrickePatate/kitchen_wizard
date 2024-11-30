@@ -7,13 +7,19 @@
             <div class="w-full h-full my-auto mx-auto md:col-span-2">
                 <div class="mx-auto h-full flex flex-col justify-between max-w-md">
                     <h1 class="font-heading py-3">
-                        <x-tabler-chef-hat class="inline me-2"></x-tabler-chef-hat>
-                        {{config('app.name')}}
+                        <x-icon-logo class="w-48"></x-icon-logo>
                     </h1>
 
                     <div>
                         <h1 class="font-heading md:text-2xl mb-4">{{__('Register')}}</h1>
-
+                        <div class="my-5 p-2 flex items-start gap-2 rounded-md text-white shadow-md bg-blue-500">
+                            <div class="w-10 h-10 mt-1">
+                                <x-tabler-info-circle-filled></x-tabler-info-circle-filled>
+                            </div>
+                            <p>
+                                {{__("Trouve de l'inspiration pour tes repas du quotidien, met de côté des recettes qui te plaisent et recoit tous les jours une entrée, un plat et un dessert pour ta journée !")}}
+                            </p>
+                        </div>
                         <form method="POST">
                             @csrf
                             <x-forms.input type="text" name="name" label="{{__('Fullname')}}" required />
