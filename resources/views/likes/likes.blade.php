@@ -7,7 +7,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mx-auto pt-6 pb-4">
                 @forelse($recipes->pluck('recipe') as $recipe)
-                    <x-recipe-card :recipe="$recipe" />
+                    <x-recipe-card :allow-refresh="false" :recipe="$recipe" />
                 @empty
                     <div class="md:col-span-2">
                         <div class="bg-gray-200 text-dark p-4 rounded-xl flex items-center gap-4">
