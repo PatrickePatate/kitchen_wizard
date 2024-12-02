@@ -1,6 +1,8 @@
 @extends('layouts.app', ['hasHeader' => false])
 @section('title', __('Register').' - '.config('app.name'))
-
+@section('meta')
+    <meta property="og:image" content="{{asset('images/website_cover.jpg')}}" />
+@endsection
 @section('content')
     <div class="w-full h-[100dvh] overflow-x-hidden ">
         <div class="grid grid-cols-1 md:grid-cols-5 h-full gap-5 p-6">

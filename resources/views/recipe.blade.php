@@ -5,6 +5,7 @@
     <meta property="og:url" content="{{$recipe->url}}" />
     <meta property="og:image" content="{{ isset($recipe->pictures[0]) ? asset('storage/'.$recipe->pictures[0]) : asset('images/default_recipe_picture.webp') }}" />
 @endsection
+@section('title', $recipe->title. ' - '.config('app.name'))
 @section('content')
     <div class="container mx-auto px-4">
         <div class="max-w-2xl mx-auto mt-8">

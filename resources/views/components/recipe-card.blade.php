@@ -61,8 +61,8 @@
     @if($allowRefresh || $clickable)
         <div class="flex items-stretch mt-4 -ms-1 gap-3">
             @if($allowRefresh)
-                <button wire:loading.class.remove="cursor-pointer" wire:loading.class="cursor-progress" wire:loading.attr="disabled" @click="$wire.refreshMeal('{{$recipe->meal_type}}'); setTimeout(() => { currentPicture = $refs.mainPicture.getAttribute('src'); }, 500)" class="flex items-center gap-2 py-2 px-3 bg-gray-200 font-semibold rounded-full w-fit cursor-pointer">
-                    <x-tabler-reload wire:loading.class="animate-spin"></x-tabler-reload>
+                <button wire:loading.class.remove="cursor-pointer" wire:loading.class="cursor-progress" wire:loading.attr="disabled" wire:target="refreshMeal" @click="$wire.refreshMeal('{{$recipe->meal_type}}'); setTimeout(() => { currentPicture = $refs.mainPicture.getAttribute('src'); }, 500)" class="flex items-center gap-2 py-2 px-3 bg-gray-200 font-semibold rounded-full w-fit cursor-pointer">
+                    <x-tabler-reload wire:target="refreshMeal" wire:loading.class="animate-spin"></x-tabler-reload>
                     Changer
                 </button>
             @endif

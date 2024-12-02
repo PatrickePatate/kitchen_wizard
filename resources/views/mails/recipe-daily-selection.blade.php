@@ -112,7 +112,7 @@
                                                     <tr>
                                                         <td style="padding-right: 0px;padding-left: 0px;" align="center">
 
-                                                            <img align="center" border="0" src="{{asset('images/miammmm.svg')}}" alt="logo" title="image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 31%;max-width: 179.8px;" width="179.8" class="v-src-width v-src-max-width"/>
+                                                            <img align="center" border="0" src="{{asset('images/miammmm.png')}}" alt="logo" title="image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 31%;max-width: 179.8px;" width="179.8" class="v-src-width v-src-max-width"/>
 
                                                         </td>
                                                     </tr>

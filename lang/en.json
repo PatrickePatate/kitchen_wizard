@@ -1,6 +1,8 @@
 {
+    "Yesterday": "Hier",
     "Activer un canal de notification": "Activate a notification channel",
     "Reléguer au rang d'utilisateur": "Downgrade to non-admin user",
+    "Today": "Aujourd'hui",
     "Plat principal": "Main dish",
     "Merci de valider votre compte Telegram en entrant le code suivant dans l'application Telegram avec la commande suivante :": "Thanks to validate your telegram account by sending the following command to the bot :",
     "Bonjour :name": "Hello :name",
@@ -15,6 +17,8 @@
     "Activate Email recipe suggestions": "Receive recipe sugestions by email",
     "Active": "Active",
     "Confirm password": "Confirm password",
+    "Trouve de l'inspiration pour tes repas du quotidien, met de côté des recettes qui te plaisent et recoit tous les jours une entrée, un plat et un dessert pour ta journée !": "Find inspiration for your daily meals, set aside recipes that you like and receive a starter, a main course and a dessert every day for your day!",
+    "depuis votre compte": "from your account",
     "Voir le dessert": "Check the dessert",
     "Voir le plat": "Check the main dish",
     "Meteo updated!": "Weather localization updated !",
@@ -25,5 +29,6 @@
     "Merci": "Thanks",
     "Validez votre compte Telegram": "Validate your telegram account",
     "Voir les recettes": "See those recipes",
-    "L'utilisateur(trice) n'aura plus accès à l'administration.": "User will no longer have access to the administration panel"
+    "L'utilisateur(trice) n'aura plus accès à l'administration.": "User will no longer have access to the administration panel",
+    "Vous n'avez pas encore de recettes favorites.": "You don't have any favorite recipes yet."
 }

@@ -22,7 +22,7 @@ class RecipeDailySelection extends Model
     public static function forUser(User $user): ?RecipeDailySelection
     {
         return RecipeDailySelection::where('user_id', $user->id)
-            ->whereDate('created_at', today())
+            ->whereDay('created_at', today())
             ->orderBy('created_at', 'desc')
             ->first();
     }
