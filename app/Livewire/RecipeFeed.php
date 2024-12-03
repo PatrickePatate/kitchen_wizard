@@ -17,7 +17,7 @@ class RecipeFeed extends Component
     public ?Recipe $main;
     public ?Recipe $starter;
     public ?Recipe $dessert;
-    public Carbon $selectionDay;
+    public ?Carbon $selectionDay;
 
     public function mount(){
         $this->selection = RecipeDailySelection::forUser(auth()->user())?->preload();

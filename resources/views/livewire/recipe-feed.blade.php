@@ -24,10 +24,10 @@
     </div>
     <div class="max-w-3xl mx-auto border-x px-5 pt-6 pb-4 border-b">
         <!-- Day selector -->
-        <div class="flex flex-wrap justify-start gap-3">
+        <div class="flex flex-nowrap overflow-y-scroll justify-start gap-3">
             @foreach($lastWeekSelections as $prevSelection)
                 <div wire:click="selectDay('{{$prevSelection->created_at->format('Y-m-d')}}')" class="cursor-pointer text-center font-sans @if($selectionDay?->isSameDay($prevSelection->created_at)) font-medium bg-blue-800 @else bg-blue-700 @endif text-sm text-white rounded-full px-3 py-2">
-                    <span class="pt-1">
+                    <span class="pt-1 whitespace-nowrap">
                         @if($prevSelection->created_at->isToday())
                             {{__('Today')}}
                         @elseif($prevSelection->created_at->isYesterday())
