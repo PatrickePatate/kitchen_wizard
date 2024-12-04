@@ -8,7 +8,7 @@
 @section('title', $recipe->title. ' - '.config('app.name'))
 @section('content')
     <div class="container mx-auto px-4">
-        <div class="max-w-2xl mx-auto mt-8">
+        <div class="max-w-3xl mx-auto mt-8">
             <a href="{{route('home')}}" class="flex gap-2 items-center mb-7">
                 <x-tabler-arrow-left class="w-8 h-auto text-gray-600 "></x-tabler-arrow-left>
                 <p class="font-light">Retour</p>

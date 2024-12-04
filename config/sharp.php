@@ -132,12 +132,12 @@ return [
     // 'login_page_message_blade_path' => env('SHARP_LOGIN_PAGE_MESSAGE_BLADE_PATH', 'sharp/_login-page-message'),
 
     'theme' => [
-        'primary_color' => '#004c9b',
+        'primary_color' => '#0047AB',
         // 'favicon_url' => '',
-        // 'logo_urls' => [
-        //     'menu' => '/sharp-assets/menu-icon.png',
-        //     'login' => '/sharp-assets/login-icon.png',
-        // ],
+         'logo_urls' => [
+             'menu' => '/images/logo.png',
+             'login' => '/images/logo.png',
+         ],
     ],
 
 ];

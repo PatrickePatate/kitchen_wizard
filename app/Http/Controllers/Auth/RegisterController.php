@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\UserRegistered;
 use App\Http\Controllers\Controller;
 use App\MealTypeEnum;
 use App\Models\RecipeDailySelection;
 use App\Models\User;
 use App\Services\RecipeSelectorService;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -16,6 +18,10 @@ class RegisterController extends Controller
 
     public function create()
     {
+        if(auth()->check()){
+            return redirect()->to(route('home'));
+        }
+
         return view('register');
     }
 
@@ -44,7 +50,8 @@ class RegisterController extends Controller
             ]);
 
             auth()->login($user);
-            return redirect()->route('home');
+            UserRegistered::dispatch($user);
+            return redirect()->to(route('home'));
         }
 
         return redirect()->back()->withErrors(['name' => __('Something went wrong')]);

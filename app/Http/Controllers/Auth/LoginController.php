@@ -9,6 +9,10 @@ class LoginController extends Controller
 {
     public function create()
     {
+        if(auth()->check()){
+            return redirect()->to(route('home'));
+        }
+
         return view('login');
     }
 

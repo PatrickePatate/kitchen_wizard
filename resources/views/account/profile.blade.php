@@ -34,9 +34,11 @@
                     <x-forms.input type="password" name="password" label="{{__('Password')}}" help="Laissez vide pour conserver votre mot de passe actuel" />
                     <x-forms.input type="password" name="password_confirmation" label="{{__('Confirm password')}}" />
 
-                    <hr class="border border-neutral-200">
-
-                    <div class="flex items-center py-5">
+                    <hr class="border border-neutral-200 my-8">
+                    <div>
+                        <h2 class="font-heading text-md mb-2">{{__('Notifications par e-mail')}}</h2>
+                    </div>
+                    <div class="flex items-center pb-7">
                         <input id="email-notifications" name="is_email_notifications_active" type="checkbox" @if(Auth::user()->isEmailNotificationsActive()) checked @endif class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="email-notifications" class="ms-2 text-sm font-medium text-gray-700">{{__('Activate Email recipe suggestions')}}</label>
                     </div>

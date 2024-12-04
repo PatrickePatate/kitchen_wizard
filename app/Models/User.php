@@ -47,6 +47,11 @@ class User extends Authenticatable
         return $this->hasMany(RecipeLike::class)->orderBy('liked_at', 'desc');
     }
 
+    public function dailySelections(): HasMany
+    {
+        return $this->hasMany(RecipeDailySelection::class)->orderBy('created_at', 'desc');
+    }
+
     public function isTelegramAccountSetup(): bool
     {
         return !empty($this->telegram_chat_id && $this->telegram_validated);
@@ -60,6 +65,11 @@ class User extends Authenticatable
     public function hasAtLeastOneNotificationChannelActive(): bool
     {
         return !($this->isEmailNotificationsActive() || $this->isTelegramAccountSetup());
+    }
+
+    public function routeNotificationForDiscord()
+    {
+        return $this->discord_private_channel_id ?? $this->discord_user_id;
     }
 
     public function initials(): Attribute

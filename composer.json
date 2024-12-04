@@ -10,6 +10,7 @@
         "cmixin/season": "^1.0",
         "code16/sharp": "^8.5",
         "http-interop/http-factory-guzzle": "^1.2",
+        "laravel-notification-channels/discord": "^1.6",
         "laravel-notification-channels/telegram": "^5.0",
         "laravel/framework": "^11.9",
         "laravel/horizon": "^5.29",

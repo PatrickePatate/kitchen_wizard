@@ -10,7 +10,7 @@ use Illuminate\Notifications\Notification;
 use NotificationChannels\Telegram\TelegramFile;
 use NotificationChannels\Telegram\TelegramMessage;
 
-class MealSuggestionNotification extends Notification
+class MealSuggestionDiscordNotification extends Notification
 {
     use Queueable;
 
@@ -30,29 +30,29 @@ class MealSuggestionNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['telegram'];
+        return ['discord'];
     }
 
    public function toTelegram(object $notifiable): TelegramMessage
     {
         return TelegramMessage::create()
             ->to($notifiable->telegram_chat_id ?? config('services.telegram-bot-api.user-id'))
-            ->line("Hey ! J'ai une suggestion de recette pour toi !")
+            ->line(__("Hey ! J'ai une suggestion de recette pour toi !"))
             ->line('')
-            ->line('🍽️ *En plat :*')
+            ->line(__('🍽️ *En plat :*'))
             ->line("**".$this->main->title."**")
             ->line($this->main->url)
             ->line('')
-            ->line('🥗 *En entrée :*')
+            ->line(__('🥗 *En entrée :*'))
             ->line("**".$this->starter->title."**")
             ->line('')
-            ->line('🍰 *En dessert :*')
+            ->line(__('🍰 *En dessert :*'))
             ->line("**".$this->dessert->title."**")
             ->line('')
-            ->button("Dévouvrir le plat", $this->main->url)
-            ->button("Dévouvrir l'entrée", $this->starter->url)
-            ->button("Dévouvrir le dessert", $this->dessert->url)
-            ->button('Me proposer d\'autres recettes', route('home'));
+            ->button(__("Dévouvrir le plat"), $this->main->url)
+            ->button(__("Dévouvrir l'entrée"), $this->starter->url)
+            ->button(__("Dévouvrir le dessert"), $this->dessert->url)
+            ->button(__('Me proposer d\'autres recettes'), route('home'));
     }
 
 }

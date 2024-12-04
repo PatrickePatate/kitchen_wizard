@@ -1,6 +1,9 @@
 {
     "Activer un canal de notification": "Activate a notification channel",
     "Reléguer au rang d'utilisateur": "Downgrade to non-admin user",
+    "Notifications par e-mail": "Email notifications",
+    "Bienvenue sur :appname !": "Welcome to :appname !",
+    "Pour profiter au maximum de :appname, il vous reste à activer un cannal de notification afin de recevoir votre séléction quotidienne de recettes.": "To get the most out of :appname, you just need to activate a notification channel to receive your daily selection of recipes.",
     "Plat principal": "Main dish",
     "Merci de valider votre compte Telegram en entrant le code suivant dans l'application Telegram avec la commande suivante :": "Thanks to validate your telegram account by sending the following command to the bot :",
     "Bonjour :name": "Hello :name",
@@ -15,6 +18,7 @@
     "Activate Email recipe suggestions": "Receive recipe sugestions by email",
     "Active": "Active",
     "Confirm password": "Confirm password",
+    "À bientôt": "See you soon",
     "Trouve de l'inspiration pour tes repas du quotidien, met de côté des recettes qui te plaisent et recoit tous les jours une entrée, un plat et un dessert pour ta journée !": "Find inspiration for your daily meals, set aside recipes that you like and receive a starter, a main course and a dessert every day for your day!",
     "depuis votre compte": "from your account",
     "Voir le dessert": "Check the dessert",
