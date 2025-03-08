@@ -25,12 +25,19 @@
                         <form method="POST">
                             @csrf
                             <x-forms.input type="text" name="name" label="{{__('Fullname')}}" required />
+                            <x-forms.input type="hidden" name="last_name" />
 
                             <x-forms.input type="email" name="email" label="{{__('Email')}}" required />
 
                             <x-forms.input type="password" name="password" label="{{__('Password')}}" required />
 
                             <x-forms.input type="password" name="password_confirmation" label="{{__('Password confirmation')}}" required />
+
+                            <hr class="mb-2"/>
+
+                            <img src="{{ captcha_src() }}" class="mb-2" alt="captcha">
+
+                            <x-forms.input type="number" name="captcha" label="{{__('Challenge de sécurité')}}" required />
 
                             <div class="flex justify-end items-center gap-2">
                                 <p class="text-sm py-2 text-gray-700 flex-grow "><a href="{{route('login')}}">{{__('Already have an account ? Login.')}}</a></p>
@@ -39,18 +46,12 @@
                                 </button>
                             </div>
                         </form>
-
-
-                    </div>
-
-                    <div class="h-2">
-
                     </div>
                 </div>
             </div>
 
             <div class="hidden md:block relative col-span-3 ">
-                <img src="{{asset('images/register_background.jpeg')}}" class="object-center object-cover w-full h-full max-h-[95dvh]  rounded-lg"/>
+                <img src="{{asset('images/register.jpg')}}" class="object-center object-cover w-full h-full max-h-[95dvh]  rounded-lg"/>
                 <a class="absolute bottom-2 right-3 text-white text-sm font-light" href="https://www.freepik.com/free-photo/fresh-organic-mixed-fruit-vegetables_13311286.htm#page=2&query=vegetable&position=16&from_view=keyword&track=ais_hybrid&uuid=391df862-4275-4180-902d-fe7b0d217b7d">Image by rawpixel.com on freepik</a>
             </div>
         </div>

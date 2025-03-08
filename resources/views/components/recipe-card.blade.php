@@ -6,20 +6,20 @@
     'clickable'=>true,
     'carousel'=>false
     ])
-<div x-data="{ currentSrc : '{{isset($recipe->pictures[0]) ? asset('storage/'.$recipe->pictures[0]) : ''}}' }" class="w-full relative {{$attributes->get('class')}}" data-recipeid="{{$recipe->id}}">
+<div x-data="{ currentSrc : '{{isset($recipe->pictures[0]) ? (str($recipe->pictures[0])->startsWith(['https://', 'http://']) ? $recipe->pictures[0] : asset('storage/'.$recipe->pictures[0])) : ''}}' }" class="w-full relative {{$attributes->get('class')}}" data-recipeid="{{$recipe->id}}">
     <div class="mb-2">
         @if($clickable)
             <a href="{{$clickable ? route('recipe', ['recipe'=>$recipe]) : '#'}}">
-                <img x-ref="mainPicture" src="{{isset($recipe->pictures[0]) ? asset('storage/'.$recipe->pictures[0]) : asset('images/default_recipe_picture.webp')}}" alt="Recipe image" class="w-full h-96 object-cover object-center rounded-2xl">
+                <img x-ref="mainPicture" src="{{isset($recipe->pictures[0]) ? (str($recipe->pictures[0])->startsWith(['https://', 'http://']) ? $recipe->pictures[0] : asset('storage/'.$recipe->pictures[0])) : asset('images/default_recipe_picture.webp')}}" alt="Recipe image" class="w-full h-96 object-cover object-center rounded-2xl">
             </a>
         @else
-            <img x-ref="mainPicture" src="{{isset($recipe->pictures[0]) ? asset('storage/'.$recipe->pictures[0]) : asset('images/default_recipe_picture.webp')}}" alt="Recipe image" class="w-full h-96 object-cover object-center rounded-2xl">
+            <img x-ref="mainPicture" src="{{isset($recipe->pictures[0]) ? (str($recipe->pictures[0])->startsWith(['https://', 'http://']) ? $recipe->pictures[0] : asset('storage/'.$recipe->pictures[0])) : asset('images/default_recipe_picture.webp')}}" alt="Recipe image" class="w-full h-96 object-cover object-center rounded-2xl">
         @endif
         @if($carousel && count($recipe->pictures) > 1)
             <div class="py-3">
                 <div class="flex justify-start items-center gap-2">
                     @foreach($recipe->pictures as $picture)
-                        <img src="{{ asset('storage/'.$picture) }}" @click="$refs.mainPicture.setAttribute('src', $el.src); currentSrc = $el.src" x-init="$watch('currentSrc', (value) => { if(value === $el.src) { $el.classList.add('ring-2','ring-amber-400') } else { $el.classList.remove('ring-2','ring-amber-400') } })" alt="Recipe image" class="cursor-pointer w-16 h-16 object-cover object-center rounded-lg @if($loop->index === 0) ring-2 ring-amber-400 @endif ">
+                        <img src="{{ (str($picture)->startsWith(['https://', 'http://']) ? $picture : asset('storage/'.$picture)) }}" @click="$refs.mainPicture.setAttribute('src', $el.src); currentSrc = $el.src" x-init="$watch('currentSrc', (value) => { if(value === $el.src) { $el.classList.add('ring-2','ring-amber-400') } else { $el.classList.remove('ring-2','ring-amber-400') } })" alt="Recipe image" class="cursor-pointer w-16 h-16 object-cover object-center rounded-lg @if($loop->index === 0) ring-2 ring-amber-400 @endif ">
                     @endforeach
                 </div>
             </div>

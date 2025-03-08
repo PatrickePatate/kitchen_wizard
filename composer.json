@@ -17,11 +17,14 @@
         "laravel/octane": "^2.5",
         "laravel/scout": "^10.11",
         "laravel/tinker": "^2.9",
+        "league/flysystem-aws-s3-v3": "^3.0",
         "livewire/livewire": "^3.5",
         "meilisearch/meilisearch-php": "^1.11",
+        "mews/captcha": "^3.4",
         "predis/predis": "^2.3",
         "ryangjchandler/blade-tabler-icons": "^2.3",
-        "sentry/sentry-laravel": "^4.10"
+        "sentry/sentry-laravel": "^4.10",
+        "spatie/laravel-backup": "^9.2"
     },
     "require-dev": {
         "barryvdh/laravel-translation-manager": "^0.6.6",

@@ -30,4 +30,9 @@ return Application::configure(basePath: dirname(__DIR__))
         $schedule->call(function () {
             SendRecipesSuggestionsToUsersJob::dispatchSync();
         })->dailyAt('08:30');
+
+        if(config('app.backups.enabled', true)) {
+            $schedule->command('backup:clean')->daily()->at('01:00');
+            $schedule->command('backup:run')->daily()->at('01:30');
+        }
     })->create();

@@ -40,7 +40,7 @@
             </div>
 
             <div class="hidden md:block relative col-span-3">
-                <img src="{{asset('images/login_background.jpeg')}}" class="object-center object-cover h-full rounded-lg">
+                <img src="{{asset('images/login.jpg')}}" class="object-center object-cover h-full rounded-lg">
                 <a class="absolute bottom-2 right-3 text-white text-sm font-light" href="https://www.freepik.com/free-photo/raw-fresh-organic-vegetables-desk_3492645.htm#query=vegetable&position=8&from_view=keyword&track=ais_hybrid&uuid=7ac276a7-e02a-4c6b-8586-5947d9905c42">Image by freepik</a>
             </div>
         </div>

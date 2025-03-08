@@ -126,6 +126,11 @@ return [
 
     'assets' => [
         'disk' => env('APP_ASSETS_DISK', 'public'),
-    ]
+    ],
+
+    'backups' => [
+        'admin_email' => env('DB_BACKUPS_ADMIN_EMAIL', env('MAIL_FROM_ADDRESS')),
+        'enabled' => env('DB_BACKUPS_ENABLED', true)
+    ],
 
 ];

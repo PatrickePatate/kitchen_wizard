@@ -10,6 +10,8 @@ use App\Models\User;
 use App\Services\RecipeSelectorService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Request;
 
 
@@ -27,17 +29,31 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
+        if(request()->has('last_name') && !empty(request('last_name'))) {
+            //honeypot
+            return back(200);
+        }
+
         $request->validate([
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|confirmed|min:6',
+            'captcha' => 'required|captcha'
         ]);
+
+        if (RateLimiter::tooManyAttempts('register:'.$request->ip(), 2)) {
+            throw ValidationException::withMessages([
+                'email' => ['Vous ne pouvez vous inscrire que deux fois dans un court laps de temps.'],
+            ]);
+        }
 
         $user = User::create([
             'name' => request('name'),
             'email' => request('email'),
             'password' => Hash::make(request('password')),
         ]);
+
+        RateLimiter::increment('register:'.$request->ip(), 3600);
 
         if($user->id){
             RecipeDailySelection::create([

@@ -36,8 +36,8 @@ class ImportRecipeDumpInPostgreSQLCommand extends Command
 
         $process = Process::forever()
             ->env(['PGPASSWORD' => config('database.connections.pgsql.password')])
-            ->run(sprintf('%s %s %s %s %s %s %s %s',
-                'psql', '-h', config('database.connections.pgsql.host'), '-U', config('database.connections.pgsql.username'), config('database.connections.mariadb.database'), '<', realpath(database_path($this->argument('file')))
+            ->run(sprintf('%s %s %s %s %s %s %s %s %s',
+                'psql', '-h', config('database.connections.pgsql.host'), '-p 5433', '-U', config('database.connections.pgsql.username'), config('database.connections.mariadb.database'), '<', realpath(database_path($this->argument('file')))
             ));
 
         if($process->successful()) {

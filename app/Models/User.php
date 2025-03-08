@@ -18,21 +18,11 @@ class User extends Authenticatable
 
     protected $guarded = [];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
@@ -70,6 +60,14 @@ class User extends Authenticatable
     public function routeNotificationForDiscord()
     {
         return $this->discord_private_channel_id ?? $this->discord_user_id;
+    }
+
+    protected static function boot() {
+        parent::boot();
+        static::deleting(function(User $user) {
+            $user->dailySelections()->delete();
+            $user->likedRecipes()->delete();
+      });
     }
 
     public function initials(): Attribute

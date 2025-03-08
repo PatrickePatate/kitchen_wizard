@@ -95,8 +95,6 @@ class UsersList extends SharpEntityList
 
     public function delete(mixed $id): void
     {
-        $user = User::findOrFail($id);
-        $user->dailySelections()->delete();
-        $user->delete();
+        $user = User::findOrFail($id)->delete();
     }
 }
