@@ -32,5 +32,7 @@
     "Validez votre compte Telegram": "Validate your telegram account",
     "Voir les recettes": "See those recipes",
     "L'utilisateur(trice) n'aura plus accès à l'administration.": "User will no longer have access to the administration panel",
-    "Vous n'avez pas encore de recettes favorites.": "You don't have any favorite recipes yet."
+    "Vous n'avez pas encore de recettes favorites.": "You don't have any favorite recipes yet.",
+    "Rechercher votre adresse pour remplir automatiquement les coordonnées géographiques.": "Search for your address to automatically fill geographic coordinates.",
+    "Mes recettes <b>favorites<\/b>": "My <b>favorite<\/b> recipes"
 }

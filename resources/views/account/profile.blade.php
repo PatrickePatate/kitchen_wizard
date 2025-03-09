@@ -23,8 +23,8 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-neutral-200 p-4">
-                <h1 class="font-heading text-xl">{{__('Your informations')}}</h1>
+            <div class="bg-neutral-900 text-white p-4">
+                <h1 class="font-heading text-xl inline-flex items-center gap-2"><x-tabler-user-cog /> {{__('Your informations')}}</h1>
             </div>
             <div class="bg-neutral-100 p-4 mb-6">
                 <form method="POST">
@@ -35,24 +35,25 @@
                     <x-forms.input type="password" name="password_confirmation" label="{{__('Confirm password')}}" />
 
                     <hr class="border border-neutral-200 my-8">
-                    <div>
-                        <h2 class="font-heading text-md mb-2">{{__('Notifications par e-mail')}}</h2>
+                    <div class="mb-2.5">
+                        <h2 class="font-heading text-md mb-1">{{__('Notifications par e-mail')}}</h2>
+                        <p class="text-[.75rem] text-gray-500">
+                            {{__('Recevez votre sélection de recettes chaque jour par e-mail.')}}
+                        </p>
                     </div>
                     <div class="flex items-center pb-7">
                         <input id="email-notifications" name="is_email_notifications_active" type="checkbox" @if(Auth::user()->isEmailNotificationsActive()) checked @endif class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="email-notifications" class="ms-2 text-sm font-medium text-gray-700">{{__('Activate Email recipe suggestions')}}</label>
+                        <label for="email-notifications" class="ms-2 text-gray-700">{{__('Activate Email recipe suggestions')}}</label>
                     </div>
 
                     <div class="flex justify-end">
-                        <button type="submit" class="px-5 py-3 bg-blue-700 font-medium text-white rounded-md">
-                            {{__('Save')}}
-                        </button>
+                        <x-forms.button icon="tabler-device-floppy" label="Save" />
                     </div>
                 </form>
             </div>
 
-            <div class="bg-neutral-200 p-4">
-                <h1 class="font-heading text-xl">{{__('Meteo')}}</h1>
+            <div class="bg-neutral-900 text-white p-4">
+                <h1 class="font-heading text-xl inline-flex items-center gap-2"><x-tabler-sun /> {{__('Meteo')}}</h1>
             </div>
             <div x-data="meteo" class="bg-neutral-100 p-4 mb-6">
                 <form method="POST" action="{{route('profile.store.meteo')}}">
@@ -61,7 +62,8 @@
                         <div class="mb-4">
                             <label class="block text-sm font-medium text-gray-700">{{__("Place's name")}}</label>
                             <div>
-                                <input autocomplete="off" type="text" @keydown="updateLocationSearch($el.value)" value="{{Auth::user()->meteo_city}}" name="meteo_city" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500  sm:text-sm" value="{{ Auth::user()->meteo_city }}">
+                                <input autocomplete="off" type="text" @keydown="updateLocationSearch($el.value)" value="{{Auth::user()->meteo_city}}" name="meteo_city" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500  sm:text-sm">
+                                <span class="ms-1 mt-1 text-[0.75rem] text-gray-500">{{__('Rechercher votre adresse pour remplir automatiquement les coordonnées géographiques.')}}</span>
                                 <div class="relative" @click.away="this.show=false">
                                     <div x-cloak x-show="show" class="absolute top-1 left-0 right-0 rounded-md bg-white border p-1">
                                         <template x-for="res in results" class="p-2">
@@ -79,9 +81,7 @@
                         <x-forms.input type="number" step="any" name="meteo_lon" label="{{__('Longitude')}}" required value="{{Auth::user()->meteo_lon}}" />
                     </div>
                     <div class="flex justify-end">
-                        <button type="submit" class="px-5 py-3 bg-blue-700 font-medium text-white rounded-md">
-                            {{__('Save')}}
-                        </button>
+                        <x-forms.button icon="tabler-device-floppy" label="Save" />
                     </div>
                 </form>
             </div>
@@ -90,8 +90,11 @@
 
 
         <div class="w-full max-w-2xl mx-auto">
-            <div class="bg-neutral-200 p-4">
-                <h1 class="font-heading text-xl">{{__('Integrations')}}</h1>
+            <div class="bg-neutral-900 text-white p-4">
+                <h1 class="font-heading text-xl inline-flex items-center gap-2"><x-tabler-plug-connected /> {{__('Integrations')}}</h1>
+                <div>
+                    <p class="text-sm text-gray-200">{{__('Connectez vos comptes pour recevoir votre séléction du jour.')}}</p>
+                </div>
             </div>
             <div class="p-4 mb-6">
                 <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -100,7 +103,7 @@
                             <x-tabler-brand-telegram class="text-white w-12 h-12"/>
                         </div>
                         <p class="text-nowrap">Telegram : <span :class="active ? 'text-green-500' : 'text-red-500'">{{Auth::user()->isTelegramAccountSetup() ? __("Active") : __('Inactive')}}</span></p>
-                        <a target="_blank" href="{{sprintf('https://t.me/%s', str_replace('@', '', config('services.telegram-bot-api.bot_username')))}}" class="mt-2 px-3 py-2 rounded-md bg-[#29a9ea] text-white text-center" :class="active ? 'hidden': ''">{{__('Link your account')}}</a>
+                        <a target="_blank" href="{{sprintf('https://t.me/%s', str_replace('@', '', config('services.telegram-bot-api.bot_username')))}}" class="mt-2 px-3 py-1 rounded-md bg-[#29a9ea] text-white text-center inline-flex gap-1 items-center" :class="active ? 'hidden': ''"><x-tabler-plug />{{__('Link your account')}}</a>
                     </div>
 
                     <div class="flex flex-col items-center justify-center" x-data="{ active: {{(int)Auth::user()->isEmailNotificationsActive()}} }">

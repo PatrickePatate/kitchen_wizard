@@ -9,16 +9,10 @@
                 @forelse($recipes->pluck('recipe') as $recipe)
                     <x-recipe-card :allow-refresh="false" :recipe="$recipe" />
                 @empty
-                    <div class="md:col-span-2">
-                        <div class="bg-gray-200 text-dark p-4 rounded-xl flex items-center gap-4">
-                            <div>
-                                <x-tabler-alert-triangle></x-tabler-alert-triangle>
-                            </div>
-                            <div>
-                                <p>{{__("Vous n'avez pas encore de recettes favorites.")}}</p>
-                                <small>{{__('Ajoutez des recettes en favoris en cliquant sur le coeur en haut à droite des recettes.')}}</small>
-                            </div>
-                    </div>
+                    <x-alert type="info">
+                        <p>{{__("Vous n'avez pas encore de recettes favorites.")}}</p>
+                        <small>{{__('Ajoutez des recettes en favoris en cliquant sur le coeur en haut à droite des recettes.')}}</small>
+                    </x-alert>
                 @endforelse
             </div>
 
