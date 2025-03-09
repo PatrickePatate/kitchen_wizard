@@ -17,7 +17,8 @@ RUN install-php-extensions \
     pcre \
     tokenizer \
     xml \
-    zip
+    zip \
+    gd
 
 RUN apt-get update  \
     && apt-get install -y supervisor  \
