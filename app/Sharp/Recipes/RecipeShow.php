@@ -112,7 +112,7 @@ class RecipeShow extends SharpShow
     {
         return $this
             ->setCustomTransformer('pictures', function ($value, Recipe $recipe) {
-                return isset($recipe->pictures[0]) ? asset('storage/'.$recipe->pictures[0]) : asset('images/default_recipe_picture.webp');
+                return isset($recipe->pictures[0]) ? (str($recipe->pictures[0])->startsWith(['https://', 'http://']) ? $recipe->pictures[0] : asset('storage/'.$recipe->pictures[0])) : '';
             })
             ->setCustomTransformer('ingredients', function ($value, Recipe $recipe) {
                 return "<ul>".collect($recipe->ingredients)->map(fn($ingredient) => sprintf(
@@ -143,6 +143,7 @@ class RecipeShow extends SharpShow
                     $step['text']
                 ))->implode('');
             })
+            ->setCustomTransformer('difficulty', fn($value, $recipe) => $recipe->difficulty?->getLabel())
             ->transform(Recipe::findOrFail($id));
     }
 

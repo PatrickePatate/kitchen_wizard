@@ -23,7 +23,7 @@ class DifficultyFilter extends EntityListSelectFilter
             ->pluck('difficulty')
             ->values()
             ->unique()
-            ->map(fn($dif) => Str::ucfirst($dif))
-            ->keyBy(fn($dif) => Str::lower($dif))->toArray();
+            ->mapWithKeys(fn($dif) => [$dif->value => $dif->getLabel()])
+            ->toArray();
     }
 }

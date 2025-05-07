@@ -74,12 +74,13 @@ class RecipesList extends SharpEntityList
     {
         return $this
             ->setCustomTransformer('photo', function($value, Recipe $recipe) {
+                $imageUrl = isset($recipe->pictures[0]) ? (str($recipe->pictures[0])->startsWith(['https://', 'http://']) ? $recipe->pictures[0] : asset('storage/'.$recipe->pictures[0])) : '';
                 return isset($recipe->pictures[0])
-                    ? sprintf('<img src="%s" style="max-height: 50px;" />', asset('storage/'.$recipe->pictures[0]))
+                    ? sprintf('<img src="%s" style="max-height: 50px;" />', $imageUrl)
                     : null;
             })
             ->setCustomTransformer('meal_type', fn($value) => Str::ucfirst($value))
-            ->setCustomTransformer('difficulty', fn($value) => Str::ucfirst($value))
+            ->setCustomTransformer('difficulty', fn($value, $recipe) => $recipe->difficulty?->getLabel())
             ->setCustomTransformer('price', fn($value) => Str::ucfirst($value))
             ->transform(
                 Recipe::query()

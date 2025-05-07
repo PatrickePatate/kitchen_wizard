@@ -5,10 +5,10 @@ namespace App\Models;
 use App\MealTypeEnum;
 use App\Models\Miscs\RecipeLike;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Scout\Searchable;
+use App\MealDifficultyEnum;
 
 class Recipe extends Model
 {
@@ -21,6 +21,7 @@ class Recipe extends Model
         'utensils' => 'array',
         'times' => 'array',
         'meal_type' => MealTypeEnum::class,
+        "difficulty" => MealDifficultyEnum::class,
     ];
 
     protected $guarded = [];

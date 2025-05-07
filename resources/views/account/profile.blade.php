@@ -29,8 +29,8 @@
             <div class="bg-neutral-100 p-4 mb-6">
                 <form method="POST">
                     @csrf
-                    <x-forms.input type="text" name="name" label="{{__('Fullname')}}" required value="{{Auth::user()->name}}" />
-                    <x-forms.input type="email" name="email" label="{{__('Email')}}" required value="{{Auth::user()->email}}" />
+                    <x-forms.input type="text" name="name" label="{{__('Fullname')}}" required :value="Auth::user()->name" />
+                    <x-forms.input type="email" name="email" label="{{__('Email')}}" required :value="Auth::user()->email" />
                     <x-forms.input type="password" name="password" label="{{__('Password')}}" help="Laissez vide pour conserver votre mot de passe actuel" />
                     <x-forms.input type="password" name="password_confirmation" label="{{__('Confirm password')}}" />
 
@@ -77,8 +77,8 @@
                             </div>
                         </div>
 
-                        <x-forms.input type="number" step="any" name="meteo_lat" label="{{__('Latitude')}}" required value="{{Auth::user()->meteo_lat}}" />
-                        <x-forms.input type="number" step="any" name="meteo_lon" label="{{__('Longitude')}}" required value="{{Auth::user()->meteo_lon}}" />
+                        <x-forms.input type="number" step="any" name="meteo_lat" label="{{__('Latitude')}}" required :value="Auth::user()->meteo_lat" />
+                        <x-forms.input type="number" step="any" name="meteo_lon" label="{{__('Longitude')}}" required :value="Auth::user()->meteo_lon" />
                     </div>
                     <div class="flex justify-end">
                         <x-forms.button icon="tabler-device-floppy" label="Save" />

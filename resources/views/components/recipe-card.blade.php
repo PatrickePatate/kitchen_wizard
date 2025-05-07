@@ -53,7 +53,7 @@
                 <span class="text-lg font-extralight  uppercase text-nowrap">{{ $recipe->price }}</span>
             </div>
             <div class="flex flex-nowrap items-center gap-1">
-                <span class="text-lg font-extralight pt-1 uppercase text-nowrap">{{ $recipe->difficulty }}</span>
+                <span class="text-lg font-extralight pt-1 uppercase text-nowrap">{{ $recipe->difficulty?->getLabel() }}</span>
                 <x-tabler-chef-hat class=" w-6" />
             </div>
         </div>

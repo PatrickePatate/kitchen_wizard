@@ -38,7 +38,7 @@ class ConvertPgSQLRecipesToMySQL extends Command
                     'total_time' => $recipe->total_time,
                     'times' => json_encode($recipe->times ?? []),
                     'people' => $recipe->people,
-                    'difficulty' => $recipe->difficulty,
+                    'difficulty' => $recipe->difficulty?->value,
                     'price' => $recipe->price,
                     'meal_type' => $recipe->meal_type,
                     'ingredients' => json_encode($recipe->ingredients ?? []),
