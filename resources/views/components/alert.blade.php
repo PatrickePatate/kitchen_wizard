@@ -16,7 +16,7 @@
         default => 'tabler-info-hexagon',
     };
 @endphp
-<div class="md:col-span-2">
+<div {{$attributes->class('md:col-span-2')}}>
     <div class="{{$bgColor}} text-dark p-4 rounded-xl flex items-center gap-4">
         <div>
             {{ svg($icon) }}

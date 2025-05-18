@@ -13,11 +13,46 @@
                 <x-tabler-arrow-left class="w-8 h-auto text-gray-600 "></x-tabler-arrow-left>
                 <p class="font-light">Retour</p>
             </a>
-            <div class="flex gap-2 items-center mb-3">
-                <div class="bg-gray-200 rounded-full p-2 w-10 h-10 flex justify-center items-center">
-                    @svg($recipe->meal_type?->getIcon())
+
+            @if(!auth()->check() && isset($share))
+                <x-alert class="mb-6">
+                    Cette recette a été partagée avec vous par <strong>{{$share->sharer?->name}}</strong>.<br>
+                </x-alert>
+            @endif
+
+            <div class="flex gap-2 items-center justify-between mb-3">
+                <div>
+                    <div class="bg-gray-200 rounded-full p-2 w-10 h-10 flex justify-center items-center">
+                        @svg($recipe->meal_type?->getIcon())
+                    </div>
+                    <h2 class="font-sans uppercase font-semibold text-lg">{{$recipe->meal_type}}</h2>
                 </div>
-                <h2 class="font-sans uppercase font-semibold text-lg">{{$recipe->meal_type}}</h2>
+                <div>
+                    <div x-data="{shareLink: 'Chargement...'}">
+                        <x-dialog>
+                            <x-slot name="button">
+                                <x-tabler-share @click="shareLink = (await (await fetch('{{route('recipe.api.share', ['recipe' => $recipe])}}')).json()).url" class="text-black h-7"/>
+                            </x-slot>
+                            <x-slot name="title">
+                                Partager la recette
+                            </x-slot>
+                            Partager ce lien avec vos amis pour leur faire découvrir la recette <em>{{$recipe->title}}</em> :
+
+                            <div class="relative mt-2 bg-gray-100 p-2 rounded-md text-sm font-mono">
+
+                                <div class="mr-12 text-wrap wrap-break-word">
+                                    <span x-text="shareLink"></span>
+                                </div>
+                                <div class="absolute top-0 bottom-0 right-5 flex items-center">
+                                    <div class="relative">
+                                        <x-tabler-clipboard class="cursor-pointer text-gray-800" @click="$clipboard(shareLink); $flash('#copied-message-recipe')"/>
+                                        <div class="absolute -top-8 -left-5 -right-5 hidden px-2 py-1 bg-neutral-800 text-white text-nowrap text-[0.7rem]" id="copied-message-recipe">Copié !</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </x-dialog>
+                    </div>
+                </div>
             </div>
 
             <x-recipe-card class="mb-10" :recipe="$recipe" :carousel="true" :allowRefresh="false" :clickable="false"/>
@@ -111,7 +146,8 @@
                                 <h3 class="font-sans font-medium uppercase text-md">
                                     {{$step['heading']}}
                                 </h3>
-                                <div class="hidden cursor-pointer opacity-75 share-btn">
+                                @if(auth()->check())
+                                    <div class="hidden cursor-pointer opacity-75 share-btn">
                                     <div x-data="{shareLink: 'Chargement...'}">
                                         <x-dialog>
                                             <x-slot name="button">
@@ -124,7 +160,7 @@
 
                                             <div class="relative mt-2 bg-gray-100 p-2 rounded-md text-sm font-mono">
 
-                                                <div class="pr-12 text-wrap break-word">
+                                                <div class="mr-12 text-wrap wrap-break-word">
                                                     <span x-text="shareLink+'#step-{{$loop->index+1}}'"></span>
                                                 </div>
                                                 <div class="absolute top-0 bottom-0 right-5 flex items-center">
@@ -137,6 +173,7 @@
                                         </x-dialog>
                                     </div>
                                 </div>
+                                @endif
                             </div>
 
                             <p class="text-sm font-normal">{{$step['text']}}</p>

@@ -1,7 +1,7 @@
 @use(App\Models\RecipeDailySelection;use Carbon\Carbon)
 @use(App\Services\WeatherService)
 @use(App\MealTypeEnum)
-<div class="relative container mx-auto min-h-[100dvh]">
+<div class="relative container mx-auto min-h-dvh">
     <!-- Feed header -->
     <div class="max-w-3xl mx-auto border-x px-6 pt-6 pb-4 border-b">
         <div class="flex justify-between items-center">

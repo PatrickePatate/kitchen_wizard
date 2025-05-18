@@ -1,7 +1,7 @@
 @use(Carbon\Carbon)
 @extends('layouts.app')
 @section('content')
-    <div class="container mx-auto min-h-[100dvh]">
+    <div class="container mx-auto min-h-dvh">
         <!-- Feed header -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mx-auto border-x px-6 pt-6 pb-4 border-b">
             @foreach($recipes as $recipe)

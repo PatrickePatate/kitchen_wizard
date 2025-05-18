@@ -42,7 +42,7 @@
                         </p>
                     </div>
                     <div class="flex items-center pb-7">
-                        <input id="email-notifications" name="is_email_notifications_active" type="checkbox" @if(Auth::user()->isEmailNotificationsActive()) checked @endif class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <input id="email-notifications" name="is_email_notifications_active" type="checkbox" @if(Auth::user()->isEmailNotificationsActive()) checked @endif class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="email-notifications" class="ms-2 text-gray-700">{{__('Activate Email recipe suggestions')}}</label>
                     </div>
 
@@ -62,7 +62,7 @@
                         <div class="mb-4">
                             <label class="block text-sm font-medium text-gray-700">{{__("Place's name")}}</label>
                             <div>
-                                <input autocomplete="off" type="text" @keydown="updateLocationSearch($el.value)" value="{{Auth::user()->meteo_city}}" name="meteo_city" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500  sm:text-sm">
+                                <input autocomplete="off" type="text" @keydown="updateLocationSearch($el.value)" value="{{Auth::user()->meteo_city}}" name="meteo_city" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-xs focus:outline-hidden focus:ring-indigo-500  sm:text-sm">
                                 <span class="ms-1 mt-1 text-[0.75rem] text-gray-500">{{__('Rechercher votre adresse pour remplir automatiquement les coordonnées géographiques.')}}</span>
                                 <div class="relative" @click.away="this.show=false">
                                     <div x-cloak x-show="show" class="absolute top-1 left-0 right-0 rounded-md bg-white border p-1">

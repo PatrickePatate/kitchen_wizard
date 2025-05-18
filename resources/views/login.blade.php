@@ -4,7 +4,7 @@
     <meta property="og:image" content="{{asset('images/website_cover.jpg')}}" />
 @endsection
 @section('content')
-    <div class="w-full h-[100dvh] overflow-x-hidden ">
+    <div class="w-full h-dvh overflow-x-hidden ">
         <div class="grid grid-cols-1 md:grid-cols-5 h-full gap-5 p-6">
             <div class="w-full h-full my-auto mx-auto md:col-span-2">
                 <div class="mx-auto h-full flex flex-col justify-between max-w-md">
@@ -23,7 +23,7 @@
 
                             <x-forms.check name="remember" label="{{__('Remember me')}}" />
                             <div class="flex justify-end items-center gap-2">
-                                <p class="text-sm py-2 text-gray-700 flex-grow "><a href="{{route('register')}}">{{__('No account ? Register.')}}</a></p>
+                                <p class="text-sm py-2 text-gray-700 grow "><a href="{{route('register')}}">{{__('No account ? Register.')}}</a></p>
                                 <button type="submit" class="px-5 py-3 bg-blue-700 font-medium text-white text-nowrap rounded-md">
                                     {{__('Login')}}
                                 </button>

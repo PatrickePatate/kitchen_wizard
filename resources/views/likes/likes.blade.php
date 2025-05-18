@@ -1,7 +1,7 @@
 @use(Carbon\Carbon)
 @extends('layouts.app')
 @section('content')
-    <div class="container mx-auto min-h-[100dvh] ">
+    <div class="container mx-auto min-h-dvh ">
         <div class="py-6 px-6 border-x border-b">
             <h1 class="font-heading text-xl">{!! __('Mes recettes <b>favorites</b>') !!}</h1>
 

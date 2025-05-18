@@ -24,7 +24,9 @@
                 </div>
             </div>
         @endif
-        <livewire:actions.like-recipe :recipe="$recipe" />
+        @if(auth()->check())
+                <livewire:actions.like-recipe :recipe="$recipe" />
+        @endif
     </div>
     <div class="flex flex-col">
         <div class="flex justify-between items-start">
@@ -47,7 +49,7 @@
             </div>
         </div>
 
-        <div class="flex-shrink flex justify-between items-end gap-1">
+        <div class="shrink flex justify-between items-end gap-1">
             <div class="flex flex-nowrap items-center pt-1 gap-1 -ms-1">
                 <x-tabler-currency-euro class=" w-6" />
                 <span class="text-lg font-extralight  uppercase text-nowrap">{{ $recipe->price }}</span>

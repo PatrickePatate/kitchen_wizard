@@ -44,7 +44,7 @@ return [
         'sensitive' => true,
         'angle' => 12,
         'sharpen' => 10,
-        'blur' => 2,
+        'blur-sm' => 2,
         'invert' => true,
         'contrast' => -5,
     ]

@@ -2,7 +2,7 @@
 @extends('layouts.app')
 @section('content')
     @if(Auth::user()->hasAtLeastOneNotificationChannelActive())
-        <div class="container mx-auto min-h-[100dvh]">
+        <div class="container mx-auto min-h-dvh">
             <!-- Feed header -->
             <div class="max-w-3xl mx-auto border-x px-6 pt-6 pb-4 ">
                 <div class="rounded-xl bg-purple-950 text-white p-4 mb-4 flex items-center gap-4">
