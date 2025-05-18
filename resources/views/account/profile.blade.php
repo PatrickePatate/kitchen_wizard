@@ -103,7 +103,7 @@
                             <x-tabler-brand-telegram class="text-white w-12 h-12"/>
                         </div>
                         <p class="text-nowrap">Telegram : <span :class="active ? 'text-green-500' : 'text-red-500'">{{Auth::user()->isTelegramAccountSetup() ? __("Active") : __('Inactive')}}</span></p>
-                        <a target="_blank" href="{{sprintf('https://t.me/%s', str_replace('@', '', config('services.telegram-bot-api.bot_username')))}}" class="mt-2 px-3 py-1 rounded-md bg-[#29a9ea] text-white text-center inline-flex gap-1 items-center" :class="active ? 'hidden': ''"><x-tabler-plug />{{__('Link your account')}}</a>
+                        <a target="_blank" href="{{sprintf('https://t.me/%s', str_replace('@', '', config('services.telegram-bot-api.bot_username')))}}" class="mt-2 px-3 py-1 rounded-md bg-[#29a9ea] text-white text-center inline-flex gap-1 items-center" :class="active ? '!hidden': ''"><x-tabler-plug />{{__('Link your account')}}</a>
                     </div>
 
                     <div class="flex flex-col items-center justify-center" x-data="{ active: {{(int)Auth::user()->isEmailNotificationsActive()}} }">
