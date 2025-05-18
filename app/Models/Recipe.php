@@ -7,6 +7,7 @@ use App\Models\Miscs\RecipeLike;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Str;
 use Laravel\Scout\Searchable;
 use App\MealDifficultyEnum;
 
@@ -43,6 +44,25 @@ class Recipe extends Model
     public function likes(): HasMany
     {
         return $this->hasMany(RecipeLike::class);
+    }
+
+    public function shares(): HasMany
+    {
+        return $this->hasMany(RecipeShare::class);
+    }
+
+    public function share(): ?string
+    {
+        if ($user = auth()->user()) {
+            $share = $this->shares()->create([
+                'sharer_id' => $user->id,
+                'share_token' => Str::random(32),
+            ]);
+
+            return route('recipe', ['recipe' => $this, 'share_token' => $share->share_token]);
+        }
+
+        return null;
     }
 
     public function url(): Attribute

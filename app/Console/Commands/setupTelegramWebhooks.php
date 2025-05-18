@@ -35,6 +35,7 @@ class setupTelegramWebhooks extends Command
                 ['command' => 'start', 'description' => 'Démarrer l\'échange'],
                 ['command' => 'link', 'description' => 'Démarrer la procédure de liaison de compte'],
                 ['command' => 'code', 'description' => 'Valider la liaison de votre compte'],
+                ['command' => 'stop', 'description' => 'Stopper la réception via telegram'],
             ]),
         ]);
 

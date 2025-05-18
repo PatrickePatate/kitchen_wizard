@@ -1,19 +1,18 @@
 services:
     app:
-        hostname: kitchenwizard
-        image: kitchenwizard
+        #hostname: kicthenwizard
+        image: kicthenwizard
         restart: unless-stopped
         network_mode: host
         ports:
             -   "8000:8000"
+        volumes:
+            - ./:/app
+            - ./storage:/app/storage
+            #- ./.env:/app/.env
 #        networks:
 #           # - web
 #            - host
-
-        volumes:
-            - ./:/app
-           # - ./storage:/app/storage
-           # - ./.env:/app/.env
 #        depends_on:
 #            common-postgres:
 #                condition: service_healthy

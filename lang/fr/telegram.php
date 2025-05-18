@@ -8,6 +8,11 @@ return [
         '',
         '📝 Exemple: /link'
     ],
+    'stop' => [
+        'Vous ne recevrez plus de recettes via Telegram.',
+        '',
+        'Au revoir 👋',
+    ],
     'link' => [
         '🚀 Hey ! Bonne nouvelle !',
         '',

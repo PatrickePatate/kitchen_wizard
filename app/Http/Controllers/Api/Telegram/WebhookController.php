@@ -58,6 +58,11 @@ class WebhookController extends Controller
                 TelegramChatSetupService::validateLinking($chatId, $code);
                 return;
             }
+
+            if($message === '/stop'){
+                TelegramChatSetupService::stop($chatId);
+                return;
+            }
         } else{
             Log::error('Invalid webhook received from telegram', $request->all());
         }

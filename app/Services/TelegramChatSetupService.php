@@ -81,6 +81,24 @@ class TelegramChatSetupService
 
             $error->send();
         }
+    }
 
+    public static function stop($chatId) {
+        $user = User::where('telegram_chat_id', $chatId)->first();
+
+        if($user) {
+            $user->update([
+                'telegram_chat_id' => null,
+            ]);
+
+            $msg = TelegramMessage::create()
+                ->to($chatId);
+
+            foreach (trans('telegram.stop') ?? [] as $line) {
+                $msg->line($line);
+            }
+
+            $msg->send();
+        }
     }
 }

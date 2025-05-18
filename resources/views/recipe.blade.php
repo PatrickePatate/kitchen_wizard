@@ -112,9 +112,31 @@
                                     {{$step['heading']}}
                                 </h3>
                                 <div class="hidden cursor-pointer opacity-75 share-btn">
-                                    <x-tabler-share-2 @click="$clipboard('{{route('recipe', ['recipe' => $recipe])}}#step-{{$loop->index+1}}'); $flash('#copied-message-step-{{$loop->index+1}}')" class="text-cyan-900 h-5"/>
+                                    <div x-data="{shareLink: 'Chargement...'}">
+                                        <x-dialog>
+                                            <x-slot name="button">
+                                                <x-tabler-share-2 @click="shareLink = (await (await fetch('{{route('recipe.api.share', ['recipe' => $recipe])}}')).json()).url" class="text-cyan-900 h-5"/>
+                                            </x-slot>
+                                            <x-slot name="title">
+                                                Partager la recette
+                                            </x-slot>
+                                            Partager l'étape <code class="bg-gray-200 py-0.5 px-1">{{$step['heading']}}</code> :
+
+                                            <div class="relative mt-2 bg-gray-100 p-2 rounded-md text-sm font-mono">
+
+                                                <div class="pr-12 text-wrap break-word">
+                                                    <span x-text="shareLink+'#step-{{$loop->index+1}}'"></span>
+                                                </div>
+                                                <div class="absolute top-0 bottom-0 right-5 flex items-center">
+                                                    <div class="relative">
+                                                        <x-tabler-clipboard class="cursor-pointer text-gray-800" @click="$clipboard(shareLink+'#step-{{$loop->index+1}}'); $flash('#copied-message-step-{{$loop->index+1}}')"/>
+                                                        <div class="absolute -top-8 -left-5 -right-5 hidden px-2 py-1 bg-neutral-800 text-white text-nowrap text-[0.7rem]" id="copied-message-step-{{$loop->index+1}}">Copié !</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </x-dialog>
+                                    </div>
                                 </div>
-                                <div class="hidden px-2 py-1 bg-neutral-800 text-white text-[0.7rem]" id="copied-message-step-{{$loop->index+1}}">Copié !</div>
                             </div>
 
                             <p class="text-sm font-normal">{{$step['text']}}</p>

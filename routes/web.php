@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:web'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
-    Route::get('recipe/{recipe}', [RecipeController::class, 'show'])->name('recipe')->whereNumber('recipe');
     Route::get('/search', [RecipeController::class, 'search'])->name('search');
     Route::get('/likes', [LikedRecipesController::class, 'index'])->name('likes');
 
@@ -21,6 +20,9 @@ Route::middleware(['auth:web'])->group(function () {
         Route::post('profile/meteo', [AccountController::class, 'meteo'])->name('profile.store.meteo');
     });
 });
+
+Route::get('recipe/{recipe}', [RecipeController::class, 'show'])->name('recipe')->whereNumber('recipe');
+Route::get('recipe/{recipe}/share', [RecipeController::class, 'share'])->name('recipe.api.share')->whereNumber('recipe');
 
 // Auth
 Route::get('login', [LoginController::class, 'create'])->name('login');
