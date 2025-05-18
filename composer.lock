@@ -495,16 +495,16 @@
         },
         {
             "name": "code16/sharp",
-            "version": "v8.5.0",
+            "version": "v8.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/code16/sharp.git",
-                "reference": "2bbcf056a8ceb3ce1876c6799228a57e7fb69e0e"
+                "reference": "a78fbb55b0eb9bcc5dea11d0ac227e1ed950c6ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/code16/sharp/zipball/2bbcf056a8ceb3ce1876c6799228a57e7fb69e0e",
-                "reference": "2bbcf056a8ceb3ce1876c6799228a57e7fb69e0e",
+                "url": "https://api.github.com/repos/code16/sharp/zipball/a78fbb55b0eb9bcc5dea11d0ac227e1ed950c6ff",
+                "reference": "a78fbb55b0eb9bcc5dea11d0ac227e1ed950c6ff",
                 "shasum": ""
             },
             "require": {
@@ -513,7 +513,7 @@
                 "intervention/image-laravel": "^1.2",
                 "laravel/framework": "^10.0|^11.0",
                 "league/commonmark": "^2.4",
-                "php": "8.2.*|8.3.*",
+                "php": "8.2.*|8.3.*|8.4.*",
                 "spatie/image-optimizer": "^1.6"
             },
             "require-dev": {
@@ -521,6 +521,7 @@
                 "dms/phpunit-arraysubset-asserts": "^0.4|^0.5",
                 "doctrine/dbal": "^3.5",
                 "friendsofphp/php-cs-fixer": "^3.8",
+                "laravel/pint": "1.18.3",
                 "mockery/mockery": "^1.5.0",
                 "nunomaduro/collision": "^7.0|^8.0",
                 "orchestra/testbench": "^8.0|^9.0",
@@ -557,9 +558,9 @@
             "description": "Laravel Content Management Framework",
             "support": {
                 "issues": "https://github.com/code16/sharp/issues",
-                "source": "https://github.com/code16/sharp/tree/v8.5.0"
+                "source": "https://github.com/code16/sharp/tree/v8.6.1"
             },
-            "time": "2024-10-14T14:20:39+00:00"
+            "time": "2024-12-18T13:34:42+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
