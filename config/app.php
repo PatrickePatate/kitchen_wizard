@@ -129,7 +129,7 @@ return [
     ],
 
     'backups' => [
-        'admin_email' => env('DB_BACKUPS_ADMIN_EMAIL', env('MAIL_FROM_ADDRESS')),
+        'admin_email' => env('DB_BACKUPS_ADMIN_EMAIL', (env('MAIL_FROM_ADDRESS') ?? '')),
         'enabled' => env('DB_BACKUPS_ENABLED', true)
     ],
 
