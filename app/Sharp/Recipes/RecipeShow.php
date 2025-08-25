@@ -81,7 +81,7 @@ class RecipeShow extends SharpShow
             $section
                 ->addColumn(4, function (ShowLayoutColumn $column) {
                     $column
-                        ->withSingleField("pictures");
+                        ->withField("pictures");
                 })
                 ->addColumn(8, function ($column) {
                     $column
@@ -95,15 +95,15 @@ class RecipeShow extends SharpShow
                 $section
                     ->addColumn(12, function ($column) {
                         $column
-                            ->withSingleField("steps");
+                            ->withField("steps");
                     });
             })
             ->addSection("Auteur", function (ShowLayoutSection $section) {
                 $section
                     ->addColumn(12, function ($column) {
                         $column
-                            ->withSingleField("author")
-                            ->withSingleField("author_note");
+                            ->withField("author")
+                            ->withField("author_note");
                     });
             });
     }
@@ -127,14 +127,14 @@ class RecipeShow extends SharpShow
                         $utensil['label'],
                     ))->implode('')."</ul>";
             })
-            ->setCustomTransformer('times:rest_time', function ($value, Recipe $recipe) {
-                return $recipe->times['rest_time'];
+            ->setCustomTransformer('times:rest_time', function ($value, array $times) {
+                return $times['rest_time'];
             })
-            ->setCustomTransformer('times:cook', function ($value, Recipe $recipe) {
-                return $recipe->times['cook'];
+            ->setCustomTransformer('times:cook', function ($value, array $times) {
+                return $times['cook'];
             })
-            ->setCustomTransformer('times:prep', function ($value, Recipe $recipe) {
-                return $recipe->times['prep'];
+            ->setCustomTransformer('times:prep', function ($value, array $times) {
+                return $times['prep'];
             })
             ->setCustomTransformer('steps', function ($value, Recipe $recipe) {
                 return collect($recipe->steps)->map(fn($step) => sprintf(

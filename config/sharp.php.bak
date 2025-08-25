@@ -135,7 +135,7 @@ return [
         'primary_color' => '#0047AB',
         // 'favicon_url' => '',
          'logo_urls' => [
-             'menu' => '/images/logo.png',
+             'menu' => '/sharp-assets/logo.svg',
              'login' => '/images/logo.png',
          ],
     ],
