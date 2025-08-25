@@ -5,10 +5,10 @@
     "keywords": ["laravel", "framework"],
     "license": "MIT",
     "require": {
-        "php": "^8.2",
+        "php": "^8.4",
         "blade-ui-kit/blade-icons": "^1.7",
         "cmixin/season": "^1.0",
-        "code16/sharp": "^8.5",
+        "code16/sharp": "^9.0",
         "http-interop/http-factory-guzzle": "^1.2",
         "laravel-notification-channels/discord": "^1.6",
         "laravel-notification-channels/telegram": "^5.0",
