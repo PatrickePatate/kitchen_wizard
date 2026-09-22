@@ -26,6 +26,7 @@
         @endif
         @if(auth()->check())
                 <livewire:actions.like-recipe :recipe="$recipe" />
+                <livewire:actions.add-to-shopping-list :recipe="$recipe" />
         @endif
             @if($recipe->diet)
                 <div class="absolute left-3 top-3">

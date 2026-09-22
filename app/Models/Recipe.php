@@ -5,6 +5,7 @@ namespace App\Models;
 use App\DietEnum;
 use App\MealTypeEnum;
 use App\Models\Miscs\RecipeLike;
+use App\Models\Miscs\ShoppingListRecipe;
 use App\RecipeDurationEnum;
 use App\Support\DurationParser;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -57,6 +58,11 @@ class Recipe extends Model
         return $this->hasMany(RecipeShare::class);
     }
 
+    public function shoppingListRecipes(): HasMany
+    {
+        return $this->hasMany(ShoppingListRecipe::class);
+    }
+
     public function share(): ?string
     {
         if ($user = auth()->user()) {
@@ -96,6 +102,11 @@ class Recipe extends Model
     public function isLikedBy(User $user): bool
     {
         return $this->likes->firstWhere('user_id', $user->id) !== null;
+    }
+
+    public function isInShoppingListOf(User $user): bool
+    {
+        return $this->shoppingListRecipes()->where('user_id', $user->id)->exists();
     }
 
     public function toSearchableArray(): array

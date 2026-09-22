@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\MealTypeEnum;
+use App\Models\Miscs\ShoppingListRecipe;
 use App\Services\RecipeSelectorService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -75,5 +76,21 @@ class RecipeDailySelection extends Model
     public function prunable()
     {
         return static::where('created_at', '<=', now()->subMonth());
+    }
+
+    public function addAllToShoppingListFor(User $user): void
+    {
+        foreach ([$this->starter(), $this->main(), $this->dessert()] as $recipe) {
+            if ($recipe === null) {
+                continue;
+            }
+
+            ShoppingListRecipe::firstOrCreate([
+                'recipe_id' => $recipe->id,
+                'user_id' => $user->id,
+            ], [
+                'added_at' => now(),
+            ]);
+        }
     }
 }

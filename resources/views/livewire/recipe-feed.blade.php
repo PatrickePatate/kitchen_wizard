@@ -43,6 +43,12 @@
 
     <div wire:loading.remove wire:target="selectDay">
         @if(!is_null($selection))
+            <div class="max-w-3xl mx-auto px-6 pt-4">
+                <button wire:click="addToShoppingList" wire:loading.attr="disabled" class="flex items-center gap-2 text-sm bg-blue-700 hover:bg-blue-800 disabled:opacity-50 text-white rounded-full px-4 py-2">
+                    <x-tabler-shopping-cart class="h-5 w-5"></x-tabler-shopping-cart>
+                    {{__("Ajouter la sélection du jour à ma liste de courses")}}
+                </button>
+            </div>
             <!-- Main Course section -->
             <section class="max-w-3xl mx-auto pb-7 border-x p-6 border-b">
                 <div class="flex gap-2 items-center mb-3">

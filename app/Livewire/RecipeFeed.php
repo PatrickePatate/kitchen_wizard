@@ -38,6 +38,10 @@ class RecipeFeed extends Component
         $this->dessert = $this->selection?->dessert();
     }
 
+    public function addToShoppingList(){
+        $this->selection?->addAllToShoppingListFor(auth()->user());
+    }
+
     public function refreshMeal(MealTypeEnum $type){
         $this->selection->refreshRecipe($type);
 

@@ -14,6 +14,11 @@
                 </a>
             </div>
             <div>
+                <a href="{{route('shopping-list')}}" title="{{__('Ma liste de courses')}}">
+                    <x-tabler-shopping-cart class="h-9 text-white"></x-tabler-shopping-cart>
+                </a>
+            </div>
+            <div>
                 <form action="{{route('search')}}" class="relative flex items-center gap-3">
                     <input type="search" @keydown.enter="$el.parent.submit" class="mt-1 hidden sm:block w-full px-2 pe-9 py-1.5 bg-white border border-gray-300 rounded-md shadow-xs focus:outline-hidden focus:ring-indigo-500 text-sm text-black" placeholder="{{__('Search')}}" name="query" value="{{request()->get('query')}}">
                     <x-tabler-search @click="search.open = !search.open" class="h-5 text-white sm:text-black sm:absolute sm:right-2 sm:top-1/4"></x-tabler-search>

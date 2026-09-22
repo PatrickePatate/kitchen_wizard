@@ -27,7 +27,10 @@
                     </div>
                     <h2 class="font-sans uppercase font-semibold text-lg">{{$recipe->meal_type}}</h2>
                 </div>
-                <div>
+                <div class="flex items-center gap-3">
+                    @auth
+                        <livewire:actions.add-to-shopping-list :recipe="$recipe" wrapper-class="static" icon-class="h-7 w-7 text-black" />
+                    @endauth
                     <div x-data="{shareLink: 'Chargement...'}">
                         <x-dialog>
                             <x-slot name="button">
