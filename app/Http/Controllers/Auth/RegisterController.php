@@ -31,7 +31,7 @@ class RegisterController extends Controller
     {
         if(request()->has('last_name') && !empty(request('last_name'))) {
             //honeypot
-            return back(200);
+            return response()->noContent();
         }
 
         $request->validate([
