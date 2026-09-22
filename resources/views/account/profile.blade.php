@@ -105,31 +105,64 @@
                     <p class="text-sm text-gray-200">{{__('Connectez vos comptes pour recevoir votre séléction du jour.')}}</p>
                 </div>
             </div>
-            <div class="p-4 mb-6">
-                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                    <div class="flex flex-col items-center justify-center" x-data="{ active: {{(int)Auth::user()->isTelegramAccountSetup()}} }">
-                        <div class="bg-[#29a9ea] w-20 h-20 p-6 rounded-full flex justify-center items-center mb-2">
-                            <x-tabler-brand-telegram class="text-white w-12 h-12"/>
+            <div class="bg-neutral-100 mb-6 divide-y divide-neutral-200">
+                <div x-data="{ open: false }" class="border-b border-neutral-200 last:border-b-0">
+                    <button type="button" @click="open = !open" class="w-full flex items-center gap-3 p-4 text-left">
+                        <div class="bg-[#29a9ea] w-10 h-10 shrink-0 rounded-full flex justify-center items-center">
+                            <x-tabler-brand-telegram class="text-white w-6 h-6"/>
                         </div>
-                        <p class="text-nowrap">Telegram : <span :class="active ? 'text-green-500' : 'text-red-500'">{{Auth::user()->isTelegramAccountSetup() ? __("Active") : __('Inactive')}}</span></p>
-                        <a target="_blank" href="{{sprintf('https://t.me/%s', str_replace('@', '', config('services.telegram-bot-api.bot_username')))}}" class="mt-2 px-3 py-1 rounded-md bg-[#29a9ea] text-white text-center inline-flex gap-1 items-center" :class="active ? '!hidden': ''"><x-tabler-plug />{{__('Link your account')}}</a>
-                    </div>
-
-                    <div class="flex flex-col items-center justify-center" x-data="{ active: {{(int)Auth::user()->isEmailNotificationsActive()}} }">
-                        <div class="bg-teal-800 w-20 h-20 p-6 rounded-full flex justify-center items-center mb-2">
-                            <x-tabler-mail class="text-white w-12 h-12"/>
+                        <div class="flex-1">
+                            <p class="font-medium">Telegram</p>
+                            <p class="text-sm {{Auth::user()->isTelegramAccountSetup() ? 'text-green-600' : 'text-red-500'}}">{{Auth::user()->isTelegramAccountSetup() ? __("Active") : __('Inactive')}}</p>
                         </div>
-                        <p class="text-nowrap">Email : <span :class="active ? 'text-green-500' : 'text-red-500'">{{Auth::user()->isEmailNotificationsActive() ? __("Active") : __('Inactive')}}</span></p>
-                    </div>
-
-                    <div class="flex flex-col items-center justify-center" x-data="{ active: {{(int)Auth::user()->isEmailNotificationsActive()}} }">
-                        <div class="bg-gray-700 w-20 h-20 p-6 rounded-full flex justify-center items-center mb-2">
-                            <x-tabler-question-mark class="text-white w-12 h-12"/>
-                        </div>
-                        <p class="text-nowrap">Autre... <span class="text-orange-800">Bientôt..</span></p>
+                        <x-tabler-chevron-down class="w-5 h-5 transition-transform" ::class="open ? 'rotate-180' : ''"/>
+                    </button>
+                    <div x-cloak x-show="open" x-transition class="px-4 pb-4">
+                        <p class="text-sm text-gray-500 mb-3">{{__('Recevez votre sélection de recettes chaque jour sur Telegram.')}}</p>
+                        <a target="_blank" href="{{sprintf('https://t.me/%s', str_replace('@', '', config('services.telegram-bot-api.bot_username')))}}" class="px-3 py-1 rounded-md bg-[#29a9ea] text-white inline-flex gap-1 items-center"><x-tabler-plug />{{__('Link your account')}}</a>
                     </div>
                 </div>
 
+                <div x-data="{ open: false }" class="border-b border-neutral-200 last:border-b-0">
+                    <button type="button" @click="open = !open" class="w-full flex items-center gap-3 p-4 text-left">
+                        <div class="bg-teal-800 w-10 h-10 shrink-0 rounded-full flex justify-center items-center">
+                            <x-tabler-mail class="text-white w-6 h-6"/>
+                        </div>
+                        <div class="flex-1">
+                            <p class="font-medium">Email</p>
+                            <p class="text-sm {{Auth::user()->isEmailNotificationsActive() ? 'text-green-600' : 'text-red-500'}}">{{Auth::user()->isEmailNotificationsActive() ? __("Active") : __('Inactive')}}</p>
+                        </div>
+                        <x-tabler-chevron-down class="w-5 h-5 transition-transform" ::class="open ? 'rotate-180' : ''"/>
+                    </button>
+                    <div x-cloak x-show="open" x-transition class="px-4 pb-4">
+                        <p class="text-sm text-gray-500">{{__("Activez les notifications e-mail dans la section « Vos informations » ci-dessus.")}}</p>
+                    </div>
+                </div>
+
+                <div x-data="{ open: false }" class="border-b border-neutral-200 last:border-b-0">
+                    <button type="button" @click="open = !open" class="w-full flex items-center gap-3 p-4 text-left">
+                        <div class="bg-[#5865F2] w-10 h-10 shrink-0 rounded-full flex justify-center items-center">
+                            <x-tabler-brand-discord class="text-white w-6 h-6"/>
+                        </div>
+                        <div class="flex-1">
+                            <p class="font-medium">Discord</p>
+                            <p class="text-sm {{Auth::user()->isDiscordAccountSetup() ? 'text-green-600' : 'text-red-500'}}">{{Auth::user()->isDiscordAccountSetup() ? __("Active") : __('Inactive')}}</p>
+                        </div>
+                        <x-tabler-chevron-down class="w-5 h-5 transition-transform" ::class="open ? 'rotate-180' : ''"/>
+                    </button>
+                    <div x-cloak x-show="open" x-transition class="px-4 pb-4">
+                        <p class="text-sm text-gray-500 mb-3">{{__("Le bot doit partager un serveur avec vous avant de pouvoir vous envoyer un message privé.")}}</p>
+                        @if(config('services.discord.client_id'))
+                            <a target="_blank" href="{{sprintf('https://discord.com/oauth2/authorize?client_id=%s&scope=bot&permissions=0', config('services.discord.client_id'))}}" class="mb-3 px-3 py-1 rounded-md bg-[#5865F2] text-white inline-flex gap-1 items-center"><x-tabler-brand-discord />{{__('Ajouter le bot à un serveur')}}</a>
+                        @endif
+                        <form method="POST" action="{{route('profile.store.discord')}}" class="flex items-center gap-2">
+                            @csrf
+                            <input type="text" name="discord_user_id" placeholder="{{__('ID Discord')}}" title="{{__("Activez le mode développeur dans Discord (Paramètres > Avancés), puis clic droit sur votre profil pour copier votre ID.")}}" class="px-2 py-1 text-sm rounded-md border border-gray-300">
+                            <button type="submit" class="px-3 py-1 rounded-md bg-[#5865F2] text-white inline-flex gap-1 items-center shrink-0"><x-tabler-plug />{{__('Link your account')}}</button>
+                        </form>
+                        <p class="text-xs text-gray-400 mt-1">{{__("Astuce : activez le mode développeur dans Discord (Paramètres > Avancés), puis clic droit sur votre profil pour copier votre ID.")}}</p>
+                    </div>
+                </div>
             </div>
         </div>
 
