@@ -136,10 +136,9 @@ return [
         'host' => env('MEILISEARCH_HOST', 'http://localhost:7700'),
         'key' => env('MEILISEARCH_KEY'),
         'index-settings' => [
-//            Recipe::class => [
-//                'filterableAttributes'=> ['id', 'title', 'ingredients', 'meal_type', 'price', 'difficulty', 'people'],
-//                'sortableAttributes' => ['created_at'],
-//            ]
+            Recipe::class => [
+                'filterableAttributes' => ['diet'],
+            ],
         ],
     ],
 

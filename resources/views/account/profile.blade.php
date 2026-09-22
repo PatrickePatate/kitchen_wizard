@@ -46,6 +46,15 @@
                         <label for="email-notifications" class="ms-2 text-gray-700">{{__('Activate Email recipe suggestions')}}</label>
                     </div>
 
+                    <hr class="border border-neutral-200 my-8">
+                    <div class="mb-2.5">
+                        <h2 class="font-heading text-md mb-1">{{__('Régime alimentaire')}}</h2>
+                        <p class="text-[.75rem] text-gray-500">
+                            {{__('Votre régime préféré sera utilisé pour vous suggérer des recettes adaptées.')}}
+                        </p>
+                    </div>
+                    <x-forms.select name="preferred_diet" :value="Auth::user()->preferred_diet?->value" :options="collect(['' => __('Aucune préférence')])->merge(collect(\App\DietEnum::cases())->mapWithKeys(fn($case) => [$case->value => $case->getLabel()]))" />
+
                     <div class="flex justify-end">
                         <x-forms.button icon="tabler-device-floppy" label="Save" />
                     </div>
