@@ -4,6 +4,7 @@ namespace Tests\Unit\Models;
 
 use App\Models\Recipe;
 use App\Models\User;
+use App\RecipeDurationEnum;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -57,5 +58,29 @@ class RecipeTest extends TestCase
             'sharer_id' => $user->id,
         ]);
         $this->assertStringContainsString('share_token=', $url);
+    }
+
+    public function test_duration_minutes_is_parsed_from_total_time(): void
+    {
+        $recipe = Recipe::factory()->create(['total_time' => '1 h 30 min']);
+
+        $this->assertSame(90, $recipe->duration_minutes);
+    }
+
+    public function test_duration_bucket_matches_the_recipe_duration(): void
+    {
+        $recipe = Recipe::factory()->create(['total_time' => '1 h 30 min']);
+
+        $this->assertSame(RecipeDurationEnum::UP_TO_2_HOURS, $recipe->duration_bucket);
+    }
+
+    public function test_searchable_array_includes_duration_minutes_and_bucket(): void
+    {
+        $recipe = Recipe::factory()->create(['total_time' => '20 min']);
+
+        $searchable = $recipe->toSearchableArray();
+
+        $this->assertSame(20, $searchable['duration_minutes']);
+        $this->assertSame(RecipeDurationEnum::UP_TO_30_MIN->value, $searchable['duration_bucket']);
     }
 }

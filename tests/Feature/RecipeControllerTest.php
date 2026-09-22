@@ -86,4 +86,44 @@ class RecipeControllerTest extends TestCase
 
         $response->assertOk();
     }
+
+    public function test_search_accepts_a_difficulty_filter(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get(route('search', ['difficulty' => 'facile']));
+
+        $response->assertOk();
+        $response->assertViewHas('difficulty', 'facile');
+    }
+
+    public function test_search_accepts_a_duration_filter(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get(route('search', ['duration' => 'up_to_30_min']));
+
+        $response->assertOk();
+        $response->assertViewHas('duration', 'up_to_30_min');
+    }
+
+    public function test_search_ignores_an_invalid_difficulty_filter(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get(route('search', ['difficulty' => 'not-a-real-difficulty']));
+
+        $response->assertOk();
+        $response->assertViewHas('difficulty', null);
+    }
+
+    public function test_search_ignores_an_invalid_duration_filter(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get(route('search', ['duration' => 'not-a-real-duration']));
+
+        $response->assertOk();
+        $response->assertViewHas('duration', null);
+    }
 }

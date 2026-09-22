@@ -5,6 +5,8 @@ namespace App\Models;
 use App\DietEnum;
 use App\MealTypeEnum;
 use App\Models\Miscs\RecipeLike;
+use App\RecipeDurationEnum;
+use App\Support\DurationParser;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -75,6 +77,20 @@ class Recipe extends Model
         );
     }
 
+    public function durationMinutes(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => DurationParser::toMinutes($this->total_time),
+        );
+    }
+
+    public function durationBucket(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => RecipeDurationEnum::fromMinutes($this->duration_minutes),
+        );
+    }
+
     //todo:  Optimize to avoid loading tremendous amount of likes when/if a lot of user joins
     public function isLikedBy(User $user): bool
     {
@@ -83,6 +99,9 @@ class Recipe extends Model
 
     public function toSearchableArray(): array
     {
-        return $this->toArray();
+        return array_merge($this->toArray(), [
+            'duration_minutes' => $this->duration_minutes,
+            'duration_bucket' => $this->duration_bucket?->value,
+        ]);
     }
 }
