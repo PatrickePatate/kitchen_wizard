@@ -54,9 +54,14 @@ class User extends Authenticatable
         return (bool) $this->is_email_notifications_active;
     }
 
+    public function isDiscordAccountSetup(): bool
+    {
+        return !empty($this->discord_private_channel_id);
+    }
+
     public function hasAtLeastOneNotificationChannelActive(): bool
     {
-        return !($this->isEmailNotificationsActive() || $this->isTelegramAccountSetup());
+        return $this->isEmailNotificationsActive() || $this->isTelegramAccountSetup() || $this->isDiscordAccountSetup();
     }
 
     public function routeNotificationForDiscord()

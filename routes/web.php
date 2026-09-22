@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\Api\Discord\UserDiscordSettingsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
@@ -18,6 +19,7 @@ Route::middleware(['auth:web'])->group(function () {
         Route::get('profile', [AccountController::class, 'view'])->name('profile');
         Route::post('profile', [AccountController::class, 'store']);
         Route::post('profile/meteo', [AccountController::class, 'meteo'])->name('profile.store.meteo');
+        Route::post('profile/discord', [UserDiscordSettingsController::class, 'store'])->name('profile.store.discord');
     });
 });
 
