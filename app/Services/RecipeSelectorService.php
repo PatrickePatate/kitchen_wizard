@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\DietEnum;
 use App\MealDifficultyEnum;
 use App\MealTypeEnum;
 use App\Models\Recipe;
@@ -15,7 +16,7 @@ class RecipeSelectorService
 {
     public function __construct() {}
 
-    public function getRecipe(MealTypeEnum $type, ?array $avoid=null): ?Recipe
+    public function getRecipe(MealTypeEnum $type, ?array $avoid=null, ?DietEnum $diet=null): ?Recipe
     {
         $month = match(Carbon::today()->month) {
             1 => "Janvier", 2 => "Février", 3 => "Mars", 4 => "Avril",
@@ -73,7 +74,8 @@ class RecipeSelectorService
                     });
                 }
             })
-            ->when($avoid, fn($q) => $q->whereNotIn('id', $avoid));
+            ->when($avoid, fn($q) => $q->whereNotIn('id', $avoid))
+            ->when($diet, fn($q) => $q->where('diet', $diet));
 
         // Boost season match: try to get seasonal recipes first
         $seasonal = (clone $query)

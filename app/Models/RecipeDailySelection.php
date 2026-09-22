@@ -7,6 +7,7 @@ use App\Services\RecipeSelectorService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Prunable;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class RecipeDailySelection extends Model
 {
@@ -18,6 +19,11 @@ class RecipeDailySelection extends Model
     protected $casts = [
         'recipes_selection' => 'array'
     ];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public static function forUser(User $user): ?RecipeDailySelection
     {
@@ -36,7 +42,7 @@ class RecipeDailySelection extends Model
         };
 
         $selection = $this->recipes_selection;
-        $selection[$key] = app(RecipeSelectorService::class)->getRecipe($type, [$selection[$key]] ?? null)->id;
+        $selection[$key] = app(RecipeSelectorService::class)->getRecipe($type, [$selection[$key]] ?? null, $this->user?->preferred_diet)->id;
         $this->update(['recipes_selection' => $selection]);
     }
 
