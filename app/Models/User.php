@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\DietEnum;
 use App\Models\Miscs\RecipeLike;
 use App\UserGroupEnum;
 use Cache;
@@ -28,7 +29,8 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'group' => UserGroupEnum::class
+            'group' => UserGroupEnum::class,
+            'preferred_diet' => DietEnum::class,
         ];
     }
 

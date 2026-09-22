@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\DietEnum;
 use App\MealTypeEnum;
 use App\Models\Miscs\RecipeLike;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -23,6 +24,7 @@ class Recipe extends Model
         'times' => 'array',
         'meal_type' => MealTypeEnum::class,
         "difficulty" => MealDifficultyEnum::class,
+        "diet" => DietEnum::class,
     ];
 
     protected $guarded = [];

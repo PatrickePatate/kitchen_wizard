@@ -27,6 +27,17 @@
         @if(auth()->check())
                 <livewire:actions.like-recipe :recipe="$recipe" />
         @endif
+            @if($recipe->diet)
+                <div class="absolute left-3 top-3">
+                    <div class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-green-100 text-green-900 text-xs font-medium uppercase">
+                        @svg($recipe->diet->getIcon(), ['class' => 'w-3.5 h-3.5'])
+                        {{$recipe->diet->getLabel()}}
+                        <x-tooltip message="<span class='normal-case'>La classification des recettes est réalisée avec l'intelligence artificielle.<br> Des erreurs peuvent se produire.</span>">
+                            <x-tabler-info-circle class="w-3.5 h-3.5" />
+                        </x-tooltip>
+                    </div>
+                </div>
+            @endif
     </div>
     <div class="flex flex-col">
         <div class="flex justify-between items-start">
