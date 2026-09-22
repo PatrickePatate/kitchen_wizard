@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Prunable;
 
 class RecipeDailySelection extends Model
 {
-    use Prunable;
+    use HasFactory, Prunable;
     protected $guarded = [];
 
     protected $recipes = [];

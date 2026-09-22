@@ -6,6 +6,7 @@ use App\DietEnum;
 use App\MealTypeEnum;
 use App\Models\Miscs\RecipeLike;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
@@ -14,7 +15,7 @@ use App\MealDifficultyEnum;
 
 class Recipe extends Model
 {
-    use Searchable;
+    use HasFactory, Searchable;
 
     protected $casts = [
         'pictures' => 'array',
