@@ -137,7 +137,7 @@ return [
         'key' => env('MEILISEARCH_KEY'),
         'index-settings' => [
             Recipe::class => [
-                'filterableAttributes' => ['diet'],
+                'filterableAttributes' => ['diet', 'meal_type'],
             ],
         ],
     ],

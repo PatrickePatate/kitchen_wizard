@@ -54,23 +54,23 @@ class UserTest extends TestCase
         $this->assertFalse($user->isEmailNotificationsActive());
     }
 
-    public function test_has_at_least_one_notification_channel_active_is_true_when_none_are_active(): void
+    public function test_has_at_least_one_notification_channel_active_is_false_when_none_are_active(): void
     {
         $user = User::factory()->create([
             'is_email_notifications_active' => false,
             'telegram_chat_id' => null,
             'telegram_validated' => false,
+            'discord_private_channel_id' => null,
         ]);
 
-        // Note: the method name is misleading, it actually returns true when NO channel is active.
-        $this->assertTrue($user->hasAtLeastOneNotificationChannelActive());
+        $this->assertFalse($user->hasAtLeastOneNotificationChannelActive());
     }
 
-    public function test_has_at_least_one_notification_channel_active_is_false_when_email_is_active(): void
+    public function test_has_at_least_one_notification_channel_active_is_true_when_email_is_active(): void
     {
         $user = User::factory()->create(['is_email_notifications_active' => true]);
 
-        $this->assertFalse($user->hasAtLeastOneNotificationChannelActive());
+        $this->assertTrue($user->hasAtLeastOneNotificationChannelActive());
     }
 
     public function test_route_notification_for_discord_prefers_the_private_channel_id(): void
