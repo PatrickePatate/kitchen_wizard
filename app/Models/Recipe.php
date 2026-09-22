@@ -28,6 +28,7 @@ class Recipe extends Model
         'meal_type' => MealTypeEnum::class,
         "difficulty" => MealDifficultyEnum::class,
         "diet" => DietEnum::class,
+        "published" => "boolean",
     ];
 
     protected $guarded = [];

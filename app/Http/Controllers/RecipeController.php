@@ -43,6 +43,7 @@ class RecipeController extends Controller
         $duration = RecipeDurationEnum::tryFrom((string) $request->input('duration'))?->value;
 
         $recipes = Recipe::search($request->input('query'))
+            ->where('published', true)
             ->when($diet, fn ($search) => $search->where('diet', $diet))
             ->when($mealType, fn ($search) => $search->where('meal_type', $mealType))
             ->when($difficulty, fn ($search) => $search->where('difficulty', $difficulty))
