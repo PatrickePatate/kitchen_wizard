@@ -3,6 +3,7 @@
 namespace App\Sharp\Recipes;
 
 use App\Models\Recipe;
+use App\Sharp\Recipes\Commands\CreateRecipeFromUrlCommand;
 use App\Sharp\Recipes\Commands\RecipePublicationEntityState;
 use App\Sharp\Recipes\Filters\DifficultyFilter;
 use App\Sharp\Recipes\Filters\MealTypeFilter;
@@ -67,7 +68,9 @@ class RecipesList extends SharpEntityList
 
     protected function getEntityCommands(): ?array
     {
-        return [];
+        return [
+            CreateRecipeFromUrlCommand::class,
+        ];
     }
 
     protected function getFilters(): array
