@@ -105,7 +105,7 @@ class CreateRecipeFromUrlCommand extends EntityCommand
             'ingredients' => $extracted['ingredients'],
             'utensils' => $extracted['utensils'],
             'steps' => $extracted['steps'],
-            'published' => false,
+            'published' => true,
         ]);
 
         $recipe->update([
