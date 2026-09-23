@@ -18,6 +18,7 @@ class RecipeFeed extends Component
     public ?Recipe $starter;
     public ?Recipe $dessert;
     public ?Carbon $selectionDay;
+    public bool $addedToShoppingList = false;
 
     public function mount(){
         $this->selection = RecipeDailySelection::forUser(auth()->user())?->preload();
@@ -40,6 +41,8 @@ class RecipeFeed extends Component
 
     public function addToShoppingList(){
         $this->selection?->addAllToShoppingListFor(auth()->user());
+        $this->addedToShoppingList = true;
+        $this->dispatch('shopping-list-updated');
     }
 
     public function refreshMeal(MealTypeEnum $type){
@@ -52,6 +55,7 @@ class RecipeFeed extends Component
 
     public function selectDay(string $date)
     {
+        $this->addedToShoppingList = false;
         $this->selectionDay = Carbon::parse($date);
         $this->selection = RecipeDailySelection::query()
             ->where('user_id', auth()->id())

@@ -13,7 +13,7 @@ class ShoppingListAggregator
      */
     public function aggregate(Collection $recipes): array
     {
-        $items = [];
+        $groups = [];
 
         foreach ($recipes as $recipe) {
             foreach ((array) $recipe->ingredients as $ingredient) {
@@ -25,37 +25,44 @@ class ShoppingListAggregator
                     continue;
                 }
 
+                $key = mb_strtolower($label);
                 $unit = $this->extractUnit($quantity, $quantityText);
-                $canMerge = $unit !== null && (float) $quantity > 0;
 
-                $key = $canMerge
-                    ? mb_strtolower($label).'|'.mb_strtolower(trim($unit))
-                    : mb_strtolower($label).'|'.md5($quantityText).'|'.spl_object_id($recipe);
+                $groups[$key] ??= [
+                    'label' => $label,
+                    'quantities' => [], // unit => summed quantity
+                    'raw_texts' => [], // deduped free-text fragments (no reliable quantity to sum)
+                    'recipe_titles' => [],
+                ];
 
-                if (!isset($items[$key])) {
-                    $items[$key] = [
-                        'key' => $key,
-                        'label' => $label,
-                        'quantity' => $canMerge ? (float) $quantity : null,
-                        'unit' => $canMerge ? $unit : null,
-                        'quantity_text' => $quantityText,
-                        'recipe_titles' => [],
-                    ];
-                } elseif ($canMerge) {
-                    $items[$key]['quantity'] += (float) $quantity;
-                    $items[$key]['quantity_text'] = $this->formatQuantity($items[$key]['quantity']).$items[$key]['unit'];
+                if ($unit !== null && (float) $quantity > 0) {
+                    $groups[$key]['quantities'][$unit] = ($groups[$key]['quantities'][$unit] ?? 0) + (float) $quantity;
+                } elseif ($quantityText !== '') {
+                    $groups[$key]['raw_texts'][$quantityText] = true;
                 }
 
-                $items[$key]['recipe_titles'][] = $recipe->title;
+                $groups[$key]['recipe_titles'][$recipe->title] = true;
             }
         }
 
-        $result = array_values(array_map(function (array $item) {
-            $item['recipe_titles'] = array_values(array_unique($item['recipe_titles']));
-            unset($item['quantity'], $item['unit']);
+        $result = [];
 
-            return $item;
-        }, $items));
+        foreach ($groups as $key => $group) {
+            $parts = [];
+
+            foreach ($group['quantities'] as $unit => $sum) {
+                $parts[] = $this->formatQuantity($sum).$unit;
+            }
+
+            $parts = array_merge($parts, array_keys($group['raw_texts']));
+
+            $result[] = [
+                'key' => $key,
+                'label' => $group['label'],
+                'quantity_text' => implode(', ', $parts),
+                'recipe_titles' => array_keys($group['recipe_titles']),
+            ];
+        }
 
         usort($result, fn (array $a, array $b) => mb_strtolower($a['label']) <=> mb_strtolower($b['label']));
 

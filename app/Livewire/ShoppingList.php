@@ -40,6 +40,7 @@ class ShoppingList extends Component
         auth()->user()->shoppingListRecipes()->where('recipe_id', $recipeId)->delete();
 
         $this->refreshState();
+        $this->dispatch('shopping-list-updated');
     }
 
     public function clear()
@@ -48,6 +49,7 @@ class ShoppingList extends Component
         auth()->user()->shoppingListCheckedItems()->delete();
 
         $this->refreshState();
+        $this->dispatch('shopping-list-updated');
     }
 
     private function refreshState(): void

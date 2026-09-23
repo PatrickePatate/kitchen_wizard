@@ -27,11 +27,15 @@ class AddToShoppingList extends Component
         ], [
             'added_at' => now(),
         ]);
+
+        $this->dispatch('shopping-list-updated');
     }
 
     public function remove()
     {
         $this->recipe->shoppingListRecipes()->where('user_id', auth()->id())->delete();
+
+        $this->dispatch('shopping-list-updated');
     }
 
     public function render()
