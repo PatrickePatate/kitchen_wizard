@@ -5,6 +5,9 @@ namespace App\Models;
 use App\DietEnum;
 use App\MealTypeEnum;
 use App\Models\Miscs\RecipeLike;
+use App\Models\Miscs\ShoppingListRecipe;
+use App\RecipeDurationEnum;
+use App\Support\DurationParser;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -26,6 +29,7 @@ class Recipe extends Model
         'meal_type' => MealTypeEnum::class,
         "difficulty" => MealDifficultyEnum::class,
         "diet" => DietEnum::class,
+        "published" => "boolean",
     ];
 
     protected $guarded = [];
@@ -54,6 +58,11 @@ class Recipe extends Model
         return $this->hasMany(RecipeShare::class);
     }
 
+    public function shoppingListRecipes(): HasMany
+    {
+        return $this->hasMany(ShoppingListRecipe::class);
+    }
+
     public function share(): ?string
     {
         if ($user = auth()->user()) {
@@ -75,14 +84,36 @@ class Recipe extends Model
         );
     }
 
+    public function durationMinutes(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => DurationParser::toMinutes($this->total_time),
+        );
+    }
+
+    public function durationBucket(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => RecipeDurationEnum::fromMinutes($this->duration_minutes),
+        );
+    }
+
     //todo:  Optimize to avoid loading tremendous amount of likes when/if a lot of user joins
     public function isLikedBy(User $user): bool
     {
         return $this->likes->firstWhere('user_id', $user->id) !== null;
     }
 
+    public function isInShoppingListOf(User $user): bool
+    {
+        return $this->shoppingListRecipes()->where('user_id', $user->id)->exists();
+    }
+
     public function toSearchableArray(): array
     {
-        return $this->toArray();
+        return array_merge($this->toArray(), [
+            'duration_minutes' => $this->duration_minutes,
+            'duration_bucket' => $this->duration_bucket?->value,
+        ]);
     }
 }

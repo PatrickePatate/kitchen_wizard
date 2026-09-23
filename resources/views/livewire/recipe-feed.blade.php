@@ -22,12 +22,13 @@
             </div>
         </div>
     </div>
-    <div class="max-w-3xl mx-auto border-x px-5 pt-6 pb-4 border-b">
+    <div class="max-w-3xl mx-auto border-x px-5 pt-6 pb-5 border-b">
         <!-- Day selector -->
-        <div class="flex flex-nowrap overflow-y-auto justify-start gap-3">
+        <div class="flex flex-nowrap overflow-x-auto overflow-y-hidden justify-start items-stretch gap-3">
             @foreach($lastWeekSelections as $prevSelection)
-                <div wire:click="selectDay('{{$prevSelection->created_at->format('Y-m-d')}}')" class="cursor-pointer text-center font-sans @if($selectionDay?->isSameDay($prevSelection->created_at)) font-medium bg-blue-800 @else bg-blue-700 @endif text-sm text-white rounded-full px-3 py-2">
-                    <span class="pt-1 whitespace-nowrap">
+                @php $isActive = $selectionDay?->isSameDay($prevSelection->created_at); @endphp
+                <div class="flex items-stretch rounded-full text-sm text-white @if($isActive) bg-blue-800 @else bg-blue-700 @endif">
+                    <button type="button" wire:click="selectDay('{{$prevSelection->created_at->format('Y-m-d')}}')" class="whitespace-nowrap px-3 py-2 @if($isActive) font-medium @endif">
                         @if($prevSelection->created_at->isToday())
                             {{__('Today')}}
                         @elseif($prevSelection->created_at->isYesterday())
@@ -35,7 +36,19 @@
                         @else
                             {{$prevSelection->created_at->translatedFormat('D d M')}}
                         @endif
-                    </span>
+                    </button>
+                    @if($isActive && !is_null($selection))
+                        <button type="button" wire:click="addToShoppingList" wire:loading.attr="disabled" wire:target="addToShoppingList"
+                                @disabled($addedToShoppingList)
+                                title="{{__('Ajouter la sélection du jour à ma liste de courses')}}"
+                                class="flex items-center justify-center pl-2.5 pr-3 border-l border-white/25 rounded-r-full hover:bg-white/10 disabled:hover:bg-transparent transition-colors">
+                            @if($addedToShoppingList)
+                                <x-tabler-circle-check-filled class="h-4 w-4"></x-tabler-circle-check-filled>
+                            @else
+                                <x-tabler-shopping-cart-plus class="h-4 w-4"></x-tabler-shopping-cart-plus>
+                            @endif
+                        </button>
+                    @endif
                 </div>
             @endforeach
         </div>
