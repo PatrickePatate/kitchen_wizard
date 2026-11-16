@@ -2,15 +2,13 @@
 @section('title', __('Profile').' - '.config('app.name'))
 
 @section('content')
-    <div class="container mx-auto mt-16 px-6">
+    <div class="container mx-auto mt-8 sm:mt-16 px-6">
         <div class="w-full max-w-2xl mx-auto">
             @if(session()->has('success'))
-                <div class="p-5 bg-green-300/85 mb-6">
-                    {{session('success')}}
-                </div>
+                <x-alert type="success" class="mb-6">{{session('success')}}</x-alert>
             @endif
             <div class="flex items-stretch gap-6 mb-6">
-                <img src="{{Auth::user()->avatar}}" alt="avatar" class="w-32 h-32">
+                <img src="{{Auth::user()->avatar}}" alt="avatar" class="w-32 h-32 rounded-full object-cover">
                 <div class="flex flex-col justify-between">
                     <div class="">
                         <h1 class="text-xl font-heading mb-2">{{Auth::user()->name}}</h1>
@@ -23,10 +21,10 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-neutral-900 text-white p-4">
-                <h1 class="font-heading text-xl inline-flex items-center gap-2"><x-tabler-user-cog /> {{__('Your informations')}}</h1>
+            <div class="bg-neutral-900 text-white p-4 rounded-t-xl">
+                <h2 class="font-heading text-xl inline-flex items-center gap-2"><x-tabler-user-cog /> {{__('Your informations')}}</h2>
             </div>
-            <div class="bg-neutral-100 p-4 mb-6">
+            <div class="bg-neutral-100 p-4 mb-6 rounded-b-xl">
                 <form method="POST">
                     @csrf
                     <x-forms.input type="text" name="name" label="{{__('Fullname')}}" required :value="Auth::user()->name" />
@@ -36,13 +34,13 @@
 
                     <hr class="border border-neutral-200 my-8">
                     <div class="mb-2.5">
-                        <h2 class="font-heading text-md mb-1">{{__('Notifications par e-mail')}}</h2>
+                        <h3 class="font-heading text-md mb-1">{{__('Notifications par e-mail')}}</h3>
                         <p class="text-[.75rem] text-gray-500">
                             {{__('Recevez votre sélection de recettes chaque jour par e-mail.')}}
                         </p>
                     </div>
                     <div class="flex items-center pb-7">
-                        <input id="email-notifications" name="is_email_notifications_active" type="checkbox" @if(Auth::user()->isEmailNotificationsActive()) checked @endif class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <input id="email-notifications" name="is_email_notifications_active" type="checkbox" @if(Auth::user()->isEmailNotificationsActive()) checked @endif class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 focus:ring-2">
                         <label for="email-notifications" class="ms-2 text-gray-700">{{__('Activate Email recipe suggestions')}}</label>
                     </div>
 
@@ -61,19 +59,19 @@
                 </form>
             </div>
 
-            <div class="bg-neutral-900 text-white p-4">
-                <h1 class="font-heading text-xl inline-flex items-center gap-2"><x-tabler-sun /> {{__('Meteo')}}</h1>
+            <div class="bg-neutral-900 text-white p-4 rounded-t-xl">
+                <h2 class="font-heading text-xl inline-flex items-center gap-2"><x-tabler-sun /> {{__('Meteo')}}</h2>
             </div>
-            <div x-data="meteo" class="bg-neutral-100 p-4 mb-6">
+            <div x-data="meteo" class="bg-neutral-100 p-4 mb-6 rounded-b-xl">
                 <form method="POST" action="{{route('profile.store.meteo')}}">
                     @csrf
                     <div>
                         <div class="mb-4">
-                            <label class="block text-sm font-medium text-gray-700">{{__("Place's name")}}</label>
+                            <label for="input-meteo_city" class="block text-sm font-medium text-gray-700">{{__("Place's name")}}</label>
                             <div>
-                                <input autocomplete="off" type="text" @keydown="updateLocationSearch($el.value)" value="{{Auth::user()->meteo_city}}" name="meteo_city" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-xs focus:outline-hidden focus:ring-indigo-500  sm:text-sm">
+                                <input id="input-meteo_city" autocomplete="off" type="text" @input.debounce.300ms="updateLocationSearch($el.value)" value="{{Auth::user()->meteo_city}}" name="meteo_city" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-xs focus:outline-hidden focus:ring-2 focus:ring-blue-500 sm:text-sm">
                                 <span class="ms-1 mt-1 text-[0.75rem] text-gray-500">{{__('Rechercher votre adresse pour remplir automatiquement les coordonnées géographiques.')}}</span>
-                                <div class="relative" @click.away="this.show=false">
+                                <div class="relative" @click.away="show=false">
                                     <div x-cloak x-show="show" class="absolute top-1 left-0 right-0 rounded-md bg-white border p-1">
                                         <template x-for="res in results" class="p-2">
                                             <div class="hover:bg-blue-100 px-2 p-1 rounded-md cursor-pointer" @click="setLocationData(res)" x-text="res.properties?.label"></div>
@@ -99,13 +97,13 @@
 
 
         <div class="w-full max-w-2xl mx-auto">
-            <div class="bg-neutral-900 text-white p-4">
-                <h1 class="font-heading text-xl inline-flex items-center gap-2"><x-tabler-plug-connected /> {{__('Integrations')}}</h1>
+            <div class="bg-neutral-900 text-white p-4 rounded-t-xl">
+                <h2 class="font-heading text-xl inline-flex items-center gap-2"><x-tabler-plug-connected /> {{__('Integrations')}}</h2>
                 <div>
                     <p class="text-sm text-gray-200">{{__('Connectez vos comptes pour recevoir votre séléction du jour.')}}</p>
                 </div>
             </div>
-            <div class="bg-neutral-100 mb-6 divide-y divide-neutral-200">
+            <div class="bg-neutral-100 mb-6 divide-y divide-neutral-200 rounded-b-xl">
                 <div x-data="{ open: false }" class="border-b border-neutral-200 last:border-b-0">
                     <button type="button" @click="open = !open" class="w-full flex items-center gap-3 p-4 text-left">
                         <div class="bg-[#29a9ea] w-10 h-10 shrink-0 rounded-full flex justify-center items-center">
@@ -171,6 +169,7 @@
                 document.addEventListener('DOMContentLoaded', () => {
                     let pass = document.querySelector('#input-password');
                     let passConf = document.querySelector('#input-password_confirmation');
+                    if (!pass || !passConf) return;
                     document.addEventListener('input', () => {
                         if(pass.value.length > 0 && pass.value !== passConf.value) {
                             passConf.classList.add('border-red-500');
@@ -198,7 +197,7 @@
                         updateLocationSearch(val) {
                             if(val.length > 2) {
                                 this.show = true;
-                                fetch(`${this.endpoint}?q=${val}`)
+                                fetch(`${this.endpoint}?q=${encodeURIComponent(val)}`)
                                     .then(response => response.json())
                                     .then(data => {
                                         this.show = true;

@@ -21,3 +21,28 @@
 }
 
 [x-cloak] { display: none; }
+
+@theme {
+  --font-sans: 'Montserrat', sans-serif;
+  --font-heading: 'Michroma', sans-serif;
+  --color-accent: var(--color-amber-400);
+}
+
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--color-blue-600);
+    outline-offset: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+}
+
+@layer components {
+  .btn, .btn-primary, .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 font-semibold text-nowrap cursor-pointer transition-colors disabled:opacity-60 disabled:cursor-not-allowed;
+  }
+  .btn-primary { @apply bg-neutral-900 text-white hover:bg-neutral-700; }
+  .btn-secondary { @apply bg-gray-200 text-neutral-900 hover:bg-gray-300; }
+  .skeleton { @apply animate-pulse bg-gray-200 rounded-2xl; }
+}

@@ -1,5 +1,5 @@
-@use(Carbon\Carbon)
 @extends('layouts.app')
+@section('title', __('Mes recettes favorites').' - '.config('app.name'))
 @section('content')
     <div class="container mx-auto min-h-dvh ">
         <div class="py-6 px-6 border-x border-b">
@@ -12,6 +12,7 @@
                     <x-alert type="info">
                         <p>{{__("Vous n'avez pas encore de recettes favorites.")}}</p>
                         <small>{{__('Ajoutez des recettes en favoris en cliquant sur le coeur en haut à droite des recettes.')}}</small>
+                        <div class="mt-2"><a href="{{ route('home') }}" class="btn-primary">{{__('Voir les suggestions du jour')}}</a></div>
                     </x-alert>
                 @endforelse
             </div>
