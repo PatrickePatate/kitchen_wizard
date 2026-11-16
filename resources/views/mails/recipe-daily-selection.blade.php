@@ -202,7 +202,7 @@
                                                     <tr>
                                                         <td style="padding-right: 0px;padding-left: 0px;" align="center">
                                                             <a href="{{$selection->main()?->url}}">
-                                                                <img align="center" border="0" src="{{ asset('storage/'.$selection->main()?->pictures[0])??asset('images/default_recipe_picture.webp') }}" alt="image" title="image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 600px;" width="600" class="v-src-width v-src-max-width"/>
+                                                                <img align="center" border="0" src="{{ data_get($selection->main(), 'pictures.0') ? asset('storage/'.data_get($selection->main(), 'pictures.0')) : asset('images/default_recipe_picture.webp') }}" alt="image" title="image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 600px;" width="600" class="v-src-width v-src-max-width"/>
                                                             </a>
                                                         </td>
                                                     </tr>
@@ -286,7 +286,7 @@
                                                     <tr>
                                                         <td style="padding-right: 0px;padding-left: 0px;" align="center">
                                                             <a href="{{$selection->starter()?->url}}">
-                                                                <img align="center" border="0" src="{{ asset('storage/'.$selection->starter()?->pictures[0])??asset('images/default_recipe_picture.webp') }}" alt="{{__('Entrée')}}" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 280px;" width="280" class="v-src-width v-src-max-width"/>
+                                                                <img align="center" border="0" src="{{ data_get($selection->starter(), 'pictures.0') ? asset('storage/'.data_get($selection->starter(), 'pictures.0')) : asset('images/default_recipe_picture.webp') }}" alt="{{__('Entrée')}}" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 280px;" width="280" class="v-src-width v-src-max-width"/>
                                                             </a>
                                                         </td>
                                                     </tr>
@@ -332,7 +332,7 @@
                                                     <tr>
                                                         <td style="padding-right: 0px;padding-left: 0px;" align="center">
                                                             <a href="{{$selection->dessert()?->url}}">
-                                                                <img align="center" border="0" src="{{ asset('storage/'.$selection->dessert()?->pictures[0])??asset('images/default_recipe_picture.webp') }}" alt="{{__('Dessert')}}" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 280px;" width="280" class="v-src-width v-src-max-width"/>
+                                                                <img align="center" border="0" src="{{ data_get($selection->dessert(), 'pictures.0') ? asset('storage/'.data_get($selection->dessert(), 'pictures.0')) : asset('images/default_recipe_picture.webp') }}" alt="{{__('Dessert')}}" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 280px;" width="280" class="v-src-width v-src-max-width"/>
                                                             </a>
                                                         </td>
                                                     </tr>
