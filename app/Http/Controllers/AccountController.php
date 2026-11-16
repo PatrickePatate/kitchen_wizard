@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\DietEnum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class AccountController extends Controller
 {
@@ -20,6 +22,7 @@ class AccountController extends Controller
             'email' => 'required|string|email|max:255',
             'password' => 'nullable|string|min:6|confirmed',
             'is_email_notifications_active' => 'nullable',
+            'preferred_diet' => ['nullable', Rule::enum(DietEnum::class)],
         ]);
 
         $user = $request->user();
@@ -34,7 +37,7 @@ class AccountController extends Controller
             $user->is_email_notifications_active = false;
         }
 
-        $user->update($request->only('name', 'email'));
+        $user->update($request->only('name', 'email', 'preferred_diet'));
 
         return redirect()->route('profile')->with('success', __('Profile updated!'));
     }

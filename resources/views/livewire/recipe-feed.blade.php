@@ -24,12 +24,13 @@
             </div>
         </div>
     </div>
-    <div class="max-w-3xl mx-auto border-x px-5 pt-6 pb-4 border-b">
+    <div class="max-w-3xl mx-auto border-x px-5 pt-6 pb-5 border-b">
         <!-- Day selector -->
-        <div class="flex flex-nowrap overflow-x-auto snap-x justify-start gap-3 pb-1" role="group" aria-label="{{ __('Choose a day') }}">
+        <div class="flex flex-nowrap overflow-x-auto overflow-y-hidden snap-x justify-start items-stretch gap-3 pb-1" role="group" aria-label="{{ __('Choose a day') }}">
             @foreach($lastWeekSelections as $prevSelection)
-                <button type="button" wire:click="selectDay('{{$prevSelection->created_at->format('Y-m-d')}}')" @if($selectionDay?->isSameDay($prevSelection->created_at)) aria-current="date" @endif class="snap-start cursor-pointer text-center font-sans text-sm rounded-full px-3 py-2 @if($selectionDay?->isSameDay($prevSelection->created_at)) font-semibold bg-neutral-900 text-white @else bg-gray-200 text-neutral-900 hover:bg-gray-300 @endif">
-                    <span class="pt-1 whitespace-nowrap">
+                @php $isActive = $selectionDay?->isSameDay($prevSelection->created_at); @endphp
+                <div class="snap-start flex items-stretch rounded-full text-sm @if($isActive) bg-neutral-900 text-white @else bg-gray-200 text-neutral-900 @endif">
+                    <button type="button" wire:click="selectDay('{{$prevSelection->created_at->format('Y-m-d')}}')" @if($isActive) aria-current="date" @endif class="whitespace-nowrap px-3 py-2 rounded-full cursor-pointer @if($isActive) font-semibold @else hover:bg-gray-300 @endif">
                         @if($prevSelection->created_at->isToday())
                             {{__('Today')}}
                         @elseif($prevSelection->created_at->isYesterday())
@@ -37,8 +38,20 @@
                         @else
                             {{$prevSelection->created_at->translatedFormat('D d M')}}
                         @endif
-                    </span>
-                </button>
+                    </button>
+                    @if($isActive && !is_null($selection))
+                        <button type="button" wire:click="addToShoppingList" wire:loading.attr="disabled" wire:target="addToShoppingList"
+                                @disabled($addedToShoppingList)
+                                title="{{__('Ajouter la sélection du jour à ma liste de courses')}}" aria-label="{{__('Ajouter la sélection du jour à ma liste de courses')}}"
+                                class="flex items-center justify-center pl-2.5 pr-3 border-l border-white/25 rounded-r-full hover:bg-white/10 disabled:hover:bg-transparent transition-colors">
+                            @if($addedToShoppingList)
+                                <x-tabler-circle-check-filled class="h-4 w-4"></x-tabler-circle-check-filled>
+                            @else
+                                <x-tabler-shopping-cart-plus class="h-4 w-4"></x-tabler-shopping-cart-plus>
+                            @endif
+                        </button>
+                    @endif
+                </div>
             @endforeach
         </div>
     </div>

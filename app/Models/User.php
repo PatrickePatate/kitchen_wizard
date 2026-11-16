@@ -3,7 +3,10 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\DietEnum;
 use App\Models\Miscs\RecipeLike;
+use App\Models\Miscs\ShoppingListCheckedItem;
+use App\Models\Miscs\ShoppingListRecipe;
 use App\UserGroupEnum;
 use Cache;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -28,7 +31,8 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'group' => UserGroupEnum::class
+            'group' => UserGroupEnum::class,
+            'preferred_diet' => DietEnum::class,
         ];
     }
 
@@ -42,6 +46,16 @@ class User extends Authenticatable
         return $this->hasMany(RecipeDailySelection::class)->orderBy('created_at', 'desc');
     }
 
+    public function shoppingListRecipes(): HasMany
+    {
+        return $this->hasMany(ShoppingListRecipe::class)->orderBy('added_at', 'desc');
+    }
+
+    public function shoppingListCheckedItems(): HasMany
+    {
+        return $this->hasMany(ShoppingListCheckedItem::class);
+    }
+
     public function isTelegramAccountSetup(): bool
     {
         return !empty($this->telegram_chat_id && $this->telegram_validated);
@@ -52,9 +66,14 @@ class User extends Authenticatable
         return (bool) $this->is_email_notifications_active;
     }
 
+    public function isDiscordAccountSetup(): bool
+    {
+        return !empty($this->discord_private_channel_id);
+    }
+
     public function hasAtLeastOneNotificationChannelActive(): bool
     {
-        return !($this->isEmailNotificationsActive() || $this->isTelegramAccountSetup());
+        return $this->isEmailNotificationsActive() || $this->isTelegramAccountSetup() || $this->isDiscordAccountSetup();
     }
 
     public function routeNotificationForDiscord()
@@ -67,6 +86,8 @@ class User extends Authenticatable
         static::deleting(function(User $user) {
             $user->dailySelections()->delete();
             $user->likedRecipes()->delete();
+            $user->shoppingListRecipes()->delete();
+            $user->shoppingListCheckedItems()->delete();
       });
     }
 

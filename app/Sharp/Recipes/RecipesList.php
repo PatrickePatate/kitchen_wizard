@@ -3,11 +3,14 @@
 namespace App\Sharp\Recipes;
 
 use App\Models\Recipe;
+use App\Sharp\Recipes\Commands\CreateRecipeFromUrlCommand;
+use App\Sharp\Recipes\Commands\RecipePublicationEntityState;
 use App\Sharp\Recipes\Filters\DifficultyFilter;
 use App\Sharp\Recipes\Filters\MealTypeFilter;
 use Code16\Sharp\EntityList\Fields\EntityListField;
 use Code16\Sharp\EntityList\Fields\EntityListFieldsContainer;
 use Code16\Sharp\EntityList\Fields\EntityListFieldsLayout;
+use Code16\Sharp\EntityList\Fields\EntityListStateField;
 use Code16\Sharp\EntityList\SharpEntityList;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Str;
@@ -17,6 +20,11 @@ class RecipesList extends SharpEntityList
     protected function buildList(EntityListFieldsContainer $fields): void
     {
         $fields
+            ->addField(
+                EntityListStateField::make()
+                    ->setLabel(__('Statut'))
+                    ->setWidth(1)
+            )
             ->addField(
                 EntityListField::make('photo')
                     ->setLabel(__('Photo'))
@@ -49,7 +57,8 @@ class RecipesList extends SharpEntityList
     {
         $this
             ->configureSearchable()
-            ->configurePaginated();
+            ->configurePaginated()
+            ->configureEntityState('publication_state', RecipePublicationEntityState::class);
     }
 
     protected function getInstanceCommands(): ?array
@@ -59,7 +68,9 @@ class RecipesList extends SharpEntityList
 
     protected function getEntityCommands(): ?array
     {
-        return [];
+        return [
+            CreateRecipeFromUrlCommand::class,
+        ];
     }
 
     protected function getFilters(): array
@@ -82,6 +93,7 @@ class RecipesList extends SharpEntityList
             ->setCustomTransformer('meal_type', fn($value) => Str::ucfirst($value))
             ->setCustomTransformer('difficulty', fn($value, $recipe) => $recipe->difficulty?->getLabel())
             ->setCustomTransformer('price', fn($value) => Str::ucfirst($value))
+            ->setCustomTransformer('publication_state', fn($value, Recipe $recipe) => $recipe->published ? 'published' : 'draft')
             ->transform(
                 Recipe::query()
                     ->when($this->queryParams->hasSearch(), function($query) {

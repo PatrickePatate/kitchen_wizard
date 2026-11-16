@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\MealDifficultyEnum;
 use App\Models\Recipe;
+use App\RecipeDurationEnum;
 use Illuminate\Http\Request;
 
 class RecipeController extends Controller
@@ -35,8 +37,26 @@ class RecipeController extends Controller
 
     public function search(Request $request)
     {
-        $recipes = Recipe::search($request->input('query'))->paginate(10);
+        $diet = $request->input('diet');
+        $mealType = $request->input('meal_type');
+        $difficulty = MealDifficultyEnum::tryFrom((string) $request->input('difficulty'))?->value;
+        $duration = RecipeDurationEnum::tryFrom((string) $request->input('duration'))?->value;
 
-        return view('search', ['recipes' => $recipes]);
+        $recipes = Recipe::search($request->input('query'))
+            ->where('published', true)
+            ->when($diet, fn ($search) => $search->where('diet', $diet))
+            ->when($mealType, fn ($search) => $search->where('meal_type', $mealType))
+            ->when($difficulty, fn ($search) => $search->where('difficulty', $difficulty))
+            ->when($duration, fn ($search) => $search->where('duration_bucket', $duration))
+            ->paginate(10)
+            ->appends($request->only(['query', 'diet', 'meal_type', 'difficulty', 'duration']));
+
+        return view('search', [
+            'recipes' => $recipes,
+            'diet' => $diet,
+            'mealType' => $mealType,
+            'difficulty' => $difficulty,
+            'duration' => $duration,
+        ]);
     }
 }

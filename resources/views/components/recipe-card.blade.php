@@ -19,6 +19,7 @@
         @endif
         @if(auth()->check())
             <livewire:actions.like-recipe :recipe="$recipe" :key="'like-'.$recipe->id" />
+            <livewire:actions.add-to-shopping-list :recipe="$recipe" :key="'cart-'.$recipe->id" />
         @endif
         @if($carousel && count($pictures) > 1)
             <div class="py-3 flex justify-start items-center gap-2 overflow-x-auto">
@@ -29,6 +30,17 @@
                 @endforeach
             </div>
         @endif
+            @if($recipe->diet)
+                <div class="absolute left-3 top-3">
+                    <div class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-green-100 text-green-900 text-xs font-medium uppercase">
+                        @svg($recipe->diet->getIcon(), ['class' => 'w-3.5 h-3.5'])
+                        {{$recipe->diet->getLabel()}}
+                        <x-tooltip message="<span class='normal-case'>La classification des recettes est réalisée avec l'intelligence artificielle.<br> Des erreurs peuvent se produire.</span>">
+                            <x-tabler-info-circle class="w-3.5 h-3.5" />
+                        </x-tooltip>
+                    </div>
+                </div>
+            @endif
     </div>
     <div class="flex flex-col">
         <div class="flex justify-between items-start gap-2">
@@ -59,13 +71,13 @@
     @if($allowRefresh || $clickable)
         <div class="flex items-stretch mt-4 -ms-1 gap-3">
             @if($allowRefresh)
-                <button type="button" wire:loading.class.remove="cursor-pointer" wire:loading.class="cursor-progress" wire:loading.attr="disabled" wire:target="refreshMeal" @click="$wire.refreshMeal('{{$recipe->meal_type}}')" class="btn-secondary">
+                <button type="button" wire:loading.class.remove="cursor-pointer" wire:loading.class="cursor-progress" wire:loading.attr="disabled" wire:target="refreshMeal" @click="$wire.refreshMeal('{{$recipe->meal_type}}')" class="btn-secondary text-sm sm:text-base">
                     <x-tabler-reload wire:target="refreshMeal" wire:loading.class="animate-spin"></x-tabler-reload>
                     {{ __('Changer') }}
                 </button>
             @endif
             @if($clickable)
-                <a href="{{route('recipe', ['recipe'=>$recipe])}}" class="btn-primary w-full">
+                <a href="{{route('recipe', ['recipe'=>$recipe])}}" class="btn-primary w-full text-sm sm:text-base">
                     <x-tabler-player-play></x-tabler-player-play>
                     {{ __('On passe en cuisine ?') }}
                 </a>

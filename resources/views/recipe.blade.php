@@ -20,14 +20,15 @@
             @endif
 
             <div class="flex gap-2 items-center justify-between mb-3">
-                <div>
+                <div class="flex items-center gap-4">
                     <div class="bg-gray-200 rounded-full p-2 w-10 h-10 flex justify-center items-center">
                         @svg($recipe->meal_type?->getIcon())
                     </div>
                     <h2 class="font-sans uppercase font-semibold text-lg">{{$recipe->meal_type}}</h2>
                 </div>
                 @if(auth()->check())
-                <div>
+                <div class="flex items-center gap-3">
+                    <livewire:actions.add-to-shopping-list :recipe="$recipe" wrapper-class="static" icon-class="h-7 w-7 text-black" />
                     <x-dialog :label="__('Partager la recette')">
                         <x-slot name="button">
                             <x-tabler-share class="text-black h-7"/>

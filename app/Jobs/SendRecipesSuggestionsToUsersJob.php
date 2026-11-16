@@ -5,6 +5,7 @@ namespace App\Jobs;
 use App\Mail\RecipesSuggestionsMail;
 use App\Models\RecipeDailySelection;
 use App\Models\User;
+use App\Notifications\MealSuggestionDiscordNotification;
 use Exception;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
@@ -43,6 +44,13 @@ class SendRecipesSuggestionsToUsersJob implements ShouldQueue
                 }
                 if($user->isEmailNotificationsActive()) {
                     Mail::to($user)->send(new RecipesSuggestionsMail($user));
+                }
+                if($user->isDiscordAccountSetup()) {
+                    $user->notify(new MealSuggestionDiscordNotification(
+                        $selection->main(),
+                        $selection->starter(),
+                        $selection->dessert(),
+                    ));
                 }
 
             } catch(\Exception $e) {

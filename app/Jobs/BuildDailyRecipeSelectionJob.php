@@ -13,7 +13,6 @@ class BuildDailyRecipeSelectionJob implements ShouldQueue
 {
     use Queueable;
 
-
     public function __construct()
     {
 
@@ -22,24 +21,32 @@ class BuildDailyRecipeSelectionJob implements ShouldQueue
     /**
      * Execute the job.
      */
-    public function handle(): void
+    public function handle(RecipeSelectorService $recipeSelector): void
     {
-        User::all()->each(function (User $user) {
-            $this->buildDailySelection($user);
+        User::query()->chunkById(100, function ($users) use ($recipeSelector) {
+            $users->each(fn (User $user) => $this->buildDailySelection($user, $recipeSelector));
         });
-
     }
 
-    private function buildDailySelection(User $user): void
+    private function buildDailySelection(User $user, RecipeSelectorService $recipeSelector): void
     {
-        $userLastRecipesIds = $user->dailySelections()->select(['id'])->latest()->take(7)->get()->pluck('id')->toArray();
+        $userLastRecipesIds = $user->dailySelections()
+            ->latest()
+            ->take(7)
+            ->get(['recipes_selection'])
+            ->pluck('recipes_selection')
+            ->flatMap(fn (array $selection) => array_values($selection))
+            ->filter()
+            ->unique()
+            ->values()
+            ->toArray();
 
         $selection = new RecipeDailySelection();
         $selection->user_id = $user->id;
         $selection->recipes_selection = [
-            'starter' => app(RecipeSelectorService::class)->getRecipe(MealTypeEnum::STARTER, $userLastRecipesIds)?->id,
-            'main' => app(RecipeSelectorService::class)->getRecipe(MealTypeEnum::MAIN_COURSE, $userLastRecipesIds)?->id,
-            'dessert' => app(RecipeSelectorService::class)->getRecipe(MealTypeEnum::DESSERT, $userLastRecipesIds)?->id,
+            'starter' => $recipeSelector->getRecipe(MealTypeEnum::STARTER, $userLastRecipesIds, $user->preferred_diet)?->id,
+            'main' => $recipeSelector->getRecipe(MealTypeEnum::MAIN_COURSE, $userLastRecipesIds, $user->preferred_diet)?->id,
+            'dessert' => $recipeSelector->getRecipe(MealTypeEnum::DESSERT, $userLastRecipesIds, $user->preferred_diet)?->id,
         ];
         $selection->save();
     }

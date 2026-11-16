@@ -40,4 +40,9 @@ return [
         'token' => env('TELEGRAM_BOT_TOKEN'),
     ],
 
+    'discord' => [
+        'token' => env('DISCORD_BOT_TOKEN'),
+        'client_id' => env('DISCORD_CLIENT_ID'),
+    ],
+
 ];

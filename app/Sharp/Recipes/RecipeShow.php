@@ -3,6 +3,7 @@
 namespace App\Sharp\Recipes;
 
 use App\Models\Recipe;
+use App\Sharp\Recipes\Commands\RecipePublicationEntityState;
 use Code16\Sharp\Show\Fields\SharpShowPictureField;
 use Code16\Sharp\Show\Fields\SharpShowTextField;
 use Code16\Sharp\Show\Layout\ShowLayout;
@@ -72,7 +73,8 @@ class RecipeShow extends SharpShow
     {
         $this
             ->configureBreadcrumbCustomLabelAttribute("title")
-            ->configurePageTitleAttribute("title");
+            ->configurePageTitleAttribute("title")
+            ->configureEntityState('publication_state', RecipePublicationEntityState::class);
     }
 
     public function buildShowLayout(ShowLayout $showLayout): void
@@ -144,6 +146,7 @@ class RecipeShow extends SharpShow
                 ))->implode('');
             })
             ->setCustomTransformer('difficulty', fn($value, $recipe) => $recipe->difficulty?->getLabel())
+            ->setCustomTransformer('publication_state', fn($value, Recipe $recipe) => $recipe->published ? 'published' : 'draft')
             ->transform(Recipe::findOrFail($id));
     }
 
