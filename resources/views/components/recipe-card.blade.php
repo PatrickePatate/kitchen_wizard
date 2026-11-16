@@ -4,77 +4,72 @@
     'recipe',
     'allowRefresh'=>true,
     'clickable'=>true,
-    'carousel'=>false
-    ])
-<div x-data="{ currentSrc : '{{isset($recipe->pictures[0]) ? (str($recipe->pictures[0])->startsWith(['https://', 'http://']) ? $recipe->pictures[0] : asset('storage/'.$recipe->pictures[0])) : ''}}' }" class="w-full relative {{$attributes->get('class')}}" data-recipeid="{{$recipe->id}}">
-    <div class="mb-2">
+    'carousel'=>false,
+    'lazy'=>true,
+])
+@php $pictures = $recipe->picture_urls; $main = $recipe->main_picture_url; @endphp
+<article x-data="{ currentSrc : @js($main) }" class="w-full relative {{$attributes->get('class')}}" data-recipeid="{{$recipe->id}}">
+    <div class="mb-2 relative">
         @if($clickable)
-            <a href="{{$clickable ? route('recipe', ['recipe'=>$recipe]) : '#'}}">
-                <img x-ref="mainPicture" src="{{isset($recipe->pictures[0]) ? (str($recipe->pictures[0])->startsWith(['https://', 'http://']) ? $recipe->pictures[0] : asset('storage/'.$recipe->pictures[0])) : asset('images/default_recipe_picture.webp')}}" alt="Recipe image" class="w-full h-96 object-cover object-center rounded-2xl">
+            <a href="{{ route('recipe', ['recipe'=>$recipe]) }}" tabindex="-1" aria-hidden="true">
+                <img x-ref="mainPicture" src="{{ $main }}" alt="{{ $recipe->title }}" @if($lazy) loading="lazy" @endif class="w-full aspect-4/3 sm:aspect-16/10 object-cover object-center rounded-2xl">
             </a>
         @else
-            <img x-ref="mainPicture" src="{{isset($recipe->pictures[0]) ? (str($recipe->pictures[0])->startsWith(['https://', 'http://']) ? $recipe->pictures[0] : asset('storage/'.$recipe->pictures[0])) : asset('images/default_recipe_picture.webp')}}" alt="Recipe image" class="w-full h-96 object-cover object-center rounded-2xl">
-        @endif
-        @if($carousel && count($recipe->pictures) > 1)
-            <div class="py-3">
-                <div class="flex justify-start items-center gap-2">
-                    @foreach($recipe->pictures as $picture)
-                        <img src="{{ (str($picture)->startsWith(['https://', 'http://']) ? $picture : asset('storage/'.$picture)) }}" @click="$refs.mainPicture.setAttribute('src', $el.src); currentSrc = $el.src" x-init="$watch('currentSrc', (value) => { if(value === $el.src) { $el.classList.add('ring-2','ring-amber-400') } else { $el.classList.remove('ring-2','ring-amber-400') } })" alt="Recipe image" class="cursor-pointer w-16 h-16 object-cover object-center rounded-lg @if($loop->index === 0) ring-2 ring-amber-400 @endif ">
-                    @endforeach
-                </div>
-            </div>
+            <img x-ref="mainPicture" src="{{ $main }}" alt="{{ $recipe->title }}" class="w-full aspect-4/3 sm:aspect-16/10 object-cover object-center rounded-2xl">
         @endif
         @if(auth()->check())
-                <livewire:actions.like-recipe :recipe="$recipe" />
+            <livewire:actions.like-recipe :recipe="$recipe" :key="'like-'.$recipe->id" />
+        @endif
+        @if($carousel && count($pictures) > 1)
+            <div class="py-3 flex justify-start items-center gap-2 overflow-x-auto">
+                @foreach($pictures as $picture)
+                    <button type="button" @click="$refs.mainPicture.setAttribute('src', @js($picture)); currentSrc = @js($picture)" aria-label="{{ __('Show picture :n', ['n' => $loop->iteration]) }}" class="shrink-0 rounded-lg" :class="currentSrc === @js($picture) ? 'ring-2 ring-amber-400' : ''">
+                        <img src="{{ $picture }}" alt="" loading="lazy" class="w-16 h-16 object-cover object-center rounded-lg">
+                    </button>
+                @endforeach
+            </div>
         @endif
     </div>
     <div class="flex flex-col">
-        <div class="flex justify-between items-start">
-            <div>
+        <div class="flex justify-between items-start gap-2">
+            <h2 class="text-xl font-semibold uppercase tracking-wide">
                 @if($clickable)
-                    <a href="{{$clickable ? route('recipe', ['recipe'=>$recipe]) : '#'}}">
-                        <h2 class="text-xl font-semibold uppercase tracking-wide">
-                            {{ $recipe->title }}
-                        </h2>
-                    </a>
+                    <a href="{{ route('recipe', ['recipe'=>$recipe]) }}">{{ $recipe->title }}</a>
                 @else
-                    <h2 class="text-xl font-semibold uppercase tracking-wide">
-                        {{ $recipe->title }}
-                    </h2>
+                    {{ $recipe->title }}
                 @endif
-            </div>
-            <div class="flex flex-nowrap items-center gap-1 ">
+            </h2>
+            <div class="flex flex-nowrap items-center gap-1 shrink-0">
                 <span class="text-lg font-extralight text-nowrap uppercase">{{ $recipe->total_time }}</span>
-                <x-tabler-clock class=" w-6" />
+                <x-tabler-clock class="w-6" aria-hidden="true" />
             </div>
         </div>
 
         <div class="shrink flex justify-between items-end gap-1">
             <div class="flex flex-nowrap items-center pt-1 gap-1 -ms-1">
-                <x-tabler-currency-euro class=" w-6" />
-                <span class="text-lg font-extralight  uppercase text-nowrap">{{ $recipe->price }}</span>
+                <x-tabler-currency-euro class="w-6" aria-hidden="true" />
+                <span class="text-lg font-extralight uppercase text-nowrap">{{ $recipe->price }}</span>
             </div>
             <div class="flex flex-nowrap items-center gap-1">
                 <span class="text-lg font-extralight pt-1 uppercase text-nowrap">{{ $recipe->difficulty?->getLabel() }}</span>
-                <x-tabler-chef-hat class=" w-6" />
+                <x-tabler-chef-hat class="w-6" aria-hidden="true" />
             </div>
         </div>
     </div>
     @if($allowRefresh || $clickable)
         <div class="flex items-stretch mt-4 -ms-1 gap-3">
             @if($allowRefresh)
-                <button wire:loading.class.remove="cursor-pointer" wire:loading.class="cursor-progress" wire:loading.attr="disabled" wire:target="refreshMeal" @click="$wire.refreshMeal('{{$recipe->meal_type}}'); setTimeout(() => { currentPicture = $refs.mainPicture.getAttribute('src'); }, 500)" class="flex items-center gap-2 py-2 px-3 bg-gray-200 font-semibold rounded-full w-fit cursor-pointer">
+                <button type="button" wire:loading.class.remove="cursor-pointer" wire:loading.class="cursor-progress" wire:loading.attr="disabled" wire:target="refreshMeal" @click="$wire.refreshMeal('{{$recipe->meal_type}}')" class="btn-secondary">
                     <x-tabler-reload wire:target="refreshMeal" wire:loading.class="animate-spin"></x-tabler-reload>
-                    Changer
+                    {{ __('Changer') }}
                 </button>
             @endif
             @if($clickable)
-                    <a href="{{route('recipe', ['recipe'=>$recipe])}}" class="flex justify-center items-center gap-2 py-2 px-3 bg-gray-900 text-white font-semibold rounded-full w-full cursor-pointer">
-                        <x-tabler-player-play></x-tabler-player-play>
-                        On passe en cuisine ?
-                    </a>
+                <a href="{{route('recipe', ['recipe'=>$recipe])}}" class="btn-primary w-full">
+                    <x-tabler-player-play></x-tabler-player-play>
+                    {{ __('On passe en cuisine ?') }}
+                </a>
             @endif
         </div>
     @endif
-
-</div>
+</article>

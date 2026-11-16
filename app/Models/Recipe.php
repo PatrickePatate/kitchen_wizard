@@ -65,6 +65,22 @@ class Recipe extends Model
         return null;
     }
 
+    public function pictureUrls(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => collect($this->pictures ?? [])
+                ->map(fn($picture) => str($picture)->startsWith(['https://', 'http://']) ? $picture : asset('storage/'.$picture))
+                ->all(),
+        );
+    }
+
+    public function mainPictureUrl(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->picture_urls[0] ?? asset('images/default_recipe_picture.webp'),
+        );
+    }
+
     public function url(): Attribute
     {
         return Attribute::make(
