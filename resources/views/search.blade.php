@@ -4,6 +4,7 @@
 @use(App\MealDifficultyEnum)
 @use(App\RecipeDurationEnum)
 @extends('layouts.app')
+@section('title', __('Search').' - '.config('app.name'))
 @section('content')
     @php
         $hasAdvancedFilters = $difficulty || $duration;

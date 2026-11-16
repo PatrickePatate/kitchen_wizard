@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title', config('app.name'))</title>
+    <meta name="theme-color" content="#171717">
+    <link rel="icon" href="{{ asset('favicon.ico') }}">
     @yield('meta')
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,26 +18,23 @@
     @stack('styles')
     @livewireStyles
 </head>
-<body class="font-sans antialiased">
+<body class="font-sans antialiased text-neutral-900">
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-white focus:p-2">{{__('Skip to content')}}</a>
     @if($hasHeader)
         @include('components.menu')
     @endif
-    @yield('content')
+    <main id="main">
+        @yield('content')
+    </main>
+    @if($hasHeader)
+        <footer class="border-t mt-10 py-6 text-center text-sm text-gray-500">
+            &copy; {{ date('Y') }} {{ config('app.name') }}
+        </footer>
+    @endif
     @livewireScripts
     <script>
         Alpine.magic('clipboard', () => {
             return subject => navigator.clipboard.writeText(subject)
-        })
-        Alpine.magic('flash', () => {
-            return (subject, duration=1000) => {
-                subject = document.querySelector(subject);
-                subject.style.transition = 'ease-in-out 0.2s';
-                subject.style.display = 'block';
-                setTimeout(() => {
-                    subject.style.display = 'none';
-                    subject.style.transition = 'ease-in-out 0.5s';
-                }, duration)
-            }
         })
     </script>
 @stack('scripts')
