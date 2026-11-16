@@ -12,7 +12,7 @@
             <div x-data="{popup: { open: false }}" @click.away="popup.open = false" @keydown.escape.window="popup.open = false"
                  @mouseenter="popup.open = true" @mouseleave="popup.open = false">
                 <div class="relative text-white">
-                    <button type="button" @click="popup.open = !popup.open" :aria-expanded="popup.open" aria-label="{{ __('Weather') }}">
+                    <button type="button" @click="popup.open = true" :aria-expanded="popup.open" aria-label="{{ __('Weather') }}">
                         <img src="{{WeatherService::getIcon()}}" alt="" class="h-16">
                     </button>
                     <div x-cloak x-transition x-show="popup.open"
